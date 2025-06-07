@@ -12,8 +12,16 @@ import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Monetization from "@/components/Monetization";
 import Footer from "@/components/Footer";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { AuthDialog } from "@/components/AuthDialog";
+import { UserMenu } from "@/components/UserMenu";
+import { MobileMenu } from "@/components/MobileMenu";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
+  const { user, loading } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -29,7 +37,8 @@ const Index = () => {
               <a href="#blog" className="hover:text-primary transition-colors">Blog</a>
               <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex items-center space-x-2">
+              <ThemeToggle />
               <Button variant="outline" size="sm" asChild>
                 <a href="https://github.com/ar27111994" target="_blank" rel="noopener noreferrer">
                   <Github className="w-4 h-4" />
@@ -40,6 +49,8 @@ const Index = () => {
                   <Linkedin className="w-4 h-4" />
                 </a>
               </Button>
+              {!loading && (user ? <UserMenu /> : <AuthDialog />)}
+              <MobileMenu />
             </div>
           </div>
         </div>
@@ -58,6 +69,7 @@ const Index = () => {
       </main>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

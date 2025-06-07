@@ -3,9 +3,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Linkedin, Github } from "lucide-react";
+import { Mail, Linkedin, Github, MessageCircle, Phone, MapPin } from "lucide-react";
 
 const Contact = () => {
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "+919038582781";
+    const message = "Hi! I found your portfolio and would like to discuss a project opportunity.";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section id="contact" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -66,9 +74,21 @@ const Contact = () => {
                 
                 <div className="flex flex-col space-y-3">
                   <Button variant="outline" className="justify-start" asChild>
-                    <a href="mailto:your.email@example.com">
+                    <a href="mailto:ar27111994@gmail.com">
                       <Mail className="w-4 h-4 mr-2" />
-                      your.email@example.com
+                      ar27111994@gmail.com
+                    </a>
+                  </Button>
+                  
+                  <Button variant="outline" className="justify-start" onClick={handleWhatsAppClick}>
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    WhatsApp: +91 9038582781
+                  </Button>
+                  
+                  <Button variant="outline" className="justify-start" asChild>
+                    <a href="tel:+919038582781">
+                      <Phone className="w-4 h-4 mr-2" />
+                      +91 9038582781
                     </a>
                   </Button>
                   
@@ -85,6 +105,11 @@ const Contact = () => {
                       GitHub Profile
                     </a>
                   </Button>
+                  
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-2" />
+                    <span>Kolkata, West Bengal, India</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -96,7 +121,7 @@ const Contact = () => {
               <CardContent>
                 <p className="text-muted-foreground">
                   I typically respond to messages within 24 hours. For urgent projects, 
-                  please mention it in your message.
+                  please mention it in your message or contact me via WhatsApp.
                 </p>
               </CardContent>
             </Card>
