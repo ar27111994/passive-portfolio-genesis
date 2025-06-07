@@ -7,7 +7,7 @@ import { Mail, Linkedin, Github, MessageCircle, Phone, MapPin } from "lucide-rea
 
 const Contact = () => {
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+919038582781";
+    const phoneNumber = "+923315887235"; // Replace with your WhatsApp number
     const message = "Hi! I found your portfolio and would like to discuss a project opportunity.";
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodedMessage}`;
@@ -82,13 +82,13 @@ const Contact = () => {
                   
                   <Button variant="outline" className="justify-start" onClick={handleWhatsAppClick}>
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    WhatsApp: +91 9038582781
+                    WhatsApp: +92 3315887235
                   </Button>
                   
                   <Button variant="outline" className="justify-start" asChild>
-                    <a href="tel:+919038582781">
+                    <a href="tel:{whatsappNumber}" target="_blank" rel="noopener noreferrer">
                       <Phone className="w-4 h-4 mr-2" />
-                      +91 9038582781
+                      +92 3315887235
                     </a>
                   </Button>
                   
@@ -108,7 +108,7 @@ const Contact = () => {
                   
                   <div className="flex items-center text-muted-foreground">
                     <MapPin className="w-4 h-4 mr-2" />
-                    <span>Kolkata, West Bengal, India</span>
+                    <span>Rawalpindi, Punjab, Pakistan</span>
                   </div>
                 </div>
               </CardContent>
