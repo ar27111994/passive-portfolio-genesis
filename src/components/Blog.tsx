@@ -139,23 +139,40 @@ const Blog = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               No blog content found. Generate AI-powered content to get started.
             </p>
-            <Button 
-              onClick={handleGenerateContent} 
-              disabled={isGenerating}
-              size="lg"
-            >
-              {isGenerating ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating Content...
-                </>
-              ) : (
-                <>
-                  <Star className="w-4 h-4 mr-2" />
-                  Generate AI Blog Content
-                </>
-              )}
-            </Button>
+            <div className="space-x-4">
+              <Button
+                onClick={handleInitializeDatabase}
+                disabled={isGenerating}
+                size="lg"
+                variant="secondary"
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Initializing...
+                  </>
+                ) : (
+                  'Initialize Database'
+                )}
+              </Button>
+              <Button
+                onClick={handleGenerateContent}
+                disabled={isGenerating}
+                size="lg"
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Generating Content...
+                  </>
+                ) : (
+                  <>
+                    <Star className="w-4 h-4 mr-2" />
+                    Generate AI Blog Content
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
