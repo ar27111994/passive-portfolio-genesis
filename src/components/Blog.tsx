@@ -5,6 +5,7 @@ import { Calendar, Clock, Eye, Heart, MessageCircle, Share2, BookOpen, TrendingU
 import { useBlog } from "@/hooks/useBlog";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
 import { blogService } from "@/services/blogService";
+import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
 import { useState } from "react";
 
 const Blog = () => {
