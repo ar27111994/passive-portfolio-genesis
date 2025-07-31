@@ -9,13 +9,169 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      blog_posts: {
+        Row: {
+          id: string
+          title: string
+          slug: string
+          excerpt: string
+          content: string
+          image_url: string | null
+          category: string
+          tags: string[]
+          featured: boolean
+          published: boolean
+          publish_date: string
+          read_time_minutes: number
+          views: number
+          likes: number
+          comments: number
+          author_id: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          slug: string
+          excerpt: string
+          content: string
+          image_url?: string | null
+          category: string
+          tags?: string[]
+          featured?: boolean
+          published?: boolean
+          publish_date?: string
+          read_time_minutes?: number
+          views?: number
+          likes?: number
+          comments?: number
+          author_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          slug?: string
+          excerpt?: string
+          content?: string
+          image_url?: string | null
+          category?: string
+          tags?: string[]
+          featured?: boolean
+          published?: boolean
+          publish_date?: string
+          read_time_minutes?: number
+          views?: number
+          likes?: number
+          comments?: number
+          author_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      blog_categories: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          color_class: string
+          post_count: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          color_class?: string
+          post_count?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          color_class?: string
+          post_count?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      blog_statistics: {
+        Row: {
+          id: string
+          label: string
+          value: string
+          icon_name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          label: string
+          value: string
+          icon_name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          label?: string
+          value?: string
+          icon_name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      blog_tags: {
+        Row: {
+          id: string
+          name: string
+          usage_count: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          usage_count?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          usage_count?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_blog_views: {
+        Args: {
+          post_id: string
+        }
+        Returns: undefined
+      }
+      increment_blog_likes: {
+        Args: {
+          post_id: string
+        }
+        Returns: undefined
+      }
+      update_category_post_counts: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      update_tag_usage_counts: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
