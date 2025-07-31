@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Eye, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Star, Users, Loader2, AlertCircle } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
+import { blogService } from "@/services/blogService";
 import { useState } from "react";
 
 const Blog = () => {
