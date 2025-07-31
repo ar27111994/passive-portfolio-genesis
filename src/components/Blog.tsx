@@ -24,10 +24,18 @@ const Blog = () => {
   const handleGenerateContent = async () => {
     try {
       setIsGenerating(true);
+
+      // First check if tables exist
+      const tablesExist = await blogService.checkTablesExist();
+      if (!tablesExist) {
+        throw new Error('Database tables do not exist. Please run the database migrations first.');
+      }
+
       await generateAndPopulateBlogContent();
       await refreshData();
     } catch (err) {
       console.error('Failed to generate content:', err);
+      alert(`Failed to generate content: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setIsGenerating(false);
     }
