@@ -155,29 +155,7 @@ const Monetization = () => {
     { label: "Active Projects", value: "24+ Repos", icon: Zap }
   ];
 
-  const upcomingProducts = [
-    {
-      title: "Angular Performance Optimization Guide",
-      description: "Comprehensive guide to optimizing Angular applications for enterprise-scale performance.",
-      expectedLaunch: "Q2 2024",
-      estimatedPrice: "$79",
-      interest: 156
-    },
-    {
-      title: "Freelancer's Technical Interview Prep",
-      description: "Complete preparation package for technical interviews and client consultations.",
-      expectedLaunch: "Q3 2024",
-      estimatedPrice: "$129",
-      interest: 203
-    },
-    {
-      title: "Building SaaS with Angular & .NET Course",
-      description: "End-to-end course on building scalable SaaS applications using Angular and .NET.",
-      expectedLaunch: "Q4 2024",
-      estimatedPrice: "$399",
-      interest: 89
-    }
-  ];
+
 
   return (
     <section id="monetization" className="py-20 bg-muted/30">
