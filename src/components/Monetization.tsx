@@ -1,12 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  DollarSign,
-  Star,
-  Users,
-  MessageCircle,
+import { 
+  Calendar, 
+  DollarSign, 
+  Star, 
+  Users, 
+  MessageCircle, 
   Award,
   TrendingUp,
   Zap,
@@ -161,10 +160,10 @@ const Monetization = () => {
     <section id="monetization" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Services & Digital Products</h2>
+          <h2 className="text-4xl font-bold mb-4">Professional Services</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Leverage my 11+ years of experience to accelerate your development projects. 
-            From consulting to courses, I offer comprehensive solutions for developers and teams.
+            Leverage my 11+ years of experience to accelerate your development projects.
+            From consulting to custom development, I offer comprehensive solutions for businesses and teams.
           </p>
         </div>
 
@@ -235,11 +234,9 @@ const Monetization = () => {
                     </Card>
                   )}
                   
-                  <Button className="w-full" size="lg" asChild>
-                    <a href="#contact">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Book Session
-                    </a>
+                  <Button className="w-full" size="lg">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    Book Session
                   </Button>
                 </CardContent>
               </Card>
@@ -305,17 +302,13 @@ const Monetization = () => {
               training programs, and technical consultation tailored to your specific needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <a href="mailto:ar27111994@gmail.com?subject=Custom Development Quote Request&body=Hi Ahmed,%0A%0AI would like to discuss a custom development project. Here are the details:%0A%0AProject Type:%0ABudget Range:%0ATimeline:%0ASpecific Requirements:%0A%0APlease let me know your availability for a discussion.%0A%0AThank you!">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Email for Custom Quote
-                </a>
+              <Button size="lg">
+                <Mail className="w-4 h-4 mr-2" />
+                Email for Custom Quote
               </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="#contact">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Schedule Discovery Call
-                </a>
+              <Button size="lg" variant="outline">
+                <Phone className="w-4 h-4 mr-2" />
+                Schedule Discovery Call
               </Button>
             </div>
           </CardContent>
