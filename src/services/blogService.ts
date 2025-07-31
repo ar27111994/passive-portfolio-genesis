@@ -44,8 +44,8 @@ export class BlogService {
       .limit(2);
     
     if (error) {
-      console.error('Error fetching featured posts:', error);
-      throw error;
+      console.error('Error fetching featured posts:', error.message || error);
+      throw new Error(`Failed to fetch featured posts: ${error.message || JSON.stringify(error)}`);
     }
     
     return data || [];
