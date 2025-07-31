@@ -131,8 +131,8 @@ const Hero = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Active community member helping developers with C#, ASP.NET MVC, and Entity Framework. 
-                  Reached 16,000+ people with quality contributions.
+                  Active community member for 11+ years helping developers with C#, ASP.NET MVC, and Entity Framework.
+                  Reached 16,000+ people with quality technical contributions and solutions.
                 </p>
               </CardContent>
             </Card>
