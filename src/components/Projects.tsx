@@ -48,7 +48,7 @@ const Projects = () => {
     {
       title: "Mosaico Email Template Editor",
       description: "CodeIgniter integration for Mosaico WYSIWYG Email Template Editor with Ion Auth 2 and Email Queue System for enterprise bulk email marketing solutions.",
-      image: "https://images.unsplash.com/photo-1596526131839-a13c8a6beb2b?w=800&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop",
       tags: ["PHP", "CodeIgniter", "JavaScript", "Email Marketing", "Enterprise"],
       github: "https://github.com/ar27111994/Mosaico-CodeIgniter-Ion-Auth",
       demo: "http://mosaicoci.ar27111994.com/",
