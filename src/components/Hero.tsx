@@ -149,8 +149,8 @@ const Hero = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Diverse portfolio spanning AI, accessibility tools, e-commerce, and enterprise applications. 
-                  Notable projects include BlindSight and distributed file systems.
+                  Diverse portfolio spanning e-commerce extensions, enterprise applications, and development tools.
+                  Notable projects include Mosaico Email Editor, OpenCart extensions, and shopping cart libraries.
                 </p>
               </CardContent>
             </Card>
