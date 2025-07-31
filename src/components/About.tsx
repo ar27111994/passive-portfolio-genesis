@@ -28,10 +28,10 @@ const About = () => {
   ];
 
   const coreCompetencies = [
-    { area: "Frontend Development", level: 95, technologies: ["Angular 2+", "TypeScript", "RxJS", "Angular Material"] },
-    { area: "Backend Development", level: 90, technologies: ["C#", "ASP.NET MVC", "PHP", "CodeIgniter"] },
-    { area: "Database & ORM", level: 88, technologies: ["SQL Server", "Entity Framework", "MySQL"] },
-    { area: "DevOps & Tools", level: 85, technologies: ["Azure", "Git", "Docker", "CI/CD"] }
+    { area: "Frontend Development", level: 95, technologies: ["Angular 2+", "TypeScript", "RxJS", "Angular Material", "Ionic"] },
+    { area: "Backend Development", level: 90, technologies: ["C#", "ASP.NET MVC", "PHP", "CodeIgniter", "WordPress"] },
+    { area: "State Management", level: 92, technologies: ["Akita", "Redux", "Flux", "RxJS"] },
+    { area: "Database & Tools", level: 88, technologies: ["SQL Server", "Entity Framework", "MySQL", "Jest", "SCSS"] }
   ];
 
   return (
