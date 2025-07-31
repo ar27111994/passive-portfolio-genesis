@@ -214,9 +214,9 @@ const Monetization = () => {
 
   const statistics = [
     { label: "Monthly Consulting Revenue", value: "$3,200+", icon: DollarSign },
-    { label: "Digital Product Sales", value: "$1,800+", icon: BookOpen },
     { label: "Passive Income Streams", value: "$670+", icon: TrendingUp },
-    { label: "Total Monthly Revenue", value: "$5,670+", icon: Zap }
+    { label: "Community Impact", value: "16K+ Devs", icon: Users },
+    { label: "Active Projects", value: "24+ Repos", icon: Zap }
   ];
 
   const upcomingProducts = [
