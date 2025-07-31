@@ -8,7 +8,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
-import BlogTest from "@/components/BlogTest";
+import BlogSimple from "@/components/BlogSimple";
 import Contact from "@/components/Contact";
 import Monetization from "@/components/Monetization";
 import Footer from "@/components/Footer";
