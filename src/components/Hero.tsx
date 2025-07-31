@@ -18,11 +18,11 @@ const Hero = () => {
                 Ahmed Rehan
               </h1>
               <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-4">
-                Full Stack Developer & Solutions Architect
+                Frontend Developer & Enterprise Solutions Expert
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl lg:max-w-none mx-auto lg:mx-0">
-                11+ years of programming expertise specializing in Angular, TypeScript, and enterprise-grade applications. 
-                From EAGLE6's cybersecurity platforms to open-source contributions reaching 16,000+ developers.
+                Frontend Angular Developer from Pakistan with 11+ years of experience creating successful web and mobile applications.
+                Specialized in enterprise applications, collaborating with clients to gather requirements and improve designs for usability and functionality.
               </p>
             </div>
 
