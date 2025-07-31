@@ -94,8 +94,22 @@ const Blog = () => {
                 <Button onClick={refreshData} variant="outline">
                   Retry
                 </Button>
-                <Button 
-                  onClick={handleGenerateContent} 
+                <Button
+                  onClick={handleInitializeDatabase}
+                  disabled={isGenerating}
+                  variant="secondary"
+                >
+                  {isGenerating ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Initializing...
+                    </>
+                  ) : (
+                    'Initialize Database'
+                  )}
+                </Button>
+                <Button
+                  onClick={handleGenerateContent}
                   disabled={isGenerating}
                 >
                   {isGenerating ? (
