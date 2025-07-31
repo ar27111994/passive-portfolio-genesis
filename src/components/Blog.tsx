@@ -7,28 +7,28 @@ import { ArrowRight, Book } from "lucide-react";
 const Blog = () => {
   const blogPosts = [
     {
-      title: "Building Scalable React Applications",
-      excerpt: "Best practices and patterns for creating maintainable React applications that can grow with your business needs.",
-      date: "2024-01-15",
+      title: "Entity Framework Core Alternate Key Updates",
+      excerpt: "Deep dive into solving alternate key update issues in Entity Framework Core 1.0, including practical solutions and workarounds for common database update scenarios.",
+      date: "2016-04-05",
       readTime: "8 min read",
-      tags: ["React", "Architecture", "Best Practices"],
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop"
+      tags: ["Entity Framework", "C#", ".NET Core"],
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop"
     },
     {
-      title: "Modern JavaScript Features Every Developer Should Know",
-      excerpt: "Exploring the latest JavaScript features that can improve your code quality and developer productivity.",
-      date: "2024-01-10",
+      title: "ASP.NET Core MVC Scaffolding in Multi-Project Solutions",
+      excerpt: "Complete guide to setting up and troubleshooting scaffolding in .NET Core projects with multiple project structures and complex architectures.",
+      date: "2016-06-14",
       readTime: "6 min read",
-      tags: ["JavaScript", "ES6+", "Development"],
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=200&fit=crop"
+      tags: ["ASP.NET Core", "MVC", "Scaffolding"],
+      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=200&fit=crop"
     },
     {
-      title: "Contributing to Open Source: A Beginner's Guide",
-      excerpt: "Learn how to start contributing to open source projects and make a meaningful impact in the developer community.",
-      date: "2024-01-05",
-      readTime: "10 min read",
-      tags: ["Open Source", "Community", "Career"],
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=200&fit=crop"
+      title: "Building Email Template Editors with Mosaico",
+      excerpt: "Learn how to integrate Mosaico WYSIWYG email editor with CodeIgniter backend for professional email marketing solutions and bulk email campaigns.",
+      date: "2017-03-15",
+      readTime: "12 min read",
+      tags: ["PHP", "CodeIgniter", "Email Marketing", "JavaScript"],
+      image: "https://images.unsplash.com/photo-1596526131839-a13c8a6beb2b?w=400&h=200&fit=crop"
     }
   ];
 

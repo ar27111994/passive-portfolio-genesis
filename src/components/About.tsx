@@ -17,23 +17,24 @@ const About = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-6">My Journey</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              As a passionate full-stack developer, I specialize in creating modern web applications using 
-              React, JavaScript, and cutting-edge technologies. With a strong background in both frontend 
-              and backend development, I bring ideas to life through clean, efficient code.
+              I'm Ahmed Rehan, a professional Web Developer from Rawalpindi, Pakistan with over 11 years 
+              of programming experience. My journey began at age 13 with GW-BASIC, creating programs 
+              that could calculate the day of the week for any date in the 20th or 21st century.
             </p>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm actively contributing to open source projects and constantly learning new technologies 
-              to stay at the forefront of web development. My experience spans from building responsive 
-              user interfaces to architecting scalable backend systems.
+              From front-end development with jQuery, CSS3, and HTML5 to WordPress development for 
+              local markets, I've expanded into PHP, CodeIgniter, and the .NET ecosystem including 
+              ASP.NET MVC and Xamarin. I'm also skilled in graphics and logo design using Adobe 
+              Photoshop and Illustrator, working as a freelancer.
             </p>
             
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">React</Badge>
+              <Badge variant="secondary">C#</Badge>
+              <Badge variant="secondary">ASP.NET MVC</Badge>
+              <Badge variant="secondary">PHP</Badge>
+              <Badge variant="secondary">CodeIgniter</Badge>
               <Badge variant="secondary">JavaScript</Badge>
-              <Badge variant="secondary">TypeScript</Badge>
-              <Badge variant="secondary">Node.js</Badge>
-              <Badge variant="secondary">Python</Badge>
-              <Badge variant="secondary">Full Stack</Badge>
+              <Badge variant="secondary">Xamarin</Badge>
             </div>
           </div>
           

@@ -5,40 +5,43 @@ import { Badge } from "@/components/ui/badge";
 const Experience = () => {
   const experiences = [
     {
-      title: "Full Stack Developer",
+      title: "Full Stack Web Developer",
       company: "Freelance",
-      period: "2020 - Present",
-      description: "Developing custom web applications for clients using modern technologies. Specializing in React frontends with Node.js backends.",
+      period: "2015 - Present",
+      description: "Providing comprehensive web development services including custom applications, email marketing solutions, and e-commerce platforms. Specializing in PHP, ASP.NET, and modern web technologies.",
       achievements: [
-        "Built 20+ custom web applications",
-        "Maintained 98% client satisfaction rate",
-        "Delivered projects 15% faster than industry average"
+        "Developed Mosaico Email Template Editor integration with CodeIgniter",
+        "Built multiple e-commerce solutions with shopping cart functionality",
+        "Created scalable repository patterns for Entity Framework applications",
+        "Maintained 556 reputation on Stack Overflow helping developers worldwide"
       ],
-      technologies: ["React", "Node.js", "MongoDB", "AWS"]
-    },
-    {
-      title: "Open Source Contributor",
-      company: "Various Projects",
-      period: "2019 - Present",
-      description: "Contributing to open source projects and maintaining personal projects that benefit the developer community.",
-      achievements: [
-        "Created Aesthetic Palettes project",
-        "Active contributor on GitHub",
-        "Helped 1000+ developers through Stack Overflow"
-      ],
-      technologies: ["JavaScript", "React", "Open Source"]
+      technologies: ["PHP", "ASP.NET MVC", "C#", "CodeIgniter", "JavaScript", "SQL Server"]
     },
     {
       title: "Software Developer",
-      company: "Tech Company",
-      period: "2018 - 2020",
-      description: "Developed and maintained web applications using modern JavaScript frameworks and backend technologies.",
+      company: "Various Projects",
+      period: "2013 - 2015",
+      description: "Focused on .NET ecosystem development including ASP.NET MVC, Entity Framework, and Xamarin mobile applications. Also provided graphics design services using Adobe Creative Suite.",
       achievements: [
-        "Improved application performance by 40%",
-        "Led team of 3 junior developers",
-        "Implemented CI/CD pipelines"
+        "Developed cross-platform mobile applications using Xamarin",
+        "Created custom WordPress solutions for local market needs",
+        "Designed logos and graphics for 50+ clients",
+        "Contributed to open-source projects with Arctic Code Vault recognition"
       ],
-      technologies: ["JavaScript", "React", "Python", "Docker"]
+      technologies: ["ASP.NET", "Xamarin", "WordPress", "Adobe Photoshop", "Adobe Illustrator"]
+    },
+    {
+      title: "Junior Developer",
+      company: "Self-taught & University Projects",
+      period: "2010 - 2013",
+      description: "Started programming journey with GW-BASIC and progressively learned modern web technologies. Developed foundational skills in frontend development and database design.",
+      achievements: [
+        "Created day-of-week calculator program in GW-BASIC at age 13",
+        "Mastered jQuery, CSS3, and HTML5 for frontend development",
+        "Built first commercial projects using simple PHP",
+        "Established strong foundation in programming principles"
+      ],
+      technologies: ["GW-BASIC", "HTML5", "CSS3", "jQuery", "PHP", "MySQL"]
     }
   ];
 

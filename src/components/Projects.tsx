@@ -8,35 +8,35 @@ const Projects = () => {
   const projects = [
     {
       title: "Aesthetic Palettes",
-      description: "A curated collection of beautiful color palettes for designers and developers. Open source project with community contributions.",
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&h=400&fit=crop",
-      tags: ["React", "Design", "Open Source"],
-      github: "https://github.com/ar27111994",
-      demo: "https://opencollective.com/aesthetic-palettes",
+      description: "Open-source color palette generator with zero-cost infrastructure. Built with TypeScript and deployed on Vercel, featuring modern UI and responsive design.",
+      image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=400&fit=crop",
+      tags: ["TypeScript", "React", "Vercel", "UI/UX"],
+      github: "https://github.com/ar27111994/Aesthetic-Palettes",
+      demo: "https://aesthetic-palettes.vercel.app",
       featured: true
     },
     {
-      title: "React Components Library",
-      description: "A comprehensive library of reusable React components with modern styling and accessibility features.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop",
-      tags: ["React", "TypeScript", "Components"],
-      github: "https://github.com/ar27111994",
+      title: "Mosaico Email Template Editor",
+      description: "CodeIgniter integration for Mosaico, an open source WYSIWYG Email Template Editor with Ion Auth 2 and Email Queue System for bulk email marketing.",
+      image: "https://images.unsplash.com/photo-1596526131839-a13c8a6beb2b?w=800&h=400&fit=crop",
+      tags: ["PHP", "CodeIgniter", "JavaScript", "Email Marketing"],
+      github: "https://github.com/ar27111994/Mosaico-CodeIgniter-Ion-Auth",
+      demo: "http://mosaicoci.ar27111994.com/"
+    },
+    {
+      title: "PHP Bookstore Application",
+      description: "A comprehensive web-based bookstore application featuring user authentication, shopping cart functionality, and admin panel for managing books and users.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
+      tags: ["PHP", "MySQL", "Authentication", "E-commerce"],
+      github: "https://github.com/ar27111994/bookstore",
       demo: "#"
     },
     {
-      title: "Full Stack Web Application",
-      description: "A modern web application showcasing full-stack development skills with React frontend and Node.js backend.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=400&fit=crop",
-      tags: ["React", "Node.js", "MongoDB"],
-      github: "https://github.com/ar27111994",
-      demo: "#"
-    },
-    {
-      title: "Open Source Contributions",
-      description: "Various contributions to popular open source projects, helping improve the developer ecosystem.",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=400&fit=crop",
-      tags: ["Open Source", "JavaScript", "Community"],
-      github: "https://github.com/ar27111994",
+      title: "Generic Repository Pattern",
+      description: "A completely generic C.R.U.D. Repository built on top of Entity Framework that can be used with dependency injection containers for clean architecture.",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+      tags: ["C#", "Entity Framework", "Design Patterns", ".NET"],
+      github: "https://github.com/ar27111994/Generic-Repository-Pattern",
       demo: "#"
     }
   ];

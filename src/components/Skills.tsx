@@ -8,36 +8,37 @@ const Skills = () => {
     {
       title: "Frontend Development",
       skills: [
-        { name: "React", level: 95, color: "bg-blue-500" },
         { name: "JavaScript", level: 92, color: "bg-yellow-500" },
-        { name: "TypeScript", level: 88, color: "bg-blue-600" },
-        { name: "HTML/CSS", level: 90, color: "bg-orange-500" }
+        { name: "HTML/CSS", level: 95, color: "bg-orange-500" },
+        { name: "jQuery", level: 88, color: "bg-blue-600" },
+        { name: "Knockout.js", level: 85, color: "bg-red-500" }
       ]
     },
     {
       title: "Backend Development",
       skills: [
-        { name: "Node.js", level: 85, color: "bg-green-500" },
-        { name: "Python", level: 80, color: "bg-green-600" },
-        { name: "API Development", level: 88, color: "bg-purple-500" },
-        { name: "Database Design", level: 82, color: "bg-indigo-500" }
+        { name: "C#", level: 95, color: "bg-purple-600" },
+        { name: "ASP.NET MVC", level: 90, color: "bg-blue-500" },
+        { name: "PHP", level: 88, color: "bg-purple-500" },
+        { name: "CodeIgniter", level: 85, color: "bg-red-600" }
       ]
     },
     {
-      title: "Tools & Technologies",
+      title: "Database & Tools",
       skills: [
+        { name: "SQL Server", level: 88, color: "bg-blue-400" },
+        { name: "Entity Framework", level: 85, color: "bg-green-500" },
         { name: "Git", level: 90, color: "bg-red-500" },
-        { name: "Docker", level: 75, color: "bg-blue-400" },
-        { name: "AWS", level: 70, color: "bg-orange-400" },
-        { name: "CI/CD", level: 78, color: "bg-green-400" }
+        { name: "Adobe Photoshop", level: 82, color: "bg-blue-600" }
       ]
     }
   ];
 
   const technologies = [
-    "React", "JavaScript", "TypeScript", "Node.js", "Python", "HTML", "CSS", 
-    "Tailwind CSS", "Git", "Docker", "MongoDB", "PostgreSQL", "Redis", "AWS", 
-    "Vercel", "Next.js", "Express.js", "REST APIs", "GraphQL", "Jest", "Cypress"
+    "C#", "ASP.NET MVC", "ASP.NET Core", "Entity Framework", "PHP", "CodeIgniter", 
+    "JavaScript", "jQuery", "HTML5", "CSS3", "SQL Server", "MySQL", "Git", 
+    "Xamarin", "Adobe Photoshop", "Adobe Illustrator", "WordPress", "Ion Auth", 
+    "Knockout.js", "Node.js", "TypeScript", "Email Marketing", "WYSIWYG Editors"
   ];
 
   return (
