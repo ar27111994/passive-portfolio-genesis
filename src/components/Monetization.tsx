@@ -321,9 +321,11 @@ const Monetization = () => {
                     </Card>
                   )}
                   
-                  <Button className="w-full" size="lg">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Book Session
+                  <Button className="w-full" size="lg" asChild>
+                    <a href="#contact">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      Book Session
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
