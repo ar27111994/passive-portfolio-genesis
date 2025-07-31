@@ -23,6 +23,19 @@ const Blog = () => {
   
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const handleInitializeDatabase = async () => {
+    try {
+      setIsGenerating(true);
+      await simpleInitializeDatabase();
+      await refreshData();
+    } catch (err) {
+      console.error('Failed to initialize database:', err);
+      alert(`Failed to initialize database: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   const handleGenerateContent = async () => {
     try {
       setIsGenerating(true);
@@ -30,7 +43,8 @@ const Blog = () => {
       // First check if tables exist
       const tablesExist = await blogService.checkTablesExist();
       if (!tablesExist) {
-        throw new Error('Database tables do not exist. Please run the database migrations first.');
+        // Try to initialize database first
+        await simpleInitializeDatabase();
       }
 
       await generateAndPopulateBlogContent();
