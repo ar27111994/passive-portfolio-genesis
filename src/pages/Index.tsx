@@ -195,7 +195,7 @@ const Index = () => {
           <Education />
 
           {/* Blog Section */}
-          <Blog />
+          <BlogSimple />
 
           {/* Monetization/Services Section */}
           <Monetization />
