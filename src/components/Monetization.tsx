@@ -503,13 +503,17 @@ const Monetization = () => {
               training programs, and technical consultation tailored to your specific needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
-                <Mail className="w-4 h-4 mr-2" />
-                Email for Custom Quote
+              <Button size="lg" asChild>
+                <a href="mailto:ar27111994@gmail.com?subject=Custom Development Quote Request&body=Hi Ahmed,%0A%0AI would like to discuss a custom development project. Here are the details:%0A%0AProject Type:%0ABudget Range:%0ATimeline:%0ASpecific Requirements:%0A%0APlease let me know your availability for a discussion.%0A%0AThank you!">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email for Custom Quote
+                </a>
               </Button>
-              <Button size="lg" variant="outline">
-                <Phone className="w-4 h-4 mr-2" />
-                Schedule Discovery Call
+              <Button size="lg" variant="outline" asChild>
+                <a href="#contact">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Schedule Discovery Call
+                </a>
               </Button>
             </div>
           </CardContent>
