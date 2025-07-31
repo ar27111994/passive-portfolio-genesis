@@ -1,15 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  Calendar, 
-  Clock, 
-  DollarSign, 
-  Star, 
-  Users, 
-  BookOpen, 
-  Video, 
-  MessageCircle, 
+import {
+  Calendar,
+  DollarSign,
+  Star,
+  Users,
+  MessageCircle,
   Award,
   TrendingUp,
   Zap,
