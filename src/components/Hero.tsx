@@ -113,8 +113,8 @@ const Hero = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Led frontend development for cybersecurity enterprise products, implementing complex 
-                  cloud storage, organization charts, and document editing systems with Angular & TypeScript.
+                  Implemented frontend for Cloud Storage and Organization Chart Modeling modules with rich text
+                  document editing tools, file management systems, and complex plugin-based online editors using Angular 7+.
                 </p>
               </CardContent>
             </Card>
