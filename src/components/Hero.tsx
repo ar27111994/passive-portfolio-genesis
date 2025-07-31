@@ -8,11 +8,11 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
-            Full Stack Developer
+            Ahmed Rehan
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Passionate developer specializing in React, JavaScript, and modern web technologies. 
-            Building scalable applications and contributing to open source projects.
+            Full Stack Developer specializing in Angular, TypeScript, and enterprise-grade applications. 
+            Building scalable, efficient solutions with 8+ years of professional experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button size="lg" className="group" asChild>

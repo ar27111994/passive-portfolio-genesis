@@ -8,6 +8,7 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
+import Education from "@/components/Education";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Monetization from "@/components/Monetization";
@@ -33,7 +34,7 @@ const Index = () => {
               <a href="#about" className="hover:text-primary transition-colors">About</a>
               <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
               <a href="#skills" className="hover:text-primary transition-colors">Skills</a>
-              <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
+              <a href="#education" className="hover:text-primary transition-colors">Education</a>
               <a href="#blog" className="hover:text-primary transition-colors">Blog</a>
               <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
             </div>
@@ -63,6 +64,7 @@ const Index = () => {
         <Projects />
         <Skills />
         <Experience />
+        <Education />
         <Blog />
         <Monetization />
         <Contact />
