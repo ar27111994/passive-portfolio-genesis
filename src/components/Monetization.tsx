@@ -294,39 +294,7 @@ const Monetization = () => {
           </div>
         </div>
 
-        {/* Upcoming Products */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4">Coming Soon</h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Exciting new products in development. Be the first to know when they launch 
-              and get exclusive early bird pricing.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {upcomingProducts.map((product, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <h4 className="font-semibold mb-2">{product.title}</h4>
-                  <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
-                  
-                  <div className="flex items-center justify-between text-sm mb-4">
-                    <span className="text-muted-foreground">Expected: {product.expectedLaunch}</span>
-                    <span className="font-medium">{product.estimatedPrice}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{product.interest} interested</span>
-                    <Button size="sm" variant="outline">
-                      Get Notified
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+
 
         {/* Contact for Custom Work */}
         <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
