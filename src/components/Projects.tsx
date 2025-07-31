@@ -64,31 +64,31 @@ const Projects = () => {
       category: "Architecture"
     },
     {
-      title: "Pollytics - Political Sentiment Analysis",
-      description: "Advanced sentiment analysis project comparing political figures using machine learning. Demonstrates data science capabilities and political insights through AI.",
-      image: "https://images.unsplash.com/photo-1586207375953-b80b1d1f0aa1?w=800&h=400&fit=crop",
-      tags: ["Python", "Data Science", "Machine Learning", "Sentiment Analysis"],
-      github: "https://github.com/ar27111994/pollytics",
+      title: "CRUD Scaffolding Templates",
+      description: "Complete C.R.U.D. scaffolding templates with AJAXified searching, sorting, paging, and import/export functionality for Excel & CSV files. Built with Generic Repository Pattern on Entity Framework 6.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+      tags: ["ASP.NET MVC", "Entity Framework", "AJAX", "Generic Repository", "Excel Export"],
+      github: "https://github.com/ar27111994",
       demo: "#",
-      category: "Data Science"
+      category: "Development Tools"
     },
     {
-      title: "PYDI - Distributed File System",
-      description: "Multi-platform distributed file system built with Python. Showcases system programming skills and cross-platform development expertise.",
-      image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&h=400&fit=crop",
-      tags: ["Python", "Distributed Systems", "File Systems", "Cross-Platform"],
-      github: "https://github.com/ar27111994/pydi",
+      title: "Bookstore Application",
+      description: "A full-featured & SEO-friendly bookstore with admin panel built with vanilla PHP. Features modern design implemented from PSD template with complete e-commerce functionality.",
+      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=400&fit=crop",
+      tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "SEO", "E-commerce"],
+      github: "https://github.com/ar27111994/bookstore",
       demo: "#",
-      category: "System Development"
+      category: "E-commerce"
     },
     {
-      title: "Zoom Controls Extension",
-      description: "Chrome extension that adds skip and rewind video controls to Zoom recorded video player, enhancing productivity for remote learning and meetings.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=400&fit=crop",
-      tags: ["JavaScript", "Chrome Extension", "Productivity", "Video Processing"],
-      github: "https://github.com/ar27111994/zoomcontrols",
+      title: "Shopping Cart Library",
+      description: "A PHP class for creating shopping carts with complete CRUD operations. Used by hundreds of developers on phpclasses.org community for e-commerce implementations.",
+      image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=400&fit=crop",
+      tags: ["PHP", "Library", "E-commerce", "CRUD", "Session Management"],
+      github: "https://github.com/ar27111994/shopping-cart",
       demo: "#",
-      category: "Browser Extensions"
+      category: "Libraries"
     }
   ];
 
