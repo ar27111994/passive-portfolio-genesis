@@ -28,9 +28,11 @@ const About = () => {
   ];
 
   const coreCompetencies = [
-    { area: "Frontend Development", level: 95, technologies: ["Angular 2+", "TypeScript", "RxJS", "Angular Material", "Ionic"] },
-    { area: "Backend Development", level: 90, technologies: ["C#", "ASP.NET MVC", "PHP", "CodeIgniter", "WordPress"] },
+    { area: "Frontend Development", level: 95, technologies: ["Angular 2+", "React", "Next.js", "TypeScript", "RxJS", "Angular Material", "Ionic"] },
+    { area: "Backend Development", level: 90, technologies: ["C#", "ASP.NET MVC", "PHP", "Python", "CodeIgniter", "WordPress"] },
+    { area: "E-commerce & CMS", level: 88, technologies: ["OpenCart", "WordPress", "Shopify", "WooCommerce"] },
     { area: "State Management", level: 92, technologies: ["Akita", "Redux", "Flux", "RxJS"] },
+    { area: "Web Standards & SEO", level: 90, technologies: ["WCAG Compliance", "SEO Best Practices", "Web Accessibility", "Performance Optimization"] },
     { area: "Database & Tools", level: 88, technologies: ["SQL Server", "Entity Framework", "MySQL", "Jest", "SCSS"] }
   ];
 
