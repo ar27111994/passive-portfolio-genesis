@@ -6,32 +6,32 @@ import { Github, ExternalLink, Star, GitFork, Eye, Award } from "lucide-react";
 const Projects = () => {
   const featuredProjects = [
     {
-      title: "BlindSight",
-      description: "Accessibility application designed to assist visually impaired individuals in their daily lives. Built with Python, this project demonstrates commitment to social good technology and inclusive design.",
-      image: "https://images.unsplash.com/photo-1607706189992-eae578626c86?w=800&h=400&fit=crop",
-      tags: ["Python", "Accessibility", "Computer Vision", "Social Impact"],
-      github: "https://github.com/ar27111994/BlindSight",
+      title: "OpenCart 3.x Extensions",
+      description: "Collection of OpenCart extensions including a 3-level menu system and SMS order alert system with customized admin emails specifically designed for Indian merchants.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
+      tags: ["PHP", "OpenCart", "E-commerce", "Extensions", "SMS Integration"],
+      github: "https://github.com/ar27111994",
       demo: "#",
       featured: true,
-      category: "Social Impact"
+      category: "E-commerce"
     },
     {
-      title: "Flask File Explorer",
-      description: "A network-based file explorer application that operates over local area networks using Flask server framework. Enables secure file management and sharing across network environments.",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
-      tags: ["Python", "Flask", "Network Programming", "File Management"],
-      github: "https://github.com/ar27111994/flask-fileexplorer",
+      title: "National Criminals Database",
+      description: "A WCF project demonstrating ASP.NET MVC and WCF best practices using N-Layered Architecture. Includes web client contracts, services, unit tests, and hosted WCF services.",
+      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop",
+      tags: ["ASP.NET MVC", "WCF", "C#", "N-Layered Architecture", "Entity Framework"],
+      github: "https://github.com/ar27111994",
       demo: "#",
-      category: "System Development"
+      category: "Enterprise Systems"
     },
     {
-      title: "AIKG - AI Knowledge Graphs",
-      description: "Advanced artificial intelligence project focused on knowledge representation and graph-based AI systems. Implements cutting-edge techniques for knowledge extraction and reasoning.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
-      tags: ["AI", "Machine Learning", "Knowledge Graphs", "Python"],
-      github: "https://github.com/ar27111994/AIKG",
+      title: "OpenBiz Supply Chain Management",
+      description: "An open source and intelligently-built supply chain management system featuring complete business workflow management with modern UI and robust backend architecture.",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=400&fit=crop",
+      tags: ["ASP.NET MVC", "Entity Framework", "C#", "jQuery", "Bootstrap", "CKEditor"],
+      github: "https://github.com/ar27111994",
       demo: "#",
-      category: "Artificial Intelligence"
+      category: "Enterprise Systems"
     }
   ];
 
