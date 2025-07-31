@@ -27,8 +27,8 @@ export class BlogService {
     const { data, error } = await query;
     
     if (error) {
-      console.error('Error fetching blog posts:', error);
-      throw error;
+      console.error('Error fetching blog posts:', error.message || error);
+      throw new Error(`Failed to fetch blog posts: ${error.message || JSON.stringify(error)}`);
     }
     
     return data || [];
