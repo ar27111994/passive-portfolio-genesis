@@ -83,71 +83,7 @@ const Monetization = () => {
     }
   ];
 
-  const digitalProducts = [
-    {
-      title: "Enterprise Angular Patterns Course",
-      description: "Comprehensive video course covering enterprise-grade Angular development patterns used at EAGLE6.",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
-      price: "$199",
-      originalPrice: "$299",
-      modules: 12,
-      duration: "8 hours",
-      features: [
-        "12 comprehensive modules",
-        "Source code for all examples",
-        "Real-world enterprise patterns",
-        "State management with Akita",
-        "Performance optimization techniques",
-        "Lifetime access and updates"
-      ],
-      status: "Coming Soon",
-      preOrderDiscount: "33% off",
-      studentsEnrolled: 0,
-      rating: 0
-    },
-    {
-      title: "Full-Stack Developer Roadmap 2024",
-      description: "Complete roadmap and resources for becoming a full-stack developer, based on 11+ years of experience.",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
-      price: "$49",
-      originalPrice: "$79",
-      modules: 6,
-      duration: "3 hours",
-      features: [
-        "Technology selection guide",
-        "Learning path recommendations",
-        "Career advancement strategies",
-        "Freelancing tips and tricks",
-        "Interview preparation guide",
-        "Resource library (100+ links)"
-      ],
-      status: "Available",
-      preOrderDiscount: null,
-      studentsEnrolled: 245,
-      rating: 4.8
-    },
-    {
-      title: "Open Source Contribution Masterclass",
-      description: "Learn how to contribute to open source projects effectively and build your developer reputation.",
-      image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=300&fit=crop",
-      price: "$29",
-      originalPrice: "$49",
-      modules: 4,
-      duration: "2 hours",
-      features: [
-        "Finding the right projects",
-        "Making meaningful contributions",
-        "Building community relationships",
-        "Growing your GitHub profile",
-        "From contributor to maintainer",
-        "Real contribution examples"
-      ],
-      status: "Available",
-      preOrderDiscount: null,
-      studentsEnrolled: 189,
-      rating: 4.9
-    }
-  ];
+
 
   const passiveIncomeStreams = [
     {
