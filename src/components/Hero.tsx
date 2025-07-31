@@ -159,7 +159,7 @@ const Hero = () => {
             <div className="pt-4">
               <h4 className="text-sm font-semibold mb-3 text-muted-foreground">Primary Technologies</h4>
               <div className="flex flex-wrap gap-2">
-                {["Angular", "TypeScript", "Angular Material", "RxJS", "C#", "ASP.NET MVC", "PHP", "WordPress"].map((tech) => (
+                {["Angular", "TypeScript", "React", "Next.js", "Angular Material", "RxJS", "C#", "ASP.NET MVC", "PHP", "Python", "WordPress"].map((tech) => (
                   <Badge key={tech} variant="secondary" className="text-xs">
                     {tech}
                   </Badge>
