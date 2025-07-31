@@ -3,12 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { 
   Calendar, 
-  Clock, 
   DollarSign, 
   Star, 
   Users, 
-  BookOpen, 
-  Video, 
   MessageCircle, 
   Award,
   TrendingUp,
