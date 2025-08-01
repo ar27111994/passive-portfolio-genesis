@@ -178,14 +178,12 @@ const BlogReal = () => {
               <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
               <div className="flex-1">
                 <p className="text-red-800 dark:text-red-200 mb-2">Error loading blog data: {error}</p>
-                <div className="space-x-2">
-                  <Button onClick={refreshData} size="sm" variant="outline">
-                    Retry
-                  </Button>
-                  <Button onClick={handleInitializeDatabase} size="sm">
-                    Initialize Database
-                  </Button>
-                </div>
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  Use the admin panel below to initialize the database and generate content.
+                </p>
+                <Button onClick={refreshData} size="sm" variant="outline" className="mt-2">
+                  Retry Loading Data
+                </Button>
               </div>
             </CardContent>
           </Card>
