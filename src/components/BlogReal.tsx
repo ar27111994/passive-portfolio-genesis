@@ -26,6 +26,7 @@ const BlogReal = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [message, setMessage] = useState<string>('');
   const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error' | null>(null);
+  const [showRLSFix, setShowRLSFix] = useState(false);
 
   // Test Supabase connection on component mount
   useEffect(() => {
