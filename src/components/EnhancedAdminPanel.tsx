@@ -28,6 +28,7 @@ import BlogAdminPanel from './BlogAdminPanel';
 import ContentScheduler from './ContentScheduler';
 import AdvancedAnalytics from './AdvancedAnalytics';
 import SocialMediaIntegration from './SocialMediaIntegration';
+import NewsletterManagement from './NewsletterManagement';
 import { AdminSession, adminService } from '@/services/adminService';
 
 interface EnhancedAdminPanelProps {
