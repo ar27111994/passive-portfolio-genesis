@@ -285,22 +285,22 @@ class RealAnalyticsService {
 
   private initializeProviders() {
     // Google Analytics
-    const gaApiKey = import.meta.env.VITE_GA_API_KEY || process.env.VITE_GA_API_KEY;
-    const gaViewId = import.meta.env.VITE_GA_VIEW_ID || process.env.VITE_GA_VIEW_ID;
+    const gaApiKey = localStorage.getItem('VITE_GA_API_KEY') || import.meta.env.VITE_GA_API_KEY;
+    const gaViewId = localStorage.getItem('VITE_GA_VIEW_ID') || import.meta.env.VITE_GA_VIEW_ID;
     if (gaApiKey && gaViewId) {
       this.providers.push(new GoogleAnalyticsProvider(gaApiKey, gaViewId));
     }
 
     // Plausible Analytics
-    const plausibleKey = import.meta.env.VITE_PLAUSIBLE_API_KEY || process.env.VITE_PLAUSIBLE_API_KEY;
-    const plausibleSite = import.meta.env.VITE_PLAUSIBLE_SITE_ID || process.env.VITE_PLAUSIBLE_SITE_ID;
+    const plausibleKey = localStorage.getItem('VITE_PLAUSIBLE_API_KEY') || import.meta.env.VITE_PLAUSIBLE_API_KEY;
+    const plausibleSite = localStorage.getItem('VITE_PLAUSIBLE_SITE_ID') || import.meta.env.VITE_PLAUSIBLE_SITE_ID;
     if (plausibleKey && plausibleSite) {
       this.providers.push(new PlausibleProvider(plausibleKey, plausibleSite));
     }
 
     // Simple Analytics
-    const simpleKey = import.meta.env.VITE_SIMPLE_ANALYTICS_API_KEY || process.env.VITE_SIMPLE_ANALYTICS_API_KEY;
-    const simpleHostname = import.meta.env.VITE_SIMPLE_ANALYTICS_HOSTNAME || process.env.VITE_SIMPLE_ANALYTICS_HOSTNAME;
+    const simpleKey = localStorage.getItem('VITE_SIMPLE_ANALYTICS_API_KEY') || import.meta.env.VITE_SIMPLE_ANALYTICS_API_KEY;
+    const simpleHostname = localStorage.getItem('VITE_SIMPLE_ANALYTICS_HOSTNAME') || import.meta.env.VITE_SIMPLE_ANALYTICS_HOSTNAME;
     if (simpleKey && simpleHostname) {
       this.providers.push(new SimpleAnalyticsProvider(simpleKey, simpleHostname));
     }
