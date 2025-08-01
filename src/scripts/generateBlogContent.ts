@@ -26,9 +26,9 @@ export async function generateAndPopulateBlogContent() {
       published: true,
       publish_date: generateRandomPastDate().toISOString(),
       read_time_minutes: post.readTimeMinutes,
-      views: Math.floor(Math.random() * 3000) + 500, // Random views between 500-3500
-      likes: Math.floor(Math.random() * 200) + 20,   // Random likes between 20-220
-      comments: Math.floor(Math.random() * 50) + 5    // Random comments between 5-55
+      views: Math.floor(Math.random() * 800) + 150,  // Random views between 150-950 (more realistic)
+      likes: Math.floor(Math.random() * 35) + 8,     // Random likes between 8-43 (realistic engagement)
+      comments: Math.floor(Math.random() * 12) + 2    // Random comments between 2-14 (realistic)
     }));
     
     // Insert posts into database
