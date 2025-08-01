@@ -238,8 +238,8 @@ const BlogAdmin = () => {
                     {seed.title}
                   </li>
                 ))}
-                {blogPostSeeds.length > 4 && (
-                  <li className="text-xs">... and {blogPostSeeds.length - 4} more</li>
+                {enhancedBlogPostSeeds.length > 4 && (
+                  <li className="text-xs">... and {enhancedBlogPostSeeds.length - 4} more</li>
                 )}
               </ul>
             </div>
