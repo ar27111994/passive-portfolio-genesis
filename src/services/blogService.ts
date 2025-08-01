@@ -44,6 +44,68 @@ function handleSupabaseError(error: any, operation: string): never {
 }
 
 export class BlogService {
+  // Health check method to diagnose connection issues
+  async healthCheck(): Promise<{
+    status: 'healthy' | 'degraded' | 'unhealthy';
+    details: string[];
+    errors: string[];
+  }> {
+    const details: string[] = [];
+    const errors: string[] = [];
+    let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
+
+    try {
+      // Check environment variables
+      if (!import.meta.env.VITE_SUPABASE_URL) {
+        errors.push('VITE_SUPABASE_URL is not set');
+        status = 'unhealthy';
+      } else {
+        details.push(`Supabase URL: ${import.meta.env.VITE_SUPABASE_URL}`);
+      }
+
+      if (!import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
+        errors.push('VITE_SUPABASE_PUBLISHABLE_KEY is not set');
+        status = 'unhealthy';
+      } else {
+        details.push('Supabase key is configured');
+      }
+
+      // Test basic table queries
+      const tableTests = [
+        { name: 'blog_posts', query: () => supabase.from('blog_posts').select('count').limit(1) },
+        { name: 'blog_categories', query: () => supabase.from('blog_categories').select('count').limit(1) },
+        { name: 'blog_statistics', query: () => supabase.from('blog_statistics').select('count').limit(1) },
+        { name: 'blog_tags', query: () => supabase.from('blog_tags').select('count').limit(1) }
+      ];
+
+      for (const test of tableTests) {
+        try {
+          const { error } = await test.query();
+          if (error) {
+            if (error.message.includes('does not exist')) {
+              errors.push(`Table ${test.name} does not exist`);
+              status = 'degraded';
+            } else {
+              errors.push(`Table ${test.name}: ${error.message}`);
+              status = 'unhealthy';
+            }
+          } else {
+            details.push(`Table ${test.name} is accessible`);
+          }
+        } catch (err) {
+          errors.push(`Table ${test.name}: ${err instanceof Error ? err.message : 'Unknown error'}`);
+          status = 'unhealthy';
+        }
+      }
+
+    } catch (err) {
+      errors.push(`Health check failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
+      status = 'unhealthy';
+    }
+
+    return { status, details, errors };
+  }
+
   // Simple connection test without querying system tables
   async testConnection(): Promise<boolean> {
     try {
