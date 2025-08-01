@@ -14,12 +14,13 @@ export async function generateAndPopulateBlogContent() {
     console.log(`🤖 Generating ${enhancedBlogPostSeeds.length} blog posts with real AI services...`);
     console.log('🔍 Attempting real AI generation with configured providers...');
 
+    let generatedPosts;
     try {
-      const generatedPosts = await realAIService.generateMultiplePosts(enhancedBlogPostSeeds);
+      generatedPosts = await realAIService.generateMultiplePosts(enhancedBlogPostSeeds);
       console.log(`✅ Successfully generated ${generatedPosts.length} posts with real AI`);
     } catch (realAIError) {
       console.warn('⚠️ Real AI generation failed, falling back to enhanced template system:', realAIError);
-      const generatedPosts = await enhancedAIContentGenerator.generateMultiplePosts(enhancedBlogPostSeeds);
+      generatedPosts = await enhancedAIContentGenerator.generateMultiplePosts(enhancedBlogPostSeeds);
       console.log(`✅ Generated ${generatedPosts.length} posts using enhanced templates`);
     }
     
