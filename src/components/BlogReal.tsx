@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, Eye, Heart, MessageCircle, Star, BookOpen, Users, TrendingUp, Loader2, AlertCircle, CheckCircle } from "lucide-react";
+import { Calendar, Clock, Eye, Heart, MessageCircle, Star, BookOpen, Users, TrendingUp, Loader2, AlertCircle, CheckCircle, Database } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useBlog } from "@/hooks/useBlog";
 import { blogService } from "@/services/blogService";
