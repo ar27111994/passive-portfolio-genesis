@@ -220,29 +220,7 @@ const AdvancedAnalytics = () => {
     setAnalyticsData(analytics);
   };
 
-  const generateTimeSeriesData = (days: number, posts: any[]) => {
-    const data = [];
-    const now = new Date();
-    
-    for (let i = days - 1; i >= 0; i--) {
-      const date = new Date(now);
-      date.setDate(date.getDate() - i);
-      
-      // Generate mock daily data based on existing posts
-      const dailyViews = Math.floor(Math.random() * 100) + 50;
-      const dailyLikes = Math.floor(dailyViews * 0.1);
-      const dailyComments = Math.floor(dailyViews * 0.05);
-      
-      data.push({
-        date: date.toISOString().split('T')[0],
-        views: dailyViews,
-        likes: dailyLikes,
-        comments: dailyComments
-      });
-    }
-    
-    return data;
-  };
+
 
   const exportAnalytics = () => {
     if (!analyticsData) return;
