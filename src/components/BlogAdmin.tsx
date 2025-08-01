@@ -224,7 +224,7 @@ const BlogAdmin = () => {
               ) : (
                 <>
                   <Plus className="w-4 h-4 mr-2" />
-                  Generate All Blog Posts ({blogPostSeeds.length} posts)
+                  Generate All Blog Posts ({enhancedBlogPostSeeds.length} posts)
                 </>
               )}
             </Button>
