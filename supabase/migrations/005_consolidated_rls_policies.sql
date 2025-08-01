@@ -21,9 +21,6 @@ DROP POLICY IF EXISTS "Allow authenticated users to manage tags" ON blog_tags;
 DROP POLICY IF EXISTS "Allow authenticated users to manage statistics" ON blog_statistics;
 DROP POLICY IF EXISTS "Allow public inserts on newsletter_subscribers" ON newsletter_subscribers;
 DROP POLICY IF EXISTS "Allow authenticated users to manage newsletter_subscribers" ON newsletter_subscribers;
-DROP POLICY IF EXISTS "Allow public read access to social_platforms" ON social_platforms;
-DROP POLICY IF EXISTS "Allow authenticated users to manage social_platforms" ON social_platforms;
-DROP POLICY IF EXISTS "Allow authenticated users to manage social_posts" ON social_posts;
 DROP POLICY IF EXISTS "Allow admin users to manage user roles" ON user_roles;
 DROP POLICY IF EXISTS "Users can insert their own blog posts" ON blog_posts;
 DROP POLICY IF EXISTS "Users can update their own blog posts" ON blog_posts;
@@ -34,10 +31,6 @@ DROP POLICY IF EXISTS "Admin users can manage blog tags" ON blog_tags;
 DROP POLICY IF EXISTS "Admin users can manage blog statistics" ON blog_statistics;
 DROP POLICY IF EXISTS "Public can subscribe to the newsletter" ON newsletter_subscribers;
 DROP POLICY IF EXISTS "Admin users can manage newsletter subscribers" ON newsletter_subscribers;
-DROP POLICY IF EXISTS "Public can read social platforms" ON social_platforms;
-DROP POLICY IF EXISTS "Admin users can manage social platforms" ON social_platforms;
-DROP POLICY IF EXISTS "Users can manage their own social posts" ON social_posts;
-DROP POLICY IF EXISTS "Admin users can manage all social posts" ON social_posts;
 
 -- Function to check user role
 CREATE OR REPLACE FUNCTION public.get_user_role(user_id UUID)
@@ -77,16 +70,6 @@ CREATE POLICY "Admin users can manage blog statistics" ON public.blog_statistics
 ALTER TABLE public.newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public can subscribe to the newsletter" ON public.newsletter_subscribers FOR INSERT WITH CHECK (true);
 CREATE POLICY "Admin users can manage newsletter subscribers" ON public.newsletter_subscribers FOR ALL USING (public.get_user_role(auth.uid()) = 'admin');
-
--- Social Platforms
-ALTER TABLE public.social_platforms ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public can read social platforms" ON public.social_platforms FOR SELECT USING (true);
-CREATE POLICY "Admin users can manage social platforms" ON public.social_platforms FOR ALL USING (public.get_user_role(auth.uid()) = 'admin');
-
--- Social Posts
-ALTER TABLE public.social_posts ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Users can manage their own social posts" ON public.social_posts FOR ALL USING (auth.uid() = author_id) WITH CHECK (auth.uid() = author_id);
-CREATE POLICY "Admin users can manage all social posts" ON public.social_posts FOR ALL USING (public.get_user_role(auth.uid()) = 'admin');
 
 -- User Roles
 ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
