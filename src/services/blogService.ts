@@ -312,6 +312,45 @@ export class BlogService {
     }
   }
 
+  // Analytics and Insights
+  async getBlogAnalytics() {
+    try {
+      const [posts, categories, stats] = await Promise.all([
+        this.getAllPublishedPosts(),
+        this.getAllCategories(),
+        this.getBlogStatistics()
+      ]);
+
+      const totalViews = posts.reduce((sum, post) => sum + (post.views || 0), 0);
+      const totalLikes = posts.reduce((sum, post) => sum + (post.likes || 0), 0);
+      const averageReadTime = posts.reduce((sum, post) => sum + (post.read_time_minutes || 0), 0) / posts.length;
+
+      return {
+        totalPosts: posts.length,
+        totalViews,
+        totalLikes,
+        averageReadTime: Math.round(averageReadTime) || 0,
+        categoriesCount: categories.length,
+        featuredPostsCount: posts.filter(p => p.featured).length,
+        recentPostsCount: posts.filter(p => {
+          const publishDate = new Date(p.publish_date || '');
+          const oneMonthAgo = new Date();
+          oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+          return publishDate > oneMonthAgo;
+        }).length,
+        categories: categories.map(cat => ({
+          name: cat.name,
+          postCount: cat.post_count,
+          colorClass: cat.color_class
+        })),
+        statistics: stats
+      };
+    } catch (err) {
+      console.error('Error fetching blog analytics:', err);
+      throw err;
+    }
+  }
+
   // Bulk operations for AI content generation
   async createMultiplePosts(posts: BlogPostInsert[]): Promise<BlogPost[]> {
     try {
