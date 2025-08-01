@@ -243,48 +243,11 @@ const BlogReal = () => {
           </Card>
         )}
 
-        {/* Admin Controls */}
-        <div className="text-center mb-16">
-          <div className="space-x-4 mb-4">
-            <Button
-              onClick={handleInitializeDatabase}
-              disabled={isInitializing || isGenerating}
-              size="lg"
-              variant="secondary"
-            >
-              {isInitializing ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Inserting...
-                </>
-              ) : (
-                <>
-                  <Database className="w-4 h-4 mr-2" />
-                  Insert Basic Data
-                </>
-              )}
-            </Button>
-            <Button 
-              onClick={handleGenerateContent} 
-              disabled={isInitializing || isGenerating}
-              size="lg"
-            >
-              {isGenerating ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Star className="w-4 h-4 mr-2" />
-                  Generate AI Content
-                </>
-              )}
-            </Button>
+        {/* Admin Access Section */}
+        <div className="mb-16">
+          <div className="max-w-2xl mx-auto">
+            <AdminAccessButton />
           </div>
-          <p className="text-sm text-muted-foreground">
-            Initialize the database first, then generate AI-powered blog content based on real experience
-          </p>
         </div>
 
         {/* Blog Statistics */}
