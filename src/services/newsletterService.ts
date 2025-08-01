@@ -1,52 +1,60 @@
+import { supabase } from '@/integrations/supabase/client';
+
 export interface NewsletterSubscriber {
   id: string;
   email: string;
   name?: string;
   interests: string[];
-  subscribeDate: string;
+  subscribe_date: string;
   status: 'active' | 'unsubscribed';
   source: string;
 }
 
 class NewsletterService {
-  private static readonly STORAGE_KEY = 'newsletterSubscribers';
-
   public async subscribe(email: string, name?: string, interests: string[] = []): Promise<void> {
     if (!email) {
       throw new Error('Email is required.');
     }
 
-    const subscribers = this.getAllSubscribers();
-    const existingSubscriber = subscribers.find(sub => sub.email === email);
+    const { data: existingSubscriber, error: fetchError } = await supabase
+      .from('newsletter_subscribers')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116: 'exact one row not found'
+        throw new Error(fetchError.message);
+    }
 
     if (existingSubscriber && existingSubscriber.status === 'active') {
       throw new Error('You are already subscribed.');
     }
 
-    const newSubscriber: NewsletterSubscriber = {
-      id: `sub_${Date.now()}`,
-      email,
-      name,
-      interests,
-      subscribeDate: new Date().toISOString(),
-      status: 'active',
-      source: 'Website',
-    };
+    const { error: upsertError } = await supabase
+        .from('newsletter_subscribers')
+        .upsert({
+            email,
+            name,
+            interests,
+            status: 'active',
+            source: 'Website',
+        }, { onConflict: 'email' });
 
-    const updatedSubscribers = existingSubscriber
-      ? subscribers.map(sub => (sub.email === email ? newSubscriber : sub))
-      : [...subscribers, newSubscriber];
-
-    localStorage.setItem(NewsletterService.STORAGE_KEY, JSON.stringify(updatedSubscribers));
+    if (upsertError) {
+      throw new Error(upsertError.message);
+    }
   }
 
-  public getAllSubscribers(): NewsletterSubscriber[] {
-    try {
-      const subscribersData = localStorage.getItem(NewsletterService.STORAGE_KEY);
-      return subscribersData ? JSON.parse(subscribersData) : [];
-    } catch {
-      return [];
+  public async getAllSubscribers(): Promise<NewsletterSubscriber[]> {
+    const { data, error } = await supabase
+      .from('newsletter_subscribers')
+      .select('*');
+
+    if (error) {
+      throw new Error(error.message);
     }
+
+    return data || [];
   }
 }
 

@@ -19,15 +19,7 @@ import {
   Star
 } from "lucide-react";
 
-interface NewsletterSubscriber {
-  id: string;
-  email: string;
-  name?: string;
-  interests: string[];
-  subscribeDate: string;
-  status: 'active' | 'unsubscribed';
-  source: string;
-}
+import { newsletterService } from '@/services/newsletterService';
 
 const NewsletterSubscription = () => {
   const [email, setEmail] = useState('');
@@ -68,31 +60,8 @@ const NewsletterSubscription = () => {
       return;
     }
 
-    // Check if already subscribed
-    const existingSubscribers = localStorage.getItem('newsletterSubscribers');
-    const subscribers: NewsletterSubscriber[] = existingSubscribers ? JSON.parse(existingSubscribers) : [];
-    
-    if (subscribers.some(sub => sub.email === email && sub.status === 'active')) {
-      setMessage('📧 You\'re already subscribed to our newsletter!');
-      setIsSubscribing(false);
-      return;
-    }
-
     try {
-      const newSubscriber: NewsletterSubscriber = {
-        id: `subscriber-${Date.now()}`,
-        email,
-        name: name || undefined,
-        interests,
-        subscribeDate: new Date().toISOString(),
-        status: 'active',
-        source: 'website'
-      };
-
-      // Save to localStorage (in real app, this would be sent to backend/email service)
-      const updatedSubscribers = [...subscribers.filter(s => s.email !== email), newSubscriber];
-      localStorage.setItem('newsletterSubscribers', JSON.stringify(updatedSubscribers));
-
+      await newsletterService.subscribe(email, name, interests);
       setIsSubscribed(true);
       setMessage('🎉 Welcome aboard! You\'ve successfully subscribed to our newsletter.');
       
@@ -101,7 +70,11 @@ const NewsletterSubscription = () => {
       setName('');
       setInterests([]);
     } catch (error) {
-      setMessage('❌ Failed to subscribe. Please try again.');
+        if (error instanceof Error) {
+            setMessage(`❌ ${error.message}`);
+        } else {
+            setMessage('❌ Failed to subscribe. Please try again.');
+        }
     } finally {
       setIsSubscribing(false);
     }
