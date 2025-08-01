@@ -12,6 +12,7 @@ CREATE TABLE social_platforms (
 CREATE TABLE social_posts (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     blog_post_id UUID,
+    author_id UUID REFERENCES auth.users(id),
     blog_title TEXT,
     platforms TEXT[],
     content TEXT,
