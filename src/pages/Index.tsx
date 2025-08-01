@@ -17,6 +17,7 @@ import { AuthDialog } from "@/components/AuthDialog";
 import { UserMenu } from "@/components/UserMenu";
 import { MobileMenu } from "@/components/MobileMenu";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import AdminStatusIndicator from "@/components/AdminStatusIndicator";
 import { useAuth } from "@/hooks/useAuth";
 import SEO, { seoConfigs } from "@/components/SEO";
 import { useState, useEffect } from "react";
