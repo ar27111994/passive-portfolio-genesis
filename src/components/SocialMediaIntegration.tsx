@@ -192,7 +192,7 @@ const SocialMediaIntegration = () => {
       return;
     }
 
-    const blogPost = mockBlogPosts.find(post => post.id === selectedPost);
+    const blogPost = blogPosts.find(post => post.id === selectedPost);
     if (!blogPost) return;
 
     const content = customContent || generatePostContent(
