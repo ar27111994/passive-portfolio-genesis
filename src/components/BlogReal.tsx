@@ -109,6 +109,11 @@ const BlogReal = () => {
     );
   }
 
+  // Show setup component if tables don't exist
+  if (error && error.includes('does not exist')) {
+    return <BlogSetup />;
+  }
+
   return (
     <section id="blog" className="py-20">
       <div className="container mx-auto px-4">
