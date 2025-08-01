@@ -338,6 +338,11 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
             <SocialMediaIntegration />
           </TabsContent>
 
+          {/* Newsletter Tab */}
+          <TabsContent value="newsletter">
+            <NewsletterManagement />
+          </TabsContent>
+
           {/* User Management Tab */}
           <TabsContent value="users">
             <Card>
