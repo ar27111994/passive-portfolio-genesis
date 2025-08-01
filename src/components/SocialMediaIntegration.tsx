@@ -26,6 +26,7 @@ import {
   TrendingUp,
   Calendar
 } from "lucide-react";
+import { integrationService } from "@/services/integrationService";
 
 interface SocialPlatform {
   id: string;
