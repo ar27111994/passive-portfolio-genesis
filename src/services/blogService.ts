@@ -1,5 +1,4 @@
 import { supabase } from '@/integrations/supabase/client';
-import { adminService } from './adminService';
 import type { Database } from '@/integrations/supabase/types';
 
 type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
@@ -265,13 +264,9 @@ export class BlogService {
     }
   }
 
-  async createPost(post: BlogPostInsert): Promise<BlogPost> {
+  async createPost(post: BlogPostInsert, authorId: string): Promise<BlogPost> {
     try {
-      const session = adminService.getCurrentSession();
-      if (!session) {
-        throw new Error('User is not authenticated.');
-      }
-      const postWithAuthor = { ...post, author_id: session.userId };
+      const postWithAuthor = { ...post, author_id: authorId };
       const { data, error } = await supabase
         .from('blog_posts')
         .insert(postWithAuthor)
@@ -450,13 +445,9 @@ export class BlogService {
   }
 
   // Bulk operations for AI content generation
-  async createMultiplePosts(posts: BlogPostInsert[]): Promise<BlogPost[]> {
+  async createMultiplePosts(posts: BlogPostInsert[], authorId: string): Promise<BlogPost[]> {
     try {
-      const session = adminService.getCurrentSession();
-      if (!session) {
-        throw new Error('User is not authenticated.');
-      }
-      const postsWithAuthor = posts.map(post => ({ ...post, author_id: session.userId }));
+      const postsWithAuthor = posts.map(post => ({ ...post, author_id: authorId }));
 
       // Create posts one by one to handle potential errors better
       const createdPosts: BlogPost[] = [];

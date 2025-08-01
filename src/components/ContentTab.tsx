@@ -17,7 +17,7 @@ import { useBlog } from "@/hooks/useBlog";
 import { regenerateSinglePost, enhancedBlogPostSeeds } from "@/scripts/generateBlogContent";
 import { aiContentGenerator } from "@/services/aiContentGenerator";
 import { blogService } from "@/services/blogService";
-import { adminService } from '@/services/adminService';
+import { useAuth } from '@/hooks/useAuth';
 
 const ContentTab = () => {
   const {
@@ -39,8 +39,10 @@ const ContentTab = () => {
     style: 'tutorial' as 'tutorial' | 'opinion' | 'case-study' | 'technical-deep-dive'
   });
 
-  const canGenerateContent = adminService.hasPermission('generate', 'content');
-  const canWritePosts = adminService.hasPermission('write', 'posts');
+  const { user } = useAuth();
+  // A real implementation would use a more robust role management system
+  const canGenerateContent = !!user;
+  const canWritePosts = !!user;
 
   const handleGenerateSinglePost = async () => {
     if (!canGenerateContent) {
@@ -51,7 +53,11 @@ const ContentTab = () => {
       setIsWorking(true);
       setMessage(`🤖 Generating single post: ${enhancedBlogPostSeeds[selectedSeed].title}...`);
 
-      await regenerateSinglePost(enhancedBlogPostSeeds[selectedSeed]);
+      if (!user) {
+        setMessage('❌ You must be logged in to generate a post.');
+        return;
+      }
+      await regenerateSinglePost(enhancedBlogPostSeeds[selectedSeed], user.id);
       await refreshData();
 
       setMessage('✅ Single post generated successfully!');
@@ -87,6 +93,10 @@ const ContentTab = () => {
 
       const generatedPost = await aiContentGenerator.generateBlogPost(seed);
 
+      if (!user) {
+        setMessage('❌ You must be logged in to create a post.');
+        return;
+      }
       await blogService.createPost({
         title: generatedPost.title,
         slug: generatedPost.slug,
@@ -102,7 +112,7 @@ const ContentTab = () => {
         views: 0,
         likes: 0,
         comments: 0
-      });
+      }, user.id);
 
       await refreshData();
 

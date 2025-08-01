@@ -21,7 +21,7 @@ import {
   Timer
 } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
-import { adminService } from "@/services/adminService";
+import { useAuth } from '@/hooks/useAuth';
 
 export interface ScheduledPost {
   id: string;
@@ -57,7 +57,7 @@ const ContentScheduler = () => {
     scheduledTime: ''
   });
 
-  const session = adminService.getCurrentSession();
+  const { user } = useAuth();
 
   useEffect(() => {
     loadScheduledPosts();
@@ -117,8 +117,8 @@ const ContentScheduler = () => {
   };
 
   const handleCreatePost = () => {
-    if (!adminService.hasPermission('schedule', 'posts')) {
-      setMessage('❌ You do not have permission to schedule posts');
+    if (!user) {
+      setMessage('❌ You must be logged in to schedule posts');
       return;
     }
 
@@ -143,7 +143,7 @@ const ContentScheduler = () => {
       imageUrl: newPost.imageUrl,
       scheduledDate: scheduledDateTime.toISOString(),
       status: 'scheduled',
-      createdBy: session?.email || 'Unknown',
+      createdBy: user?.email || 'Unknown',
       createdAt: new Date().toISOString(),
       retryCount: 0
     };
@@ -215,7 +215,7 @@ const ContentScheduler = () => {
         </div>
         <Button 
           onClick={() => setIsCreating(true)} 
-          disabled={!adminService.hasPermission('schedule', 'posts')}
+          disabled={!user}
         >
           <Plus className="w-4 h-4 mr-2" />
           Schedule New Post

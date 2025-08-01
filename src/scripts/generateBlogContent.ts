@@ -6,7 +6,7 @@ import type { Database } from '../integrations/supabase/types';
 
 type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert'];
 
-export async function generateAndPopulateBlogContent() {
+export async function generateAndPopulateBlogContent(authorId: string) {
   console.log('🤖 Starting AI content generation...');
   
   try {
@@ -44,7 +44,7 @@ export async function generateAndPopulateBlogContent() {
     
     // Insert posts into database
     console.log('💾 Inserting posts into Supabase...');
-    const insertedPosts = await blogService.createMultiplePosts(blogPostsForDB);
+    const insertedPosts = await blogService.createMultiplePosts(blogPostsForDB, authorId);
     console.log(`✅ Successfully created ${insertedPosts.length} blog posts`);
     
     // Update statistics
@@ -111,7 +111,7 @@ async function updateBlogStatistics() {
 }
 
 // Function to regenerate a single post (useful for testing)
-export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
+export async function regenerateSinglePost(seed = blogPostSeeds[0], authorId: string) {
   console.log(`🔄 Regenerating post: ${seed.title}`);
   
   try {
@@ -134,7 +134,7 @@ export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
       comments: Math.floor(Math.random() * 20) + 2
     };
     
-    const insertedPost = await blogService.createPost(blogPost);
+    const insertedPost = await blogService.createPost(blogPost, authorId);
     console.log(`✅ Successfully created post: ${insertedPost.title}`);
     
     return insertedPost;

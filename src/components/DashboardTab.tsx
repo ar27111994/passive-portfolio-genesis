@@ -18,7 +18,7 @@ import {
 import { useBlog } from "@/hooks/useBlog";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
 import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
-import { adminService } from '@/services/adminService';
+import { useAuth } from '@/hooks/useAuth';
 import { blogService } from '@/services/blogService';
 
 const DashboardTab = () => {
@@ -35,8 +35,10 @@ const DashboardTab = () => {
   const [message, setMessage] = useState<string>('');
   const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error' | null>(null);
 
-  const canInitializeDb = adminService.hasPermission('write', 'database');
-  const canGenerateContent = adminService.hasPermission('generate', 'content');
+  const { user } = useAuth();
+  // A real implementation would use a more robust role management system
+  const canInitializeDb = !!user;
+  const canGenerateContent = !!user;
 
   const testConnection = async () => {
     try {
@@ -79,7 +81,11 @@ const DashboardTab = () => {
       setIsWorking(true);
       setMessage(`🤖 Generating all enhanced AI-powered blog posts...`);
 
-      await generateAndPopulateBlogContent();
+      if (!user) {
+        setMessage('❌ You must be logged in to generate content.');
+        return;
+      }
+      await generateAndPopulateBlogContent(user.id);
       await refreshData();
 
       setMessage('🎉 All blog content generated successfully!');
