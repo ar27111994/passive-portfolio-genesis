@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut, Shield, AlertTriangle } from "lucide-react";
-import AdminAuth from './AdminAuth';
-import BlogAdminPanel from './BlogAdminPanel';
+import { Shield } from "lucide-react";
+import EnhancedAdminAuth from './EnhancedAdminAuth';
+import EnhancedAdminPanel from './EnhancedAdminPanel';
+import { AdminSession, adminService } from '@/services/adminService';
 
 const ProtectedAdmin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
