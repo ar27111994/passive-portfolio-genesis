@@ -190,10 +190,10 @@ class RealAIService {
   }
 
   private initializeProviders() {
-    // Initialize providers based on available API keys
-    const huggingFaceKey = import.meta.env.VITE_HUGGINGFACE_API_KEY || process.env.VITE_HUGGINGFACE_API_KEY;
-    const cohereKey = import.meta.env.VITE_COHERE_API_KEY || process.env.VITE_COHERE_API_KEY;
-    const openaiKey = import.meta.env.VITE_OPENAI_API_KEY || process.env.VITE_OPENAI_API_KEY;
+    // Initialize providers based on available API keys from localStorage or env
+    const huggingFaceKey = localStorage.getItem('VITE_HUGGINGFACE_API_KEY') || import.meta.env.VITE_HUGGINGFACE_API_KEY;
+    const cohereKey = localStorage.getItem('VITE_COHERE_API_KEY') || import.meta.env.VITE_COHERE_API_KEY;
+    const openaiKey = localStorage.getItem('VITE_OPENAI_API_KEY') || import.meta.env.VITE_OPENAI_API_KEY;
 
     if (huggingFaceKey) {
       this.providers.push(new HuggingFaceProvider(huggingFaceKey));
