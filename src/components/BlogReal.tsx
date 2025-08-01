@@ -101,20 +101,17 @@ const BlogReal = () => {
 
 
 
-        {/* Error State */}
+        {/* Simplified Error State for End Users */}
         {error && (
-          <Card className="mb-8 bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800">
-            <CardContent className="p-4 flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
-              <div className="flex-1">
-                <p className="text-red-800 dark:text-red-200 mb-2">Error loading blog data: {error}</p>
-                <p className="text-sm text-red-600 dark:text-red-400">
-                  Use the admin panel below to initialize the database and generate content.
-                </p>
-                <Button onClick={refreshData} size="sm" variant="outline" className="mt-2">
-                  Retry Loading Data
-                </Button>
-              </div>
+          <Card className="mb-8 bg-blue-50 border-blue-200 dark:bg-blue-950/20 dark:border-blue-800">
+            <CardContent className="p-6 text-center">
+              <AlertCircle className="w-8 h-8 mx-auto mb-3 text-blue-600" />
+              <h3 className="text-lg font-medium text-blue-800 dark:text-blue-200 mb-2">
+                Blog Content Loading
+              </h3>
+              <p className="text-blue-700 dark:text-blue-300 mb-4">
+                The blog system is being initialized. Please use the admin panel below to set up and generate content.
+              </p>
             </CardContent>
           </Card>
         )}
