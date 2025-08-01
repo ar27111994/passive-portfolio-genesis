@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
 import { integrationService } from "@/services/integrationService";
+import { realAnalyticsService } from "@/services/realAnalyticsService";
 
 interface AnalyticsData {
   totalViews: number;
