@@ -87,8 +87,9 @@ const AdvancedAnalytics = () => {
     setIsLoading(true);
 
     try {
-      // Get real analytics data from integration service
-      const realAnalytics = await integrationService.getAnalyticsData(timeRange);
+      // Get real analytics data from real analytics service
+      console.log('🔍 Fetching real analytics data from configured providers...');
+      const realAnalytics = await realAnalyticsService.getAnalyticsData(timeRange);
 
       // Filter by category if needed
       const filteredPosts = selectedCategory === 'all'
