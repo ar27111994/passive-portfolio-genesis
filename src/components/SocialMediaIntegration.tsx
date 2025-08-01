@@ -101,23 +101,7 @@ const SocialMediaIntegration = () => {
   const [scheduledTime, setScheduledTime] = useState('');
   const [message, setMessage] = useState('');
 
-  // Mock blog posts for demonstration
-  const mockBlogPosts = [
-    {
-      id: '1',
-      title: 'Advanced Angular Performance Optimization',
-      excerpt: 'Learn the latest techniques to boost your Angular application performance with lazy loading, change detection strategies, and more.',
-      url: 'https://blog.ahmedrehan.dev/angular-performance',
-      category: 'Angular'
-    },
-    {
-      id: '2',
-      title: 'Building Scalable Microservices with Node.js',
-      excerpt: 'A comprehensive guide to designing and implementing microservices architecture using Node.js and Docker.',
-      url: 'https://blog.ahmedrehan.dev/microservices-nodejs',
-      category: 'Node.js'
-    }
-  ];
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
 
   useEffect(() => {
     loadSocialPosts();
