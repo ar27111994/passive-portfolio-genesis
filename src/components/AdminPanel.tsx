@@ -25,21 +25,21 @@ import {
 } from "lucide-react";
 
 // Import new components
-import BlogAdminPanel from './BlogAdminPanel';
+import ContentTab from './ContentTab';
 import ContentScheduler from './ContentScheduler';
-import AdvancedAnalytics from './AdvancedAnalytics';
+import AnalyticsTab from './AnalyticsTab';
 import SocialMediaIntegration from './SocialMediaIntegration';
 import NewsletterManagement from './NewsletterManagement';
 import AIServiceSetup from './AIServiceSetup';
-import RealImplementationStatus from './RealImplementationStatus';
+import DashboardTab from './DashboardTab';
 import { AdminSession, adminService } from '@/services/adminService';
 
-interface EnhancedAdminPanelProps {
+interface AdminPanelProps {
   session: AdminSession;
   onLogout: () => void;
 }
 
-const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
+const AdminPanel = ({ session, onLogout }: AdminPanelProps) => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sessionTimeLeft, setSessionTimeLeft] = useState<string>('');
 
@@ -166,12 +166,12 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-6">
-            <RealImplementationStatus />
+            <DashboardTab />
           </TabsContent>
 
           {/* Content Management Tab */}
           <TabsContent value="content">
-            <BlogAdminPanel />
+            <ContentTab />
           </TabsContent>
 
           {/* Content Scheduler Tab */}
@@ -181,7 +181,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
 
           {/* Advanced Analytics Tab */}
           <TabsContent value="analytics">
-            <AdvancedAnalytics />
+            <AnalyticsTab />
           </TabsContent>
 
           {/* Social Media Tab */}
@@ -323,4 +323,4 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
   );
 };
 
-export default EnhancedAdminPanel;
+export default AdminPanel;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Shield } from "lucide-react";
-import EnhancedAdminAuth from './EnhancedAdminAuth';
-import EnhancedAdminPanel from './EnhancedAdminPanel';
+import AdminAuth from './AdminAuth';
+import AdminPanel from './AdminPanel';
 import { AdminSession, adminService } from '@/services/adminService';
 
 const ProtectedAdmin = () => {
@@ -40,10 +40,10 @@ const ProtectedAdmin = () => {
   }
 
   if (!session) {
-    return <EnhancedAdminAuth onAuthenticated={handleAuthenticated} />;
+    return <AdminAuth onAuthenticated={handleAuthenticated} />;
   }
 
-  return <EnhancedAdminPanel session={session} onLogout={handleLogout} />;
+  return <AdminPanel session={session} onLogout={handleLogout} />;
 };
 
 export default ProtectedAdmin;
