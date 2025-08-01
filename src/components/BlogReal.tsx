@@ -21,39 +21,7 @@ const BlogReal = () => {
     incrementLikes
   } = useBlog();
   
-  const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error' | null>(null);
-  const [healthInfo, setHealthInfo] = useState<any>(null);
 
-  // Test Supabase connection on component mount
-  useEffect(() => {
-    testSupabaseConnection();
-  }, []);
-
-  const testSupabaseConnection = async () => {
-    try {
-      setConnectionStatus('testing');
-
-      // Run health check for detailed diagnostics
-      const health = await blogService.healthCheck();
-      setHealthInfo(health);
-
-      if (health.status === 'healthy') {
-        setConnectionStatus('connected');
-      } else if (health.status === 'degraded') {
-        setConnectionStatus('connected'); // Connected but with issues
-      } else {
-        setConnectionStatus('error');
-      }
-    } catch (err) {
-      console.error('Supabase connection test failed:', err);
-      setConnectionStatus('error');
-      setHealthInfo({
-        status: 'unhealthy',
-        details: [],
-        errors: [err instanceof Error ? err.message : 'Unknown error']
-      });
-    }
-  };
 
 
 
