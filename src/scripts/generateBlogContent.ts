@@ -9,9 +9,9 @@ export async function generateAndPopulateBlogContent() {
   console.log('🤖 Starting AI content generation...');
   
   try {
-    // Generate blog posts using AI
-    console.log(`📝 Generating ${blogPostSeeds.length} blog posts...`);
-    const generatedPosts = await aiContentGenerator.generateMultiplePosts(blogPostSeeds);
+    // Generate blog posts using enhanced AI
+    console.log(`📝 Generating ${enhancedBlogPostSeeds.length} blog posts with enhanced AI...`);
+    const generatedPosts = await enhancedAIContentGenerator.generateMultiplePosts(enhancedBlogPostSeeds);
     
     // Convert to Supabase format
     const blogPostsForDB: BlogPostInsert[] = generatedPosts.map(post => ({
