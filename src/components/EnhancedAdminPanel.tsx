@@ -13,7 +13,7 @@ import {
   Users,
   Shield,
   Database,
-  Backup,
+  HardDrive,
   Search,
   FileText,
   LogOut,
