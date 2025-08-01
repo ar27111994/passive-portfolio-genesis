@@ -82,11 +82,9 @@ const BlogReal = () => {
           </Card>
         )}
 
-        {/* Admin Access Section */}
+        {/* End-User Actions Section */}
         <div className="mb-16">
-          <div className="max-w-2xl mx-auto">
-            <AdminAccessButton />
-          </div>
+          <EndUserBlogActions />
         </div>
 
         {/* Blog Statistics */}
