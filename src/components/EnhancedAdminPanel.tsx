@@ -346,6 +346,11 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
             <NewsletterManagement />
           </TabsContent>
 
+          {/* AI Setup Tab */}
+          <TabsContent value="ai-setup">
+            <AIServiceSetup />
+          </TabsContent>
+
           {/* User Management Tab */}
           <TabsContent value="users">
             <Card>
