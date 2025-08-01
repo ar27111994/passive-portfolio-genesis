@@ -14,20 +14,32 @@ export interface BlogPostWithStats extends BlogPost {
 // Helper function to handle Supabase errors properly
 function handleSupabaseError(error: any, operation: string): never {
   let errorMessage = 'Unknown error';
-  
+
+  // Handle different error types
   if (error?.message) {
     errorMessage = error.message;
   } else if (error?.error?.message) {
     errorMessage = error.error.message;
+  } else if (error?.details) {
+    errorMessage = error.details;
+  } else if (error?.hint) {
+    errorMessage = error.hint;
   } else if (typeof error === 'string') {
     errorMessage = error;
-  } else if (error?.toString && typeof error.toString === 'function') {
-    errorMessage = error.toString();
+  } else if (error?.name === 'TypeError' && error?.message) {
+    errorMessage = `Network error: ${error.message}`;
   } else {
-    errorMessage = JSON.stringify(error);
+    // Last resort - try to extract meaningful info
+    try {
+      const errorStr = JSON.stringify(error, Object.getOwnPropertyNames(error));
+      errorMessage = errorStr !== '{}' ? errorStr : 'Connection failed';
+    } catch {
+      errorMessage = 'Connection failed';
+    }
   }
-  
+
   console.error(`Supabase ${operation} error:`, error);
+  console.error(`Error message extracted: ${errorMessage}`);
   throw new Error(`Failed to ${operation}: ${errorMessage}`);
 }
 
