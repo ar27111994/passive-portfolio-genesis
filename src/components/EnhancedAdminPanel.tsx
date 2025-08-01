@@ -253,13 +253,24 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
                   )}
                   
                   {adminService.hasPermission('write', 'posts') && (
-                    <Button 
+                    <Button
                       onClick={() => setActiveTab('social')}
                       variant="outline"
                       className="h-20 flex-col gap-2"
                     >
                       <Share2 className="w-6 h-6" />
                       Social Media
+                    </Button>
+                  )}
+
+                  {adminService.hasPermission('write', 'posts') && (
+                    <Button
+                      onClick={() => setActiveTab('newsletter')}
+                      variant="outline"
+                      className="h-20 flex-col gap-2"
+                    >
+                      <Mail className="w-6 h-6" />
+                      Newsletter
                     </Button>
                   )}
                   
