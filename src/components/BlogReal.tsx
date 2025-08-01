@@ -37,11 +37,26 @@ const BlogReal = () => {
   const testSupabaseConnection = async () => {
     try {
       setConnectionStatus('testing');
-      const status = await blogService.getConnectionStatus();
-      setConnectionStatus(status.connected && status.tablesExist ? 'connected' : 'error');
+
+      // Run health check for detailed diagnostics
+      const health = await blogService.healthCheck();
+      setHealthInfo(health);
+
+      if (health.status === 'healthy') {
+        setConnectionStatus('connected');
+      } else if (health.status === 'degraded') {
+        setConnectionStatus('connected'); // Connected but with issues
+      } else {
+        setConnectionStatus('error');
+      }
     } catch (err) {
       console.error('Supabase connection test failed:', err);
       setConnectionStatus('error');
+      setHealthInfo({
+        status: 'unhealthy',
+        details: [],
+        errors: [err instanceof Error ? err.message : 'Unknown error']
+      });
     }
   };
 
