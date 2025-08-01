@@ -159,17 +159,7 @@ const BlogReal = () => {
           </CardContent>
         </Card>
 
-        {/* RLS Fix Message */}
-        {showRLSFix && <RLSFixMessage />}
 
-        {/* Status Messages */}
-        {message && (
-          <Card className="mb-8 bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
-            <CardContent className="p-4">
-              <p className="text-blue-800 dark:text-blue-200 text-center">{message}</p>
-            </CardContent>
-          </Card>
-        )}
 
         {/* Error State */}
         {error && (
