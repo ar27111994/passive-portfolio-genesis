@@ -130,6 +130,11 @@ const BlogSetup = () => {
     try {
       const connectionStatus = await blogService.getConnectionStatus();
       setStatus(connectionStatus);
+
+      // If tables exist, clear any previous error messages
+      if (connectionStatus.tablesExist) {
+        setMessage('✅ Database tables are ready! You can now generate content.');
+      }
     } catch (err) {
       setStatus({
         connected: false,
