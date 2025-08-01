@@ -10,9 +10,18 @@ export async function generateAndPopulateBlogContent() {
   console.log('🤖 Starting AI content generation...');
   
   try {
-    // Generate blog posts using enhanced AI
-    console.log(`📝 Generating ${enhancedBlogPostSeeds.length} blog posts with enhanced AI...`);
-    const generatedPosts = await enhancedAIContentGenerator.generateMultiplePosts(enhancedBlogPostSeeds);
+    // Generate blog posts using real AI service with fallback
+    console.log(`🤖 Generating ${enhancedBlogPostSeeds.length} blog posts with real AI services...`);
+    console.log('🔍 Attempting real AI generation with configured providers...');
+
+    try {
+      const generatedPosts = await realAIService.generateMultiplePosts(enhancedBlogPostSeeds);
+      console.log(`✅ Successfully generated ${generatedPosts.length} posts with real AI`);
+    } catch (realAIError) {
+      console.warn('⚠️ Real AI generation failed, falling back to enhanced template system:', realAIError);
+      const generatedPosts = await enhancedAIContentGenerator.generateMultiplePosts(enhancedBlogPostSeeds);
+      console.log(`✅ Generated ${generatedPosts.length} posts using enhanced templates`);
+    }
     
     // Convert to Supabase format
     const blogPostsForDB: BlogPostInsert[] = generatedPosts.map(post => ({
