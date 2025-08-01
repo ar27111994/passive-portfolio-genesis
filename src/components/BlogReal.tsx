@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useBlog } from "@/hooks/useBlog";
 import { blogService } from "@/services/blogService";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
+import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
 import BlogSetup from "@/components/BlogSetup";
 
 const BlogReal = () => {
