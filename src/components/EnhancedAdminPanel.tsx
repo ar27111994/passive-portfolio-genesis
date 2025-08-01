@@ -147,7 +147,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
       <main className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           {/* Tab Navigation */}
-          <TabsList className="grid grid-cols-3 lg:grid-cols-8 gap-1 h-auto p-1">
+          <TabsList className="grid grid-cols-3 lg:grid-cols-9 gap-1 h-auto p-1">
             {availableTabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
