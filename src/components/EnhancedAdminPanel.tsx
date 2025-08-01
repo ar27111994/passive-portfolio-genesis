@@ -87,6 +87,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
       { id: 'analytics', label: 'Advanced Analytics', icon: BarChart3, permission: 'read:analytics' },
       { id: 'social', label: 'Social Media', icon: Share2, permission: 'write:posts' },
       { id: 'newsletter', label: 'Newsletter', icon: Mail, permission: 'write:posts' },
+      { id: 'ai-setup', label: 'AI Setup', icon: Zap, permission: '*:*' }, // Super admin only
       { id: 'users', label: 'User Management', icon: Users, permission: '*:*' }, // Super admin only
       { id: 'settings', label: 'Settings', icon: Settings, permission: 'read:analytics' }
     ];
