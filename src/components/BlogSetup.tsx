@@ -106,7 +106,33 @@ INSERT INTO blog_statistics (label, value, icon_name, sort_order) VALUES
 ('Technical Articles', '0+', 'BookOpen', 1),
 ('Monthly Readers', '0+', 'Users', 2),
 ('Developer Engagement', '0%', 'Heart', 3),
-('Community Reach', '0+', 'TrendingUp', 4);`;
+('Community Reach', '0+', 'TrendingUp', 4);
+
+-- Add INSERT and UPDATE policies for RLS (IMPORTANT!)
+CREATE POLICY "Allow public inserts on blog_posts" ON blog_posts
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Allow public inserts on blog_categories" ON blog_categories
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Allow public inserts on blog_statistics" ON blog_statistics
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Allow public inserts on blog_tags" ON blog_tags
+  FOR INSERT WITH CHECK (true);
+
+-- Add UPDATE policies for counters and statistics
+CREATE POLICY "Allow public updates on blog_posts" ON blog_posts
+  FOR UPDATE USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow public updates on blog_categories" ON blog_categories
+  FOR UPDATE USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow public updates on blog_statistics" ON blog_statistics
+  FOR UPDATE USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow public updates on blog_tags" ON blog_tags
+  FOR UPDATE USING (true) WITH CHECK (true);`;
 
 interface ConnectionStatus {
   connected: boolean;
@@ -486,7 +512,7 @@ const BlogSetup = () => {
               <div className="flex items-center justify-between">
                 <strong>Supabase URL:</strong>
                 <Badge variant={import.meta.env.VITE_SUPABASE_URL ? "default" : "destructive"}>
-                  {import.meta.env.VITE_SUPABASE_URL ? '✅ Configured' : '❌ Missing'}
+                  {import.meta.env.VITE_SUPABASE_URL ? '✅ Configured' : '��� Missing'}
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
