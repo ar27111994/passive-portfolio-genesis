@@ -357,7 +357,7 @@ const SocialMediaIntegration = () => {
                   <SelectValue placeholder="Choose a blog post to share" />
                 </SelectTrigger>
                 <SelectContent>
-                  {mockBlogPosts.map((post) => (
+                  {blogPosts.map((post) => (
                     <SelectItem key={post.id} value={post.id}>
                       {post.title}
                     </SelectItem>
