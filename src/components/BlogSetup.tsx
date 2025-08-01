@@ -329,28 +329,40 @@ const BlogSetup = () => {
                 <p className="text-sm text-muted-foreground">
                   Copy the SQL below and paste it into the SQL Editor, then click "Run"
                 </p>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-xs overflow-x-auto max-h-32">
-                    {setupSQL.substring(0, 200)}...
-                  </pre>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    className="absolute top-2 right-2"
-                    onClick={copySQL}
-                  >
-                    {sqlCopied ? (
-                      <>
-                        <CheckCircle className="w-4 h-4 mr-1" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4 mr-1" />
-                        Copy SQL
-                      </>
-                    )}
-                  </Button>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Complete SQL Script:</span>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={copySQL}
+                    >
+                      {sqlCopied ? (
+                        <>
+                          <CheckCircle className="w-4 h-4 mr-1" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 mr-1" />
+                          Copy SQL
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  <textarea
+                    readOnly
+                    value={setupSQL}
+                    className="w-full h-32 p-3 text-xs font-mono bg-muted border rounded-lg resize-none"
+                    onClick={(e) => {
+                      const target = e.target as HTMLTextAreaElement;
+                      target.select();
+                    }}
+                    title="Click to select all text, then Ctrl+C to copy"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    💡 Tip: Click the text area above to select all, then press Ctrl+C (or Cmd+C on Mac) to copy
+                  </p>
                 </div>
               </div>
 
