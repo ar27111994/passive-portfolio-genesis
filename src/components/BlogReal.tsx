@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useBlog } from "@/hooks/useBlog";
 import { blogService } from "@/services/blogService";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
-import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
 import BlogSetup from "@/components/BlogSetup";
 
 const BlogReal = () => {
@@ -514,7 +513,7 @@ const BlogReal = () => {
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">📊 Real-time Analytics</h4>
+                <h4 className="font-semibold mb-2">�� Real-time Analytics</h4>
                 <p className="text-sm text-muted-foreground">
                   Live tracking of views, likes, comments, and engagement metrics with automated statistics updates.
                 </p>
