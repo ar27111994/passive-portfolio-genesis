@@ -33,23 +33,45 @@ export function useBlog(): UseBlogReturn {
       setLoading(true);
       setError(null);
 
-      const [
-        allPosts,
-        featured,
-        cats,
-        stats
-      ] = await Promise.all([
+      // Fetch data with individual error handling
+      const results = await Promise.allSettled([
         blogService.getAllPublishedPosts(),
         blogService.getFeaturedPosts(),
         blogService.getAllCategories(),
         blogService.getBlogStatistics()
       ]);
 
+      const [postsResult, featuredResult, catsResult, statsResult] = results;
+
+      // Handle successful results and provide fallbacks for failures
+      const allPosts = postsResult.status === 'fulfilled' ? postsResult.value : [];
+      const featured = featuredResult.status === 'fulfilled' ? featuredResult.value : [];
+      const cats = catsResult.status === 'fulfilled' ? catsResult.value : [];
+      const stats = statsResult.status === 'fulfilled' ? statsResult.value : [
+        { id: '1', label: 'Technical Articles', value: '0+', icon_name: 'BookOpen', sort_order: 1, updated_at: new Date().toISOString() },
+        { id: '2', label: 'Monthly Readers', value: '0+', icon_name: 'Users', sort_order: 2, updated_at: new Date().toISOString() },
+        { id: '3', label: 'Developer Engagement', value: '0%', icon_name: 'Heart', sort_order: 3, updated_at: new Date().toISOString() },
+        { id: '4', label: 'Community Reach', value: '0+', icon_name: 'TrendingUp', sort_order: 4, updated_at: new Date().toISOString() }
+      ];
+
       setPosts(allPosts);
       setFeaturedPosts(featured);
       setRecentPosts(allPosts.slice(0, 6)); // First 6 posts as recent
       setCategories(cats);
       setStatistics(stats);
+
+      // Collect any errors from failed operations
+      const errors = results
+        .filter(result => result.status === 'rejected')
+        .map(result => (result as PromiseRejectedResult).reason?.message || 'Unknown error');
+
+      if (errors.length > 0) {
+        console.warn('Some blog data failed to load:', errors);
+        // Only set error if ALL operations failed
+        if (errors.length === results.length) {
+          setError(`Failed to fetch blog data: ${errors[0]}`);
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch blog data');
       console.error('Error fetching blog data:', err);
