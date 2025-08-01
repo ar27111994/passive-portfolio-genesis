@@ -105,12 +105,23 @@ const SocialMediaIntegration = () => {
 
   useEffect(() => {
     loadSocialPosts();
+    loadBlogPosts();
     // Load platform connections from localStorage
     const savedPlatforms = localStorage.getItem('socialPlatforms');
     if (savedPlatforms) {
       setPlatforms(JSON.parse(savedPlatforms));
     }
   }, []);
+
+  const loadBlogPosts = async () => {
+    try {
+      const posts = await integrationService.getPublishedBlogPosts();
+      setBlogPosts(posts);
+    } catch (error) {
+      console.error('Failed to load blog posts:', error);
+      // Keep empty array as fallback
+    }
+  };
 
   const loadSocialPosts = () => {
     const saved = localStorage.getItem('socialPosts');
