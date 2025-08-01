@@ -189,8 +189,8 @@ const BlogReal = () => {
         {/* Admin Controls */}
         <div className="text-center mb-16">
           <div className="space-x-4 mb-4">
-            <Button 
-              onClick={handleInitializeDatabase} 
+            <Button
+              onClick={handleInitializeDatabase}
               disabled={isInitializing || isGenerating}
               size="lg"
               variant="secondary"
@@ -198,12 +198,12 @@ const BlogReal = () => {
               {isInitializing ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Initializing...
+                  Inserting...
                 </>
               ) : (
                 <>
                   <Database className="w-4 h-4 mr-2" />
-                  Initialize Database
+                  Insert Basic Data
                 </>
               )}
             </Button>
@@ -513,7 +513,7 @@ const BlogReal = () => {
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">�� Real-time Analytics</h4>
+                <h4 className="font-semibold mb-2">📊 Real-time Analytics</h4>
                 <p className="text-sm text-muted-foreground">
                   Live tracking of views, likes, comments, and engagement metrics with automated statistics updates.
                 </p>
