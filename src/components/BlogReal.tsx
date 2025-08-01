@@ -5,8 +5,8 @@ import { Calendar, Clock, Eye, Heart, MessageCircle, Star, BookOpen, Users, Tren
 import { useState, useEffect } from "react";
 import { useBlog } from "@/hooks/useBlog";
 import { blogService } from "@/services/blogService";
-import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
+import BlogSetup from "@/components/BlogSetup";
 
 const BlogReal = () => {
   const { 
