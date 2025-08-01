@@ -232,7 +232,7 @@ const BlogAdmin = () => {
             <div className="text-sm text-muted-foreground">
               <p className="mb-2">This will generate:</p>
               <ul className="space-y-1">
-                {blogPostSeeds.slice(0, 4).map((seed, index) => (
+                {enhancedBlogPostSeeds.slice(0, 4).map((seed, index) => (
                   <li key={index} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
                     {seed.title}
