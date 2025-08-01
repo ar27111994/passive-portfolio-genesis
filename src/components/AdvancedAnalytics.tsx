@@ -20,6 +20,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
+import { integrationService } from "@/services/integrationService";
 
 interface AnalyticsData {
   totalViews: number;
