@@ -265,7 +265,7 @@ const BlogAdminPanel = () => {
               disabled={isWorking}
             >
               {isWorking ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}
-              Generate All Content ({blogPostSeeds.length} posts)
+              Generate All Content ({enhancedBlogPostSeeds.length} posts)
             </Button>
             <Button 
               onClick={testConnection} 
