@@ -9,6 +9,7 @@ import { useSkipLinks, useFocusManagement, useReducedMotion } from "@/hooks/useP
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ProtectedAdmin from "./components/ProtectedAdmin";
 
 const queryClient = new QueryClient({
   defaultOptions: {
