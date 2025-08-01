@@ -57,53 +57,7 @@ const BlogReal = () => {
     }
   };
 
-  const handleInitializeDatabase = async () => {
-    try {
-      setIsInitializing(true);
-      setMessage('🚀 Inserting basic categories and statistics...');
 
-      // Use the basic data insertion method instead of trying to create tables
-      await blogService.insertBasicData();
-      await refreshData();
-
-      setMessage('✅ Basic data inserted successfully! You can now generate content.');
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      setMessage(`❌ Database initialization failed: ${errorMsg}`);
-      console.error('Database initialization error:', err);
-    } finally {
-      setIsInitializing(false);
-    }
-  };
-
-  const handleGenerateContent = async () => {
-    try {
-      setIsGenerating(true);
-      setShowRLSFix(false);
-      setMessage('🤖 Generating AI-powered blog content...');
-
-      // Generate blog content directly (assumes tables already exist)
-      await generateAndPopulateBlogContent();
-
-      setMessage('🎉 AI blog content generated successfully! Refreshing data...');
-      await refreshData();
-
-      setMessage('✅ Blog system is now fully populated with AI-generated content!');
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-
-      // Check if this is an RLS policy error
-      if (errorMsg.includes('row-level security policy') || errorMsg.includes('RLS') || errorMsg.includes('Failed to create any posts')) {
-        setShowRLSFix(true);
-        setMessage('❌ Row Level Security policies need to be added. See instructions below.');
-      } else {
-        setMessage(`❌ Content generation failed: ${errorMsg}`);
-      }
-      console.error('Content generation error:', err);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
 
   const handlePostClick = async (postId: string) => {
     await incrementViews(postId);
