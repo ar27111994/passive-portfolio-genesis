@@ -88,12 +88,13 @@ async function updateBlogStatistics() {
         case 'Monthly Readers':
           newValue = `${Math.round(analytics.totalViews / 12 / 1000 * 10) / 10}K+`;
           break;
-        case 'Developer Engagement':
+        case 'Developer Engagement': {
           const engagementRate = analytics.totalViews > 0 
             ? (analytics.totalLikes / analytics.totalViews * 100) 
             : 0;
           newValue = `${Math.round(engagementRate * 10) / 10}%`;
           break;
+        }
         case 'Community Reach':
           newValue = `${Math.round(analytics.totalViews / 1000)}K+`;
           break;
@@ -124,7 +125,7 @@ export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
       image_url: generatedPost.imageUrl,
       category: generatedPost.category,
       tags: generatedPost.tags,
-      featured: true,
+      featured: Math.random() > 0.7, // 30% chance of being featured
       published: true,
       publish_date: new Date().toISOString(),
       read_time_minutes: generatedPost.readTimeMinutes,
