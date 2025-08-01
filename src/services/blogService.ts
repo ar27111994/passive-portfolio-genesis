@@ -32,6 +32,27 @@ function handleSupabaseError(error: any, operation: string): never {
 }
 
 export class BlogService {
+  // Simple connection test without querying system tables
+  async testConnection(): Promise<boolean> {
+    try {
+      // Try a simple query that should work with any Supabase project
+      const { error } = await supabase
+        .from('blog_posts')
+        .select('count')
+        .limit(0);
+
+      // If we get a "does not exist" error, that actually means we're connected
+      // but the table doesn't exist yet
+      if (error && error.message.includes('does not exist')) {
+        return true; // Connected but tables don't exist
+      }
+
+      // If no error, we're connected and tables exist
+      return !error;
+    } catch (err) {
+      return false;
+    }
+  }
   // Check if tables exist and get connection status
   async getConnectionStatus(): Promise<{
     connected: boolean;
