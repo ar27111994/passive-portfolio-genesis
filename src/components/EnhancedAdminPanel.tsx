@@ -31,6 +31,7 @@ import AdvancedAnalytics from './AdvancedAnalytics';
 import SocialMediaIntegration from './SocialMediaIntegration';
 import NewsletterManagement from './NewsletterManagement';
 import AIServiceSetup from './AIServiceSetup';
+import RealImplementationStatus from './RealImplementationStatus';
 import { AdminSession, adminService } from '@/services/adminService';
 
 interface EnhancedAdminPanelProps {
