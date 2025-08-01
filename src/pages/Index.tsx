@@ -8,7 +8,9 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
+import BlogReal from "@/components/BlogReal";
 import Contact from "@/components/Contact";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
 import Monetization from "@/components/Monetization";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -64,6 +66,7 @@ const Index = () => {
     { id: 'skills', label: 'Skills', href: '#skills' },
     { id: 'experience', label: 'Experience', href: '#experience' },
     { id: 'education', label: 'Education', href: '#education' },
+    { id: 'blog', label: 'Blog', href: '#blog' },
     { id: 'contact', label: 'Contact', href: '#contact' }
   ];
 
@@ -196,9 +199,14 @@ const Index = () => {
           {/* Education Section */}
           <Education />
 
+          {/* Blog Section */}
+          <BlogReal />
 
           {/* Monetization/Services Section */}
           <Monetization />
+
+          {/* Newsletter Section */}
+          <NewsletterSubscription />
 
           {/* Contact Section */}
           <Contact />
