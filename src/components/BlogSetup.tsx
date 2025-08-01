@@ -143,11 +143,39 @@ const BlogSetup = () => {
 
   const copySQL = async () => {
     try {
-      await navigator.clipboard.writeText(setupSQL);
-      setSqlCopied(true);
-      setTimeout(() => setSqlCopied(false), 2000);
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(setupSQL);
+        setSqlCopied(true);
+        setTimeout(() => setSqlCopied(false), 2000);
+        return;
+      }
+
+      // Fallback method for older browsers or non-secure contexts
+      const textArea = document.createElement('textarea');
+      textArea.value = setupSQL;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      textArea.style.top = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        document.execCommand('copy');
+        setSqlCopied(true);
+        setTimeout(() => setSqlCopied(false), 2000);
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr);
+        // Show the SQL in a modal or alert as last resort
+        alert('Copy failed. Please manually copy the SQL from the text area below.');
+      } finally {
+        document.body.removeChild(textArea);
+      }
     } catch (err) {
       console.error('Failed to copy SQL:', err);
+      // Show the SQL in a modal or alert as last resort
+      alert('Copy failed. Please manually copy the SQL from the text area below.');
     }
   };
 
