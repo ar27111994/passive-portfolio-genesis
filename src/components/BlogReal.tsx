@@ -97,67 +97,7 @@ const BlogReal = () => {
           </p>
         </div>
 
-        {/* Connection Status */}
-        <Card className="mb-8">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Database className="w-5 h-5" />
-                  <span className="font-medium">Supabase Connection:</span>
-                </div>
-                {connectionStatus === 'testing' && (
-                  <div className="flex items-center gap-2 text-blue-600">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Testing...</span>
-                  </div>
-                )}
-                {connectionStatus === 'connected' && (
-                  <div className="flex items-center gap-2 text-green-600">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>Connected</span>
-                  </div>
-                )}
-                {connectionStatus === 'error' && (
-                  <div className="flex items-center gap-2 text-red-600">
-                    <AlertCircle className="w-4 h-4" />
-                    <span>Connection Error</span>
-                  </div>
-                )}
-              </div>
-              <Button onClick={testSupabaseConnection} size="sm" variant="outline">
-                Test Connection
-              </Button>
-            </div>
 
-            {/* Health Check Details */}
-            {healthInfo && (
-              <div className="space-y-2">
-                {healthInfo.details.length > 0 && (
-                  <div>
-                    <h4 className="text-sm font-medium text-green-600 mb-1">✅ Healthy:</h4>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      {healthInfo.details.map((detail: string, index: number) => (
-                        <li key={index}>• {detail}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {healthInfo.errors.length > 0 && (
-                  <div>
-                    <h4 className="text-sm font-medium text-red-600 mb-1">❌ Issues:</h4>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      {healthInfo.errors.map((error: string, index: number) => (
-                        <li key={index}>• {error}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
 
 
