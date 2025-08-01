@@ -8,6 +8,7 @@ import { blogService } from "@/services/blogService";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
 import BlogSetup from "@/components/BlogSetup";
 import RLSFixMessage from "@/components/RLSFixMessage";
+import AdminAccessButton from "@/components/AdminAccessButton";
 
 const BlogReal = () => {
   const { 
