@@ -23,11 +23,7 @@ const BlogReal = () => {
     incrementLikes
   } = useBlog();
   
-  const [isInitializing, setIsInitializing] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [message, setMessage] = useState<string>('');
   const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error' | null>(null);
-  const [showRLSFix, setShowRLSFix] = useState(false);
   const [healthInfo, setHealthInfo] = useState<any>(null);
 
   // Test Supabase connection on component mount
