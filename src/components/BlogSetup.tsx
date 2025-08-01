@@ -285,6 +285,24 @@ const BlogSetup = () => {
                   <p className="text-red-800 text-sm">{status.error}</p>
                 </div>
               )}
+
+              {/* Additional debug info */}
+              {status && (
+                <div className="grid grid-cols-2 gap-4 text-xs">
+                  <div className="flex justify-between">
+                    <span>Connection:</span>
+                    <span className={status.connected ? 'text-green-600' : 'text-red-600'}>
+                      {status.connected ? 'Connected' : 'Failed'}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tables:</span>
+                    <span className={status.tablesExist ? 'text-green-600' : 'text-yellow-600'}>
+                      {status.tablesExist ? 'All Found' : 'Missing'}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
