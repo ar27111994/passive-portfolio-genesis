@@ -34,8 +34,8 @@ const BlogReal = () => {
   const testSupabaseConnection = async () => {
     try {
       setConnectionStatus('testing');
-      await blogService.checkTablesExist();
-      setConnectionStatus('connected');
+      const status = await blogService.getConnectionStatus();
+      setConnectionStatus(status.connected && status.tablesExist ? 'connected' : 'error');
     } catch (err) {
       console.error('Supabase connection test failed:', err);
       setConnectionStatus('error');
