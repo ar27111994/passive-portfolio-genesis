@@ -5,32 +5,14 @@ import EnhancedAdminPanel from './EnhancedAdminPanel';
 import { AdminSession, adminService } from '@/services/adminService';
 
 const ProtectedAdmin = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [session, setSession] = useState<AdminSession | null>(null);
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
     // Check admin authentication status
     const checkAdminAuth = () => {
-      const isAdminAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
-      const adminAuthTime = localStorage.getItem('adminAuthTime');
-      
-      if (isAdminAuthenticated && adminAuthTime) {
-        const authTime = parseInt(adminAuthTime);
-        const currentTime = Date.now();
-        const sessionDuration = 2 * 60 * 60 * 1000; // 2 hours
-        
-        if (currentTime - authTime < sessionDuration) {
-          setIsAdmin(true);
-        } else {
-          // Session expired
-          localStorage.removeItem('adminAuthenticated');
-          localStorage.removeItem('adminAuthTime');
-          setIsAdmin(false);
-        }
-      } else {
-        setIsAdmin(false);
-      }
-      
+      const currentSession = adminService.getCurrentSession();
+      setSession(currentSession);
       setIsChecking(false);
     };
 
@@ -38,13 +20,12 @@ const ProtectedAdmin = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('adminAuthenticated');
-    localStorage.removeItem('adminAuthTime');
-    setIsAdmin(false);
+    adminService.logout();
+    setSession(null);
   };
 
-  const handleAuthenticated = (adminStatus: boolean) => {
-    setIsAdmin(adminStatus);
+  const handleAuthenticated = (newSession: AdminSession) => {
+    setSession(newSession);
   };
 
   if (isChecking) {
