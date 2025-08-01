@@ -133,4 +133,4 @@ export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
 }
 
 // Export for use in components or admin interface
-export { blogPostSeeds };
+export { blogPostSeeds, enhancedBlogPostSeeds };
