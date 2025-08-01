@@ -22,7 +22,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
-import { generateAndPopulateBlogContent, regenerateSinglePost, blogPostSeeds } from "@/scripts/generateBlogContent";
+import { generateAndPopulateBlogContent, regenerateSinglePost, enhancedBlogPostSeeds } from "@/scripts/generateBlogContent";
 import { aiContentGenerator } from "@/services/aiContentGenerator";
 import { blogService } from "@/services/blogService";
 import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
