@@ -32,6 +32,7 @@ import SocialMediaIntegration from './SocialMediaIntegration';
 import NewsletterManagement from './NewsletterManagement';
 import AIServiceSetup from './AIServiceSetup';
 import DashboardTab from './DashboardTab';
+import UserManagement from './UserManagement';
 import { useAuth } from '@/hooks/useAuth';
 import { User } from '@supabase/supabase-js';
 
@@ -149,6 +150,10 @@ const AdminPanel = ({ user, onLogout }: AdminPanelProps) => {
             <AIServiceSetup />
           </TabsContent>
 
+          {/* User Management Tab */}
+          <TabsContent value="users">
+            <UserManagement />
+          </TabsContent>
 
           {/* Settings Tab */}
           <TabsContent value="settings">
