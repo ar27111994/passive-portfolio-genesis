@@ -46,12 +46,13 @@ const BlogReal = () => {
   const handleInitializeDatabase = async () => {
     try {
       setIsInitializing(true);
-      setMessage('🚀 Initializing database tables and seed data...');
-      
-      await simpleInitializeDatabase();
+      setMessage('🚀 Inserting basic categories and statistics...');
+
+      // Use the basic data insertion method instead of trying to create tables
+      await blogService.insertBasicData();
       await refreshData();
-      
-      setMessage('✅ Database initialized successfully! You can now generate content.');
+
+      setMessage('✅ Basic data inserted successfully! You can now generate content.');
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unknown error';
       setMessage(`❌ Database initialization failed: ${errorMsg}`);
