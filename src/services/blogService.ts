@@ -39,46 +39,53 @@ export class BlogService {
     error?: string;
   }> {
     try {
-      // Test basic connection
-      const { data: connectionTest, error: connectionError } = await supabase
-        .from('information_schema.tables')
-        .select('table_name')
-        .limit(1);
-      
-      if (connectionError) {
+      // Test if our main blog tables exist by trying to query them
+      const tableChecks = await Promise.allSettled([
+        supabase.from('blog_posts').select('id').limit(1),
+        supabase.from('blog_categories').select('id').limit(1),
+        supabase.from('blog_statistics').select('id').limit(1),
+        supabase.from('blog_tags').select('id').limit(1)
+      ]);
+
+      // Check if any table queries succeeded
+      const tablesExist = tableChecks.some(result =>
+        result.status === 'fulfilled' && !result.value.error
+      );
+
+      // Check if all queries failed with "does not exist" errors
+      const allTablesExist = tableChecks.every(result =>
+        result.status === 'fulfilled' && !result.value.error
+      );
+
+      // If at least one table query succeeded, we're connected
+      if (tablesExist) {
         return {
-          connected: false,
-          tablesExist: false,
-          error: connectionError.message
+          connected: true,
+          tablesExist: allTablesExist,
+          error: allTablesExist ? undefined : 'Some tables missing - may need to re-run setup script'
         };
       }
-      
-      // Test if our tables exist
-      const { error: tableError } = await supabase
-        .from('blog_posts')
-        .select('id')
-        .limit(1);
-      
-      if (tableError) {
-        if (tableError.message.includes('does not exist')) {
-          return {
-            connected: true,
-            tablesExist: false,
-            error: 'Database tables not created yet'
-          };
-        }
+
+      // Check what kind of errors we got
+      const errors = tableChecks
+        .filter(result => result.status === 'fulfilled' && result.value.error)
+        .map(result => (result as any).value.error.message);
+
+      if (errors.some(error => error.includes('does not exist'))) {
         return {
           connected: true,
           tablesExist: false,
-          error: tableError.message
+          error: 'Database tables not created yet - please run the setup SQL script'
         };
       }
-      
+
+      // Some other error occurred
       return {
-        connected: true,
-        tablesExist: true
+        connected: false,
+        tablesExist: false,
+        error: errors[0] || 'Connection failed'
       };
-      
+
     } catch (err) {
       return {
         connected: false,
