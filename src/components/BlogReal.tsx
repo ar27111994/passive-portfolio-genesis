@@ -66,16 +66,13 @@ const BlogReal = () => {
     try {
       setIsGenerating(true);
       setMessage('🤖 Generating AI-powered blog content...');
-      
-      // First ensure database is initialized
-      await simpleInitializeDatabase();
-      
-      setMessage('🤖 Database ready. Generating authentic blog posts...');
+
+      // Generate blog content directly (assumes tables already exist)
       await generateAndPopulateBlogContent();
-      
+
       setMessage('🎉 AI blog content generated successfully! Refreshing data...');
       await refreshData();
-      
+
       setMessage('✅ Blog system is now fully populated with AI-generated content!');
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unknown error';
