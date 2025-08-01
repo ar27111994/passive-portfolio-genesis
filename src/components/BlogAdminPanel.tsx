@@ -105,7 +105,7 @@ const BlogAdminPanel = () => {
       setIsWorking(true);
       setMessage(`🤖 Generating single post: ${blogPostSeeds[selectedSeed].title}...`);
       
-      await regenerateSinglePost(blogPostSeeds[selectedSeed]);
+      await regenerateSinglePost(enhancedBlogPostSeeds[selectedSeed]);
       await refreshData();
       
       setMessage('✅ Single post generated successfully!');
