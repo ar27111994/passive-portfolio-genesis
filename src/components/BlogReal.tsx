@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Eye, Heart, MessageCircle, Star, BookOpen, Users, TrendingUp, Loader2, AlertCircle } from "lucide-react";
 import { useBlog } from "@/hooks/useBlog";
 import BlogSetup from "@/components/BlogSetup";
-import AdminAccessButton from "@/components/AdminAccessButton";
+import EndUserBlogActions from "@/components/EndUserBlogActions";
 
 const BlogReal = () => {
   const { 
