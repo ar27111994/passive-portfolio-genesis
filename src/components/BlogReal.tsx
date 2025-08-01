@@ -7,6 +7,7 @@ import { useBlog } from "@/hooks/useBlog";
 import { blogService } from "@/services/blogService";
 import { generateAndPopulateBlogContent } from "@/scripts/generateBlogContent";
 import BlogSetup from "@/components/BlogSetup";
+import RLSFixMessage from "@/components/RLSFixMessage";
 
 const BlogReal = () => {
   const { 
