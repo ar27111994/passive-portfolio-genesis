@@ -1,6 +1,6 @@
 -- Policies for blog_posts
 CREATE POLICY "Allow public read access to published posts" ON blog_posts FOR SELECT USING (published = true);
-CREATE POLICY "Allow authenticated users to manage blog posts" ON blog_posts FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Allow authors to manage their own posts" ON blog_posts FOR ALL USING (auth.uid() = author_id) WITH CHECK (auth.uid() = author_id);
 
 -- Policies for blog_categories
 CREATE POLICY "Allow public read access to categories" ON blog_categories FOR SELECT USING (true);
