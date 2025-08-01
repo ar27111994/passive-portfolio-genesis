@@ -97,9 +97,9 @@ const BlogAdmin = () => {
         published: true,
         publish_date: new Date().toISOString(),
         read_time_minutes: generatedPost.readTimeMinutes,
-        views: Math.floor(Math.random() * 100) + 10,
-        likes: Math.floor(Math.random() * 20) + 5,
-        comments: Math.floor(Math.random() * 10) + 1
+        views: 0, // Will be updated based on actual engagement
+        likes: 0,
+        comments: 0
       });
 
       await refreshData();
