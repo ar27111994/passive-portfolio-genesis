@@ -58,7 +58,7 @@ const BlogAdmin = () => {
   const handleGenerateSinglePost = async () => {
     try {
       setIsGenerating(true);
-      await regenerateSinglePost(blogPostSeeds[selectedSeed]);
+      await regenerateSinglePost(enhancedBlogPostSeeds[selectedSeed]);
       await refreshData();
     } catch (err) {
       console.error('Failed to generate single post:', err);
