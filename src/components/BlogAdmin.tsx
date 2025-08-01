@@ -260,7 +260,7 @@ const BlogAdmin = () => {
                 <SelectValue placeholder="Select a post template" />
               </SelectTrigger>
               <SelectContent>
-                {blogPostSeeds.map((seed, index) => (
+                {enhancedBlogPostSeeds.map((seed, index) => (
                   <SelectItem key={index} value={index.toString()}>
                     {seed.title}
                   </SelectItem>
