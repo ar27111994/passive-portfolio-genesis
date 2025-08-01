@@ -1,4 +1,5 @@
 import { aiContentGenerator, blogPostSeeds } from '../services/aiContentGenerator';
+import { enhancedAIContentGenerator, enhancedBlogPostSeeds } from '../services/enhancedAIContentGenerator';
 import { blogService } from '../services/blogService';
 import type { Database } from '../integrations/supabase/types';
 
