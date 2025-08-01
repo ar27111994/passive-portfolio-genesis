@@ -86,7 +86,7 @@ const BlogAdminPanel = () => {
   const handleGenerateAllContent = async () => {
     try {
       setIsWorking(true);
-      setMessage(`🤖 Generating ${blogPostSeeds.length} AI-powered blog posts...`);
+      setMessage(`🤖 Generating ${enhancedBlogPostSeeds.length} enhanced AI-powered blog posts...`);
       
       await generateAndPopulateBlogContent();
       await refreshData();
