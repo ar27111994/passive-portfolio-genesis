@@ -286,8 +286,44 @@ const AdminSetupTool = () => {
     setIsFunctionFixRunning(false);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const copyToClipboard = async (text: string) => {
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        console.log('Text copied to clipboard successfully');
+        return;
+      }
+    } catch (error) {
+      console.warn('Clipboard API failed, trying fallback method:', error);
+    }
+
+    // Fallback method for when clipboard API is blocked
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      if (successful) {
+        console.log('Text copied using fallback method');
+      } else {
+        console.error('Fallback copy method failed');
+        // Show user a message to copy manually
+        alert('Unable to copy automatically. Please manually select and copy the text from the text area.');
+      }
+    } catch (fallbackError) {
+      console.error('All copy methods failed:', fallbackError);
+      // Last resort - show the text in an alert so user can copy it
+      alert('Copy failed. Here is the text to copy manually:\n\n' + text.substring(0, 500) + (text.length > 500 ? '...' : ''));
+    }
   };
 
   const getStatusIcon = (status: string) => {
