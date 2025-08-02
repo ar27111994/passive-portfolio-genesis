@@ -116,8 +116,25 @@ const AdminAuth = () => {
               )}
             </Button>
           </form>
+
+          <div className="mt-4 pt-4 border-t">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => setShowDiagnostics(!showDiagnostics)}
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              {showDiagnostics ? 'Hide' : 'Show'} Login Diagnostics
+            </Button>
+          </div>
         </CardContent>
       </Card>
+
+      {showDiagnostics && (
+        <div className="mt-6">
+          <AdminSetupTool />
+        </div>
+      )}
     </div>
   );
 };
