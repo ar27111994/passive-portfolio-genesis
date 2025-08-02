@@ -54,27 +54,27 @@ const NewsletterSubscription = () => {
     setIsSubscribing(true);
     setMessage('');
 
-    if (!email) {
-      setMessage('❌ Please enter your email address');
+    const emailRegex = /^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setMessage('❌ Please enter a valid email address');
       setIsSubscribing(false);
       return;
     }
 
     try {
-      await newsletterService.subscribe(email, name, interests);
-      setIsSubscribed(true);
-      setMessage('🎉 Welcome aboard! You\'ve successfully subscribed to our newsletter.');
-      
-      // Reset form
-      setEmail('');
-      setName('');
-      setInterests([]);
+      const response = await newsletterService.subscribe(email, name, interests);
+      if (response.success) {
+        setIsSubscribed(true);
+        setMessage(`🎉 ${response.message}`);
+        // Reset form
+        setEmail('');
+        setName('');
+        setInterests([]);
+      } else {
+        setMessage(`❌ ${response.message}`);
+      }
     } catch (error) {
-        if (error instanceof Error) {
-            setMessage(`❌ ${error.message}`);
-        } else {
-            setMessage('❌ Failed to subscribe. Please try again.');
-        }
+      setMessage('❌ Failed to subscribe. Please try again.');
     } finally {
       setIsSubscribing(false);
     }

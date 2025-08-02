@@ -11,38 +11,22 @@ export interface NewsletterSubscriber {
 }
 
 class NewsletterService {
-  public async subscribe(email: string, name?: string, interests: string[] = []): Promise<void> {
+  public async subscribe(email: string, name?: string, interests: string[] = []): Promise<{ success: boolean; message: string; data?: any }> {
     if (!email) {
-      throw new Error('Email is required.');
+      return { success: false, message: 'Email is required.' };
     }
 
-    const { data: existingSubscriber, error: fetchError } = await supabase
-      .from('newsletter_subscribers')
-      .select('*')
-      .eq('email', email)
-      .single();
+    const { data, error } = await supabase.rpc('subscribe_to_newsletter', {
+      user_email: email,
+      user_name: name,
+      user_interests: interests,
+    });
 
-    if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116: 'exact one row not found'
-        throw new Error(fetchError.message);
+    if (error) {
+      return { success: false, message: 'An unexpected error occurred.' };
     }
 
-    if (existingSubscriber && existingSubscriber.status === 'active') {
-      throw new Error('You are already subscribed.');
-    }
-
-    const { error: upsertError } = await supabase
-        .from('newsletter_subscribers')
-        .upsert({
-            email,
-            name,
-            interests,
-            status: 'active',
-            source: 'Website',
-        }, { onConflict: 'email' });
-
-    if (upsertError) {
-      throw new Error(upsertError.message);
-    }
+    return data;
   }
 
   public async getAllSubscribers(): Promise<NewsletterSubscriber[]> {
