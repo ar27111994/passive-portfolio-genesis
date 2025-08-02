@@ -38,6 +38,8 @@ const AdminSetupTool = () => {
   const [manualInstructions, setManualInstructions] = useState('');
   const [setupSteps, setSetupSteps] = useState<SetupStep[]>([]);
   const [isSetupRunning, setIsSetupRunning] = useState(false);
+  const [directFixResult, setDirectFixResult] = useState<any>(null);
+  const [isDirectFixRunning, setIsDirectFixRunning] = useState(false);
 
   const runDiagnostics = async () => {
     setIsRunning(true);
