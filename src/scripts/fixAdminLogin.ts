@@ -40,67 +40,67 @@ export async function directFixAdminLogin(): Promise<{ success: boolean; message
 
     console.log('user_roles table exists');
 
-    // Step 3: Try to sign up admin user first
-    console.log('Creating admin user...');
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-      email: 'admin@example.com',
-      password: 'password123',
-      options: {
-        data: {
-          role: 'admin'
-        }
-      }
-    });
-
+    // Step 3: Check if admin user already exists first
+    console.log('Checking if admin user exists...');
     let adminUserId: string | null = null;
 
-    if (signUpError && signUpError.message.includes('already been registered')) {
-      // User exists, try to get their ID by signing in
-      console.log('User exists, getting user ID...');
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+    // Try to sign in first to see if user exists
+    const { data: existingSignIn, error: existingSignInError } = await supabase.auth.signInWithPassword({
+      email: 'admin@example.com',
+      password: 'password123'
+    });
+
+    if (existingSignIn?.user?.id) {
+      // User exists and can login
+      adminUserId = existingSignIn.user.id;
+      console.log('Admin user already exists and can authenticate');
+      await supabase.auth.signOut(); // Clean up
+    } else if (existingSignInError?.message === 'Invalid login credentials') {
+      // User doesn't exist or wrong password, try to create
+      console.log('Admin user does not exist or wrong password, attempting to create...');
+
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email: 'admin@example.com',
-        password: 'password123'
+        password: 'password123',
+        options: {
+          data: {
+            role: 'admin'
+          }
+        }
       });
 
-      if (signInData?.user?.id) {
-        adminUserId = signInData.user.id;
-        console.log('Found existing admin user');
-        await supabase.auth.signOut(); // Clean up
-      } else if (signInError) {
-        // User exists but wrong password - we need to reset or use different method
-        console.log('User exists but login failed:', signInError.message);
-        
-        // Try to get user info from auth admin (this might fail due to permissions)
-        try {
-          const { data: usersData, error: usersError } = await supabase.auth.admin.listUsers();
-          if (usersData?.users) {
-            const adminUser = usersData.users.find(user => user.email === 'admin@example.com');
-            if (adminUser) {
-              adminUserId = adminUser.id;
-              console.log('Found admin user via admin API');
-            }
+      if (signUpError) {
+        // Sign up failed - likely due to project settings
+        return {
+          success: false,
+          message: 'Cannot create admin user automatically. This is likely because:\n' +
+                   '1. User signup is disabled in Supabase settings\n' +
+                   '2. Email confirmation is required\n' +
+                   '3. Admin privileges are needed\n\n' +
+                   'Please create the user manually in Supabase Dashboard → Authentication → Users',
+          details: {
+            signUpError,
+            needsManualCreation: true,
+            instructions: 'Go to Supabase Dashboard → Authentication → Users → Add User'
           }
-        } catch (adminError) {
-          console.warn('Could not access admin API:', adminError);
-        }
-
-        if (!adminUserId) {
-          return {
-            success: false,
-            message: 'Admin user exists but password is incorrect. Reset password in Supabase dashboard or use different credentials.',
-            details: { signInError }
-          };
-        }
+        };
+      } else if (signUpData?.user?.id) {
+        adminUserId = signUpData.user.id;
+        console.log('Created new admin user successfully');
+      } else {
+        return {
+          success: false,
+          message: 'User creation returned no user data - please check Supabase project settings',
+          details: { signUpData }
+        };
       }
-    } else if (signUpError) {
+    } else {
+      // Some other auth error
       return {
         success: false,
-        message: 'Failed to create admin user: ' + signUpError.message,
-        details: signUpError
+        message: 'Authentication error: ' + (existingSignInError?.message || 'Unknown error'),
+        details: existingSignInError
       };
-    } else if (signUpData?.user?.id) {
-      adminUserId = signUpData.user.id;
-      console.log('Created new admin user');
     }
 
     if (!adminUserId) {
