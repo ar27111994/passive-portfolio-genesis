@@ -266,6 +266,24 @@ const AdminSetupTool = () => {
     setIsDirectFixRunning(false);
   };
 
+  const runFunctionFix = async () => {
+    setIsFunctionFixRunning(true);
+    setFunctionFixResult(null);
+
+    try {
+      const result = await fixRecursiveFunction();
+      setFunctionFixResult(result);
+    } catch (error) {
+      setFunctionFixResult({
+        success: false,
+        message: 'Function fix failed with exception',
+        details: error
+      });
+    }
+
+    setIsFunctionFixRunning(false);
+  };
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
   };
