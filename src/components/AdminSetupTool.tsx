@@ -43,6 +43,7 @@ const AdminSetupTool = () => {
   const [isDirectFixRunning, setIsDirectFixRunning] = useState(false);
   const [functionFixResult, setFunctionFixResult] = useState<any>(null);
   const [isFunctionFixRunning, setIsFunctionFixRunning] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<string>('');
 
   const runDiagnostics = async () => {
     setIsRunning(true);
