@@ -74,7 +74,3 @@ CREATE POLICY "Admin users can manage newsletter subscribers" ON public.newslett
 -- User Roles
 ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow admin users to manage user roles" ON public.user_roles FOR ALL USING (public.get_user_role(auth.uid()) = 'admin');
-
--- Seed a default admin user
-INSERT INTO public.user_roles (user_id, role)
-SELECT id, 'admin' FROM auth.users WHERE email = 'admin@example.com' ON CONFLICT DO NOTHING;
