@@ -32,7 +32,7 @@ const ProtectedAdmin = () => {
     expiryTime: session.expires_at ? session.expires_at * 1000 : 0,
   };
 
-  return <AdminPanel session={adminSession} onLogout={() => {}} />;
+  return <AdminPanel user={user!} onLogout={() => {}} />;
 };
 
 export default ProtectedAdmin;
