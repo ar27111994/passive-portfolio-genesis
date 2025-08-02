@@ -426,16 +426,16 @@ const AdminSetupTool = () => {
             </div>
           )}
 
-          {(setupResult || directFixResult) && (
-            <Alert variant={(setupResult?.success || directFixResult?.success) ? "default" : "destructive"}>
+          {(setupResult || directFixResult || functionFixResult) && (
+            <Alert variant={(setupResult?.success || directFixResult?.success || functionFixResult?.success) ? "default" : "destructive"}>
               <AlertDescription>
-                <strong>{(setupResult?.success || directFixResult?.success) ? 'Success:' : 'Error:'}</strong>
-                {' '}{directFixResult?.message || setupResult?.message}
-                {(directFixResult?.details || setupResult?.details) && (
+                <strong>{(setupResult?.success || directFixResult?.success || functionFixResult?.success) ? 'Success:' : 'Error:'}</strong>
+                {' '}{functionFixResult?.message || directFixResult?.message || setupResult?.message}
+                {(functionFixResult?.details || directFixResult?.details || setupResult?.details) && (
                   <details className="mt-2">
                     <summary className="cursor-pointer">Show Details</summary>
                     <pre className="text-xs mt-1 p-2 bg-muted rounded overflow-auto">
-                      {JSON.stringify(directFixResult?.details || setupResult?.details, null, 2)}
+                      {JSON.stringify(functionFixResult?.details || directFixResult?.details || setupResult?.details, null, 2)}
                     </pre>
                   </details>
                 )}
@@ -465,6 +465,14 @@ const AdminSetupTool = () => {
                     </Button>
                   </div>
                 )}
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {functionFixResult && !functionFixResult.success && (
+            <Alert variant="destructive">
+              <AlertDescription>
+                <strong>Manual Fix Required:</strong> Click "Manual Setup SQL" below to get the SQL that fixes the recursive function issue.
               </AlertDescription>
             </Alert>
           )}
