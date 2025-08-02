@@ -30,7 +30,7 @@ export class DatabaseSetup {
       this.updateStep(0, { status: 'running' });
       progress();
       
-      const { error: connectionError } = await supabase.from('information_schema.tables').select('table_name').limit(1);
+      const { error: connectionError } = await supabase.rpc('version');
       if (connectionError) {
         this.updateStep(0, { status: 'error', message: 'Failed to connect to Supabase', error: connectionError });
         progress();
