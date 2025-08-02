@@ -41,6 +41,8 @@ const AdminSetupTool = () => {
   const [isSetupRunning, setIsSetupRunning] = useState(false);
   const [directFixResult, setDirectFixResult] = useState<any>(null);
   const [isDirectFixRunning, setIsDirectFixRunning] = useState(false);
+  const [functionFixResult, setFunctionFixResult] = useState<any>(null);
+  const [isFunctionFixRunning, setIsFunctionFixRunning] = useState(false);
 
   const runDiagnostics = async () => {
     setIsRunning(true);
@@ -460,7 +462,7 @@ const AdminSetupTool = () => {
               <Alert>
                 <AlertDescription>
                   <strong>Instructions:</strong> Copy the SQL below and run it in your Supabase Dashboard → SQL Editor.
-                  After running it, you may need to manually create the admin user in Authentication ��� Users with email
+                  After running it, you may need to manually create the admin user in Authentication → Users with email
                   "admin@example.com" and password "password123".
                 </AlertDescription>
               </Alert>
