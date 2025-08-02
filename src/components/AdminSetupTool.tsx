@@ -527,9 +527,10 @@ const AdminSetupTool = () => {
                   variant="outline"
                   size="sm"
                   onClick={() => copyToClipboard(manualInstructions)}
+                  disabled={copyStatus === 'Copying...'}
                 >
                   <Copy className="w-4 h-4 mr-2" />
-                  Copy SQL
+                  {copyStatus || 'Copy SQL'}
                 </Button>
               </div>
               <Alert>
