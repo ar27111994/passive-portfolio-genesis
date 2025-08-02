@@ -4,18 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  CheckCircle, 
-  XCircle, 
-  AlertTriangle, 
-  Settings, 
-  Database, 
-  User, 
+import { Progress } from "@/components/ui/progress";
+import {
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  Settings,
+  Database,
+  User,
   Shield,
   Copy,
-  RefreshCw
+  RefreshCw,
+  Play,
+  Clock
 } from "lucide-react";
 import { createAdminUser, manualAdminSetupInstructions } from '@/scripts/createAdminUser';
+import { DatabaseSetup, getManualSetupSQL, SetupStep } from '@/scripts/quickDatabaseSetup';
 import { supabase } from '@/integrations/supabase/client';
 
 interface DiagnosticResult {
