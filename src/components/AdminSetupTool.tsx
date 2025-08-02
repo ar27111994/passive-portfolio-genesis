@@ -298,17 +298,22 @@ const AdminSetupTool = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex gap-2 flex-wrap">
-            <Button onClick={runDiagnostics} disabled={isRunning || isSetupRunning}>
+            <Button onClick={runDiagnostics} disabled={isRunning || isSetupRunning || isDirectFixRunning}>
               <Database className="w-4 h-4 mr-2" />
               {isRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Run Diagnostics
             </Button>
-            <Button onClick={runQuickSetup} disabled={isRunning || isSetupRunning} variant="default">
+            <Button onClick={runDirectFix} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="default">
+              <Shield className="w-4 h-4 mr-2" />
+              {isDirectFixRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Fix Now
+            </Button>
+            <Button onClick={runQuickSetup} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="outline">
               <Play className="w-4 h-4 mr-2" />
               {isSetupRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Quick Setup
             </Button>
-            <Button onClick={setupAdmin} disabled={isRunning || isSetupRunning} variant="outline">
+            <Button onClick={setupAdmin} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="outline">
               <User className="w-4 h-4 mr-2" />
               Alt Setup Method
             </Button>
