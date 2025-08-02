@@ -292,6 +292,50 @@ const AdminSetupTool = () => {
             </Button>
           </div>
 
+          {setupSteps.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold">Setup Progress</h3>
+              <div className="space-y-2">
+                {setupSteps.map((step, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
+                    {step.status === 'pending' && <Clock className="w-5 h-5 text-gray-400" />}
+                    {step.status === 'running' && <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />}
+                    {step.status === 'success' && <CheckCircle className="w-5 h-5 text-green-500" />}
+                    {step.status === 'error' && <XCircle className="w-5 h-5 text-red-500" />}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-medium">{step.name}</span>
+                        <Badge variant={step.status === 'success' ? 'default' : step.status === 'error' ? 'destructive' : 'secondary'}>
+                          {step.status}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{step.message}</p>
+                      {step.error && (
+                        <details className="mt-2">
+                          <summary className="text-xs cursor-pointer text-muted-foreground">
+                            Show Error Details
+                          </summary>
+                          <pre className="text-xs mt-1 p-2 bg-muted rounded overflow-auto">
+                            {JSON.stringify(step.error, null, 2)}
+                          </pre>
+                        </details>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {isSetupRunning && (
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Setup in progress...</span>
+                    <span>{setupSteps.filter(s => s.status === 'success').length} / {setupSteps.length}</span>
+                  </div>
+                  <Progress value={(setupSteps.filter(s => s.status === 'success').length / setupSteps.length) * 100} />
+                </div>
+              )}
+            </div>
+          )}
+
           {diagnostics.length > 0 && (
             <div className="space-y-3">
               <h3 className="text-lg font-semibold">Diagnostic Results</h3>
