@@ -383,18 +383,25 @@ const AdminSetupTool = () => {
           {showManualInstructions && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Manual Setup Instructions</h3>
+                <h3 className="text-lg font-semibold">Manual Setup SQL</h3>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => copyToClipboard(manualInstructions)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
-                  Copy All
+                  Copy SQL
                 </Button>
               </div>
-              <div className="bg-muted p-4 rounded-lg">
-                <pre className="text-sm whitespace-pre-wrap overflow-auto">
+              <Alert>
+                <AlertDescription>
+                  <strong>Instructions:</strong> Copy the SQL below and run it in your Supabase Dashboard → SQL Editor.
+                  After running it, you may need to manually create the admin user in Authentication → Users with email
+                  "admin@example.com" and password "password123".
+                </AlertDescription>
+              </Alert>
+              <div className="bg-muted p-4 rounded-lg max-h-96 overflow-auto">
+                <pre className="text-sm whitespace-pre-wrap">
                   {manualInstructions}
                 </pre>
               </div>
