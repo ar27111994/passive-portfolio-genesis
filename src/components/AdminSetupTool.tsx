@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { createAdminUser, manualAdminSetupInstructions } from '@/scripts/createAdminUser';
 import { DatabaseSetup, getManualSetupSQL, SetupStep } from '@/scripts/quickDatabaseSetup';
+import { directFixAdminLogin, getQuickSetupSQL } from '@/scripts/fixAdminLogin';
 import { supabase } from '@/integrations/supabase/client';
 
 interface DiagnosticResult {
