@@ -45,6 +45,18 @@ const AdminPanel = ({ user, onLogout }: AdminPanelProps) => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const { signOut } = useAuth();
 
+  // Safety check for user prop
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Shield className="w-8 h-8 animate-pulse mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Loading user information...</p>
+        </div>
+      </div>
+    );
+  }
+
   const handleLogout = async () => {
     await signOut();
     onLogout();
