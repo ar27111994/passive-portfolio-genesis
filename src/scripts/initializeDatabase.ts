@@ -198,9 +198,9 @@ export async function initializeDatabase(): Promise<void> {
   try {
     // Check Supabase connection first
     const { data: connectionTest, error: connectionError } = await supabase
-      .from('information_schema.tables')
-      .select('table_name')
-      .limit(1);
+      .from('user_roles')
+      .select('user_id')
+      .limit(0); // Just test connection
     
     if (connectionError) {
       throw new Error(`Supabase connection failed: ${connectionError.message}`);
@@ -264,7 +264,7 @@ export async function initializeDatabase(): Promise<void> {
     console.log('🔍 Verifying setup...');
     await blogService.checkTablesExist();
     
-    console.log('🎉 Database initialization completed successfully!');
+    console.log('��� Database initialization completed successfully!');
     
   } catch (error) {
     console.error('❌ Database initialization failed:', error);

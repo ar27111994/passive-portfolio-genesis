@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lock, Shield, Eye, EyeOff } from "lucide-react";
+import { Lock, Shield, Eye, EyeOff, Settings } from "lucide-react";
 import { useAuth } from '@/hooks/useAuth';
+import AdminSetupTool from './AdminSetupTool';
 
 const AdminAuth = () => {
   const [credentials, setCredentials] = useState({
@@ -15,6 +16,7 @@ const AdminAuth = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showDiagnostics, setShowDiagnostics] = useState(false);
   const { signInWithEmail } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -114,8 +116,25 @@ const AdminAuth = () => {
               )}
             </Button>
           </form>
+
+          <div className="mt-4 pt-4 border-t">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => setShowDiagnostics(!showDiagnostics)}
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              {showDiagnostics ? 'Hide' : 'Show'} Login Diagnostics
+            </Button>
+          </div>
         </CardContent>
       </Card>
+
+      {showDiagnostics && (
+        <div className="mt-6">
+          <AdminSetupTool />
+        </div>
+      )}
     </div>
   );
 };

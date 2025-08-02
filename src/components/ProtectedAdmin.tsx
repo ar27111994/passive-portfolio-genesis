@@ -17,22 +17,11 @@ const ProtectedAdmin = () => {
     );
   }
 
-  if (!session) {
+  if (!session || !user) {
     return <AdminAuth />;
   }
 
-  // This is a temporary solution to pass the session to the AdminPanel.
-  // A better solution would be to use a context provider for the admin session.
-  const adminSession = {
-    userId: user?.id || '',
-    email: user?.email || '',
-    role: 'super-admin', // This should be replaced with a proper role management system
-    permissions: [],
-    loginTime: session.created_at ? new Date(session.created_at).getTime() : 0,
-    expiryTime: session.expires_at ? session.expires_at * 1000 : 0,
-  };
-
-  return <AdminPanel session={adminSession} onLogout={() => {}} />;
+  return <AdminPanel user={user} onLogout={() => {}} />;
 };
 
 export default ProtectedAdmin;
