@@ -197,10 +197,7 @@ export async function initializeDatabase(): Promise<void> {
   
   try {
     // Check Supabase connection first
-    const { data: connectionTest, error: connectionError } = await supabase
-      .from('information_schema.tables')
-      .select('table_name')
-      .limit(1);
+    const { data: connectionTest, error: connectionError } = await supabase.rpc('version');
     
     if (connectionError) {
       throw new Error(`Supabase connection failed: ${connectionError.message}`);
