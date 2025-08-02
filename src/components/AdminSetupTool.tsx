@@ -413,14 +413,29 @@ const AdminSetupTool = () => {
                     </pre>
                   </details>
                 )}
-                {directFixResult?.details?.sqlNeeded && (
-                  <div className="mt-2">
+                {(directFixResult?.details?.sqlNeeded || directFixResult?.details?.needsManualCreation) && (
+                  <div className="mt-3 space-y-2">
+                    <p className="text-sm font-medium">Next Steps:</p>
+                    {directFixResult?.details?.needsManualCreation && (
+                      <div className="text-sm bg-blue-50 p-3 rounded border">
+                        <p className="font-medium mb-2">Manual User Creation Required:</p>
+                        <ol className="list-decimal list-inside space-y-1 text-xs">
+                          <li>Go to <strong>Supabase Dashboard → Authentication → Users</strong></li>
+                          <li>Click <strong>"Add User"</strong></li>
+                          <li>Email: <code>admin@example.com</code></li>
+                          <li>Password: <code>password123</code></li>
+                          <li>Check <strong>"Email Confirm"</strong> box</li>
+                          <li>Click <strong>"Create User"</strong></li>
+                          <li>Then click <strong>"Run Diagnostics"</strong> again to verify</li>
+                        </ol>
+                      </div>
+                    )}
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={showManualSetup}
                     >
-                      Show Required SQL
+                      Show Complete SQL Setup
                     </Button>
                   </div>
                 )}
