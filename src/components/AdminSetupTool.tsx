@@ -395,17 +395,29 @@ const AdminSetupTool = () => {
             </div>
           )}
 
-          {setupResult && (
-            <Alert variant={setupResult.success ? "default" : "destructive"}>
+          {(setupResult || directFixResult) && (
+            <Alert variant={(setupResult?.success || directFixResult?.success) ? "default" : "destructive"}>
               <AlertDescription>
-                <strong>{setupResult.success ? 'Success:' : 'Error:'}</strong> {setupResult.message}
-                {setupResult.details && (
+                <strong>{(setupResult?.success || directFixResult?.success) ? 'Success:' : 'Error:'}</strong>
+                {' '}{directFixResult?.message || setupResult?.message}
+                {(directFixResult?.details || setupResult?.details) && (
                   <details className="mt-2">
                     <summary className="cursor-pointer">Show Details</summary>
                     <pre className="text-xs mt-1 p-2 bg-muted rounded overflow-auto">
-                      {JSON.stringify(setupResult.details, null, 2)}
+                      {JSON.stringify(directFixResult?.details || setupResult?.details, null, 2)}
                     </pre>
                   </details>
+                )}
+                {directFixResult?.details?.sqlNeeded && (
+                  <div className="mt-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={showManualSetup}
+                    >
+                      Show Required SQL
+                    </Button>
+                  </div>
                 )}
               </AlertDescription>
             </Alert>
