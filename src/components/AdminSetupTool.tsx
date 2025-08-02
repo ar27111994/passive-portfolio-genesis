@@ -238,7 +238,9 @@ const AdminSetupTool = () => {
   };
 
   const showManualSetup = async () => {
-    const instructions = getQuickSetupSQL();
+    const setupSQL = getQuickSetupSQL();
+    const fixSQL = getFixSQL();
+    const instructions = `${fixSQL}\n\n--- ORIGINAL SETUP SQL ---\n\n${setupSQL}`;
     setManualInstructions(instructions);
     setShowManualInstructions(true);
   };
