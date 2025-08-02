@@ -21,6 +21,7 @@ import {
 import { createAdminUser, manualAdminSetupInstructions } from '@/scripts/createAdminUser';
 import { DatabaseSetup, getManualSetupSQL, SetupStep } from '@/scripts/quickDatabaseSetup';
 import { directFixAdminLogin, getQuickSetupSQL } from '@/scripts/fixAdminLogin';
+import { fixRecursiveFunction, getFixSQL } from '@/scripts/fixRecursiveFunction';
 import { supabase } from '@/integrations/supabase/client';
 
 interface DiagnosticResult {
@@ -459,7 +460,7 @@ const AdminSetupTool = () => {
               <Alert>
                 <AlertDescription>
                   <strong>Instructions:</strong> Copy the SQL below and run it in your Supabase Dashboard → SQL Editor.
-                  After running it, you may need to manually create the admin user in Authentication → Users with email
+                  After running it, you may need to manually create the admin user in Authentication ��� Users with email
                   "admin@example.com" and password "password123".
                 </AlertDescription>
               </Alert>
