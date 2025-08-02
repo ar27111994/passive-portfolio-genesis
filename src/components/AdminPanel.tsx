@@ -25,84 +25,42 @@ import {
 } from "lucide-react";
 
 // Import new components
-import BlogAdminPanel from './BlogAdminPanel';
+import ContentTab from './ContentTab';
 import ContentScheduler from './ContentScheduler';
-import AdvancedAnalytics from './AdvancedAnalytics';
+import AnalyticsTab from './AnalyticsTab';
 import SocialMediaIntegration from './SocialMediaIntegration';
 import NewsletterManagement from './NewsletterManagement';
 import AIServiceSetup from './AIServiceSetup';
-import RealImplementationStatus from './RealImplementationStatus';
-import { AdminSession, adminService } from '@/services/adminService';
+import DashboardTab from './DashboardTab';
+import UserManagement from './UserManagement';
+import { useAuth } from '@/hooks/useAuth';
+import { User } from '@supabase/supabase-js';
 
-interface EnhancedAdminPanelProps {
-  session: AdminSession;
+interface AdminPanelProps {
+  user: User;
   onLogout: () => void;
 }
 
-const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
+const AdminPanel = ({ user, onLogout }: AdminPanelProps) => {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [sessionTimeLeft, setSessionTimeLeft] = useState<string>('');
+  const { signOut } = useAuth();
 
-  useEffect(() => {
-    // Update session countdown every minute
-    const interval = setInterval(() => {
-      const timeLeft = session.expiryTime - Date.now();
-      if (timeLeft <= 0) {
-        onLogout();
-        return;
-      }
-      
-      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      setSessionTimeLeft(`${hours}h ${minutes}m`);
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, [session.expiryTime, onLogout]);
-
-  const getRoleIcon = (role: string) => {
-    switch (role) {
-      case 'super-admin': return <Crown className="w-4 h-4" />;
-      case 'admin': return <Shield className="w-4 h-4" />;
-      case 'editor': return <Edit className="w-4 h-4" />;
-      case 'viewer': return <Eye className="w-4 h-4" />;
-      default: return <Users className="w-4 h-4" />;
-    }
+  const handleLogout = async () => {
+    await signOut();
+    onLogout();
   };
 
-  const getRoleColor = (role: string) => {
-    switch (role) {
-      case 'super-admin': return 'bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300';
-      case 'admin': return 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300';
-      case 'editor': return 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300';
-      case 'viewer': return 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-300';
-      default: return 'bg-gray-100 text-gray-700';
-    }
-  };
-
-  const getAvailableTabs = () => {
-    const tabs = [
-      { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, permission: 'read:analytics' },
-      { id: 'content', label: 'Content Management', icon: PenTool, permission: 'write:posts' },
-      { id: 'scheduler', label: 'Content Scheduler', icon: Calendar, permission: 'schedule:posts' },
-      { id: 'analytics', label: 'Advanced Analytics', icon: BarChart3, permission: 'read:analytics' },
-      { id: 'social', label: 'Social Media', icon: Share2, permission: 'write:posts' },
-      { id: 'newsletter', label: 'Newsletter', icon: Mail, permission: 'write:posts' },
-      { id: 'ai-setup', label: 'AI Setup', icon: Zap, permission: '*:*' }, // Super admin only
-      { id: 'users', label: 'User Management', icon: Users, permission: '*:*' }, // Super admin only
-      { id: 'settings', label: 'Settings', icon: Settings, permission: 'read:analytics' }
-    ];
-
-    return tabs.filter(tab => {
-      if (tab.permission === '*:*') {
-        return adminService.hasPermission('*', '*');
-      }
-      const [action, resource] = tab.permission.split(':');
-      return adminService.hasPermission(action, resource);
-    });
-  };
-
-  const availableTabs = getAvailableTabs();
+  const tabs = [
+      { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { id: 'content', label: 'Content Management', icon: PenTool },
+      { id: 'scheduler', label: 'Content Scheduler', icon: Calendar },
+      { id: 'analytics', label: 'Advanced Analytics', icon: BarChart3 },
+      { id: 'social', label: 'Social Media', icon: Share2 },
+      { id: 'newsletter', label: 'Newsletter', icon: Mail },
+      { id: 'ai-setup', label: 'AI Setup', icon: Zap },
+      { id: 'users', label: 'User Management', icon: Users },
+      { id: 'settings', label: 'Settings', icon: Settings }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -124,18 +82,11 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
               {/* User Info */}
               <div className="hidden sm:flex items-center gap-3">
                 <div className="text-right">
-                  <p className="text-sm font-medium">{session.email}</p>
-                  <p className="text-xs text-muted-foreground">Session: {sessionTimeLeft}</p>
+                  <p className="text-sm font-medium">{user.email}</p>
                 </div>
-                <Badge className={getRoleColor(session.role)}>
-                  <div className="flex items-center gap-1">
-                    {getRoleIcon(session.role)}
-                    {session.role.replace('-', ' ').toUpperCase()}
-                  </div>
-                </Badge>
               </div>
               
-              <Button onClick={onLogout} variant="outline" size="sm" className="gap-2">
+              <Button onClick={handleLogout} variant="outline" size="sm" className="gap-2">
                 <LogOut className="w-4 h-4" />
                 Logout
               </Button>
@@ -149,7 +100,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           {/* Tab Navigation */}
           <TabsList className="grid grid-cols-3 lg:grid-cols-9 gap-1 h-auto p-1">
-            {availableTabs.map((tab) => {
+            {tabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
                 <TabsTrigger
@@ -166,12 +117,12 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-6">
-            <RealImplementationStatus />
+            <DashboardTab />
           </TabsContent>
 
           {/* Content Management Tab */}
           <TabsContent value="content">
-            <BlogAdminPanel />
+            <ContentTab />
           </TabsContent>
 
           {/* Content Scheduler Tab */}
@@ -181,7 +132,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
 
           {/* Advanced Analytics Tab */}
           <TabsContent value="analytics">
-            <AdvancedAnalytics />
+            <AnalyticsTab />
           </TabsContent>
 
           {/* Social Media Tab */}
@@ -201,40 +152,7 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
 
           {/* User Management Tab */}
           <TabsContent value="users">
-            <Card>
-              <CardHeader>
-                <CardTitle>User Management</CardTitle>
-                <CardDescription>Manage admin accounts and permissions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {adminService.getAllUsers().map((user) => (
-                    <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex items-center gap-3">
-                        {getRoleIcon(user.role)}
-                        <div>
-                          <h4 className="font-medium">{user.name}</h4>
-                          <p className="text-sm text-muted-foreground">{user.email}</p>
-                        </div>
-                        <Badge className={getRoleColor(user.role)}>
-                          {user.role.replace('-', ' ').toUpperCase()}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant={user.isActive ? "outline" : "destructive"}>
-                          {user.isActive ? 'Active' : 'Inactive'}
-                        </Badge>
-                        {user.lastLogin && (
-                          <span className="text-xs text-muted-foreground">
-                            Last: {new Date(user.lastLogin).toLocaleDateString()}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <UserManagement />
           </TabsContent>
 
           {/* Settings Tab */}
@@ -323,4 +241,4 @@ const EnhancedAdminPanel = ({ session, onLogout }: EnhancedAdminPanelProps) => {
   );
 };
 
-export default EnhancedAdminPanel;
+export default AdminPanel;

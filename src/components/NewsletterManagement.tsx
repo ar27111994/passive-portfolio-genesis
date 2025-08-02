@@ -23,15 +23,7 @@ import {
   TrendingUp
 } from "lucide-react";
 
-interface NewsletterSubscriber {
-  id: string;
-  email: string;
-  name?: string;
-  interests: string[];
-  subscribeDate: string;
-  status: 'active' | 'unsubscribed';
-  source: string;
-}
+import { newsletterService, NewsletterSubscriber } from '@/services/newsletterService';
 
 interface NewsletterCampaign {
   id: string;
@@ -59,16 +51,13 @@ const NewsletterManagement = () => {
   });
 
   useEffect(() => {
+    const loadSubscribers = async () => {
+        const data = await newsletterService.getAllSubscribers();
+        setSubscribers(data);
+    };
     loadSubscribers();
     loadCampaigns();
   }, []);
-
-  const loadSubscribers = () => {
-    const stored = localStorage.getItem('newsletterSubscribers');
-    if (stored) {
-      setSubscribers(JSON.parse(stored));
-    }
-  };
 
   const loadCampaigns = () => {
     const stored = localStorage.getItem('newsletterCampaigns');

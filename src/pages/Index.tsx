@@ -10,6 +10,7 @@ import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import BlogReal from "@/components/BlogReal";
 import Contact from "@/components/Contact";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
 import Monetization from "@/components/Monetization";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -203,6 +204,9 @@ const Index = () => {
 
           {/* Monetization/Services Section */}
           <Monetization />
+
+          {/* Newsletter Section */}
+          <NewsletterSubscription />
 
           {/* Contact Section */}
           <Contact />

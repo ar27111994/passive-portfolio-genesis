@@ -264,11 +264,12 @@ export class BlogService {
     }
   }
 
-  async createPost(post: BlogPostInsert): Promise<BlogPost> {
+  async createPost(post: BlogPostInsert, authorId: string): Promise<BlogPost> {
     try {
+      const postWithAuthor = { ...post, author_id: authorId };
       const { data, error } = await supabase
         .from('blog_posts')
-        .insert(post)
+        .insert(postWithAuthor)
         .select()
         .single();
       
@@ -365,6 +366,24 @@ export class BlogService {
     }
   }
 
+  async updateBlogStatistic(id: string, value: string): Promise<void> {
+    try {
+      const { error } = await supabase
+        .from('blog_statistics')
+        .update({ value, updated_at: new Date().toISOString() })
+        .eq('id', id);
+
+      if (error) {
+        handleSupabaseError(error, 'update blog statistic');
+      }
+    } catch (err) {
+      if (err instanceof Error && err.message.includes('Failed to update')) {
+        throw err;
+      }
+      handleSupabaseError(err, 'update blog statistic');
+    }
+  }
+
   // Tags
   async getAllTags(): Promise<BlogTag[]> {
     try {
@@ -426,12 +445,14 @@ export class BlogService {
   }
 
   // Bulk operations for AI content generation
-  async createMultiplePosts(posts: BlogPostInsert[]): Promise<BlogPost[]> {
+  async createMultiplePosts(posts: BlogPostInsert[], authorId: string): Promise<BlogPost[]> {
     try {
+      const postsWithAuthor = posts.map(post => ({ ...post, author_id: authorId }));
+
       // Create posts one by one to handle potential errors better
       const createdPosts: BlogPost[] = [];
       
-      for (const post of posts) {
+      for (const post of postsWithAuthor) {
         try {
           const { data, error } = await supabase
             .from('blog_posts')

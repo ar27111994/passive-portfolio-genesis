@@ -9,18 +9,18 @@ import { simpleInitializeDatabase } from "@/scripts/initializeDatabase";
 import { useState } from "react";
 
 const Blog = () => {
-  const { 
-    featuredPosts, 
-    recentPosts, 
-    categories, 
-    statistics, 
-    loading, 
-    error, 
+  const {
+    featuredPosts,
+    recentPosts,
+    categories,
+    statistics,
+    loading,
+    error,
     refreshData,
     incrementViews,
     incrementLikes
   } = useBlog();
-  
+
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleInitializeDatabase = async () => {
@@ -185,7 +185,7 @@ const Blog = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">Technical Blog & Insights</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Sharing practical insights from 11+ years of development experience, from enterprise Angular applications 
+            Sharing practical insights from 11+ years of development experience, from enterprise Angular applications
             to accessibility-focused projects and freelancing strategies.
           </p>
         </div>
@@ -223,18 +223,18 @@ const Blog = () => {
               <Star className="w-6 h-6 text-primary" />
               <h3 className="text-2xl font-bold">Featured Articles</h3>
             </div>
-            
+
             <div className="grid lg:grid-cols-2 gap-8">
               {featuredPosts.map((post) => (
-                <Card 
-                  key={post.id} 
+                <Card
+                  key={post.id}
                   className="group hover:shadow-xl transition-all duration-300 border-primary/20 cursor-pointer"
                   onClick={() => handlePostClick(post.id)}
                 >
                   {post.image_url && (
                     <div className="overflow-hidden rounded-t-lg">
-                      <img 
-                        src={post.image_url} 
+                      <img
+                        src={post.image_url}
                         alt={post.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -260,7 +260,7 @@ const Blog = () => {
                         </Badge>
                       ))}
                     </div>
-                    
+
                     <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
@@ -273,14 +273,14 @@ const Blog = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Eye className="w-4 h-4" />
                           {post.views.toLocaleString()}
                         </div>
-                        <button 
+                        <button
                           className="flex items-center gap-1 hover:text-primary transition-colors"
                           onClick={(e) => handleLikeClick(post.id, e)}
                         >
@@ -309,8 +309,8 @@ const Blog = () => {
             <h3 className="text-2xl font-bold mb-8">Recent Articles</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recentPosts.map((post) => (
-                <Card 
-                  key={post.id} 
+                <Card
+                  key={post.id}
                   className="group hover:shadow-lg transition-shadow cursor-pointer"
                   onClick={() => handlePostClick(post.id)}
                 >
@@ -338,7 +338,7 @@ const Blog = () => {
                         </Badge>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-3 h-3" />
@@ -349,7 +349,7 @@ const Blog = () => {
                         {post.read_time_minutes} min read
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Eye className="w-3 h-3" />
@@ -372,8 +372,8 @@ const Blog = () => {
             <h3 className="text-2xl font-bold mb-8">Content Categories</h3>
             <div className="flex flex-wrap gap-3">
               {categories.map((category) => (
-                <div 
-                  key={category.id} 
+                <div
+                  key={category.id}
                   className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:shadow-md transition-shadow ${category.color_class}`}
                 >
                   {category.name} ({category.post_count})
@@ -388,11 +388,11 @@ const Blog = () => {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4">Professional Development Services</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Leverage my enterprise development experience through personalized consulting, 
+              Leverage my enterprise development experience through personalized consulting,
               code reviews, and training sessions tailored to your specific needs.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -443,7 +443,7 @@ const Blog = () => {
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold mb-4">Join the Developer Community</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Connect with fellow developers, get answers to technical questions, and stay updated 
+              Connect with fellow developers, get answers to technical questions, and stay updated
               with the latest in Angular, accessibility, and enterprise development practices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -456,8 +456,8 @@ const Blog = () => {
                 Follow on LinkedIn
               </Button>
               {/* Admin button for generating more content */}
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="secondary"
                 onClick={handleGenerateContent}
                 disabled={isGenerating}

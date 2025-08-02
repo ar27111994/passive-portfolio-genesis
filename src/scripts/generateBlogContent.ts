@@ -6,7 +6,7 @@ import type { Database } from '../integrations/supabase/types';
 
 type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert'];
 
-export async function generateAndPopulateBlogContent() {
+export async function generateAndPopulateBlogContent(authorId: string) {
   console.log('🤖 Starting AI content generation...');
   
   try {
@@ -44,7 +44,7 @@ export async function generateAndPopulateBlogContent() {
     
     // Insert posts into database
     console.log('💾 Inserting posts into Supabase...');
-    const insertedPosts = await blogService.createMultiplePosts(blogPostsForDB);
+    const insertedPosts = await blogService.createMultiplePosts(blogPostsForDB, authorId);
     console.log(`✅ Successfully created ${insertedPosts.length} blog posts`);
     
     // Update statistics
@@ -88,12 +88,13 @@ async function updateBlogStatistics() {
         case 'Monthly Readers':
           newValue = `${Math.round(analytics.totalViews / 12 / 1000 * 10) / 10}K+`;
           break;
-        case 'Developer Engagement':
+        case 'Developer Engagement': {
           const engagementRate = analytics.totalViews > 0 
             ? (analytics.totalLikes / analytics.totalViews * 100) 
             : 0;
           newValue = `${Math.round(engagementRate * 10) / 10}%`;
           break;
+        }
         case 'Community Reach':
           newValue = `${Math.round(analytics.totalViews / 1000)}K+`;
           break;
@@ -110,7 +111,7 @@ async function updateBlogStatistics() {
 }
 
 // Function to regenerate a single post (useful for testing)
-export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
+export async function regenerateSinglePost(seed = blogPostSeeds[0], authorId: string) {
   console.log(`🔄 Regenerating post: ${seed.title}`);
   
   try {
@@ -124,7 +125,7 @@ export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
       image_url: generatedPost.imageUrl,
       category: generatedPost.category,
       tags: generatedPost.tags,
-      featured: true,
+      featured: Math.random() > 0.7, // 30% chance of being featured
       published: true,
       publish_date: new Date().toISOString(),
       read_time_minutes: generatedPost.readTimeMinutes,
@@ -133,7 +134,7 @@ export async function regenerateSinglePost(seed = blogPostSeeds[0]) {
       comments: Math.floor(Math.random() * 20) + 2
     };
     
-    const insertedPost = await blogService.createPost(blogPost);
+    const insertedPost = await blogService.createPost(blogPost, authorId);
     console.log(`✅ Successfully created post: ${insertedPost.title}`);
     
     return insertedPost;

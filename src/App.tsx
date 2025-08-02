@@ -69,7 +69,7 @@ const AppContent = () => {
           if (process.env.NODE_ENV === 'development') {
             console.log(`Performance: ${entry.name} - ${entry.duration}ms`);
           }
-          
+
           // Send to analytics in production
           if (process.env.NODE_ENV === 'production' && typeof gtag !== 'undefined') {
             gtag('event', 'timing_complete', {
@@ -79,14 +79,14 @@ const AppContent = () => {
           }
         });
       });
-      
+
       observer.observe({ entryTypes: ['measure', 'navigation'] });
     }
 
     // Add error boundary for JavaScript errors
     window.addEventListener('error', (event) => {
       console.error('JavaScript Error:', event.error);
-      
+
       if (process.env.NODE_ENV === 'production' && typeof gtag !== 'undefined') {
         gtag('event', 'exception', {
           description: event.error?.message || 'Unknown error',
@@ -98,7 +98,7 @@ const AppContent = () => {
     // Add unhandled promise rejection handler
     window.addEventListener('unhandledrejection', (event) => {
       console.error('Unhandled Promise Rejection:', event.reason);
-      
+
       if (process.env.NODE_ENV === 'production' && typeof gtag !== 'undefined') {
         gtag('event', 'exception', {
           description: event.reason?.message || 'Unhandled promise rejection',
@@ -126,12 +126,12 @@ const AppContent = () => {
       .animate-fade-in {
         animation: fadeIn 0.6s ease-out;
       }
-      
+
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      
+
       /* Respect reduced motion preference */
       @media (prefers-reduced-motion: reduce) {
         .animate-fade-in,
@@ -145,28 +145,28 @@ const AppContent = () => {
           transition: none !important;
         }
       }
-      
+
       /* Focus management */
       .focus-visible *:focus-visible {
         outline: 2px solid hsl(var(--primary));
         outline-offset: 2px;
         border-radius: 2px;
       }
-      
+
       /* High contrast mode support */
       @media (prefers-contrast: high) {
         .text-muted-foreground {
           color: hsl(var(--foreground)) !important;
         }
       }
-      
+
       /* Loading skeleton */
       .skeleton {
         background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
         background-size: 200% 100%;
         animation: loading 1.5s infinite;
       }
-      
+
       @keyframes loading {
         0% { background-position: 200% 0; }
         100% { background-position: -200% 0; }

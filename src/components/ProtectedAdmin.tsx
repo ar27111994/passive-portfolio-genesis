@@ -1,34 +1,12 @@
-import { useState, useEffect } from 'react';
 import { Shield } from "lucide-react";
-import EnhancedAdminAuth from './EnhancedAdminAuth';
-import EnhancedAdminPanel from './EnhancedAdminPanel';
-import { AdminSession, adminService } from '@/services/adminService';
+import AdminAuth from './AdminAuth';
+import AdminPanel from './AdminPanel';
+import { useAuth } from '@/hooks/useAuth';
 
 const ProtectedAdmin = () => {
-  const [session, setSession] = useState<AdminSession | null>(null);
-  const [isChecking, setIsChecking] = useState(true);
+  const { session, loading, user } = useAuth();
 
-  useEffect(() => {
-    // Check admin authentication status
-    const checkAdminAuth = () => {
-      const currentSession = adminService.getCurrentSession();
-      setSession(currentSession);
-      setIsChecking(false);
-    };
-
-    checkAdminAuth();
-  }, []);
-
-  const handleLogout = () => {
-    adminService.logout();
-    setSession(null);
-  };
-
-  const handleAuthenticated = (newSession: AdminSession) => {
-    setSession(newSession);
-  };
-
-  if (isChecking) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -40,10 +18,21 @@ const ProtectedAdmin = () => {
   }
 
   if (!session) {
-    return <EnhancedAdminAuth onAuthenticated={handleAuthenticated} />;
+    return <AdminAuth />;
   }
 
-  return <EnhancedAdminPanel session={session} onLogout={handleLogout} />;
+  // This is a temporary solution to pass the session to the AdminPanel.
+  // A better solution would be to use a context provider for the admin session.
+  const adminSession = {
+    userId: user?.id || '',
+    email: user?.email || '',
+    role: 'super-admin', // This should be replaced with a proper role management system
+    permissions: [],
+    loginTime: session.created_at ? new Date(session.created_at).getTime() : 0,
+    expiryTime: session.expires_at ? session.expires_at * 1000 : 0,
+  };
+
+  return <AdminPanel session={adminSession} onLogout={() => {}} />;
 };
 
 export default ProtectedAdmin;

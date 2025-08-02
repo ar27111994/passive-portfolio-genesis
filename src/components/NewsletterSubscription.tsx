@@ -19,15 +19,7 @@ import {
   Star
 } from "lucide-react";
 
-interface NewsletterSubscriber {
-  id: string;
-  email: string;
-  name?: string;
-  interests: string[];
-  subscribeDate: string;
-  status: 'active' | 'unsubscribed';
-  source: string;
-}
+import { newsletterService } from '@/services/newsletterService';
 
 const NewsletterSubscription = () => {
   const [email, setEmail] = useState('');
@@ -62,44 +54,25 @@ const NewsletterSubscription = () => {
     setIsSubscribing(true);
     setMessage('');
 
-    if (!email) {
-      setMessage('❌ Please enter your email address');
-      setIsSubscribing(false);
-      return;
-    }
-
-    // Check if already subscribed
-    const existingSubscribers = localStorage.getItem('newsletterSubscribers');
-    const subscribers: NewsletterSubscriber[] = existingSubscribers ? JSON.parse(existingSubscribers) : [];
-    
-    if (subscribers.some(sub => sub.email === email && sub.status === 'active')) {
-      setMessage('📧 You\'re already subscribed to our newsletter!');
+    const emailRegex = /^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setMessage('❌ Please enter a valid email address');
       setIsSubscribing(false);
       return;
     }
 
     try {
-      const newSubscriber: NewsletterSubscriber = {
-        id: `subscriber-${Date.now()}`,
-        email,
-        name: name || undefined,
-        interests,
-        subscribeDate: new Date().toISOString(),
-        status: 'active',
-        source: 'website'
-      };
-
-      // Save to localStorage (in real app, this would be sent to backend/email service)
-      const updatedSubscribers = [...subscribers.filter(s => s.email !== email), newSubscriber];
-      localStorage.setItem('newsletterSubscribers', JSON.stringify(updatedSubscribers));
-
-      setIsSubscribed(true);
-      setMessage('🎉 Welcome aboard! You\'ve successfully subscribed to our newsletter.');
-      
-      // Reset form
-      setEmail('');
-      setName('');
-      setInterests([]);
+      const response = await newsletterService.subscribe(email, name, interests);
+      if (response.success) {
+        setIsSubscribed(true);
+        setMessage(`🎉 ${response.message}`);
+        // Reset form
+        setEmail('');
+        setName('');
+        setInterests([]);
+      } else {
+        setMessage(`❌ ${response.message}`);
+      }
     } catch (error) {
       setMessage('❌ Failed to subscribe. Please try again.');
     } finally {

@@ -26,37 +26,7 @@ import {
   TrendingUp,
   Calendar
 } from "lucide-react";
-import { integrationService } from "@/services/integrationService";
-
-interface SocialPlatform {
-  id: string;
-  name: string;
-  icon: React.ComponentType<any>;
-  connected: boolean;
-  username?: string;
-  followers?: number;
-  lastPost?: string;
-  autoPost: boolean;
-  postTemplate: string;
-}
-
-interface SocialPost {
-  id: string;
-  blogPostId: string;
-  blogTitle: string;
-  platforms: string[];
-  content: string;
-  scheduledTime?: string;
-  status: 'draft' | 'scheduled' | 'posted' | 'failed';
-  engagement: {
-    likes: number;
-    shares: number;
-    comments: number;
-    reach: number;
-  };
-  createdAt: string;
-  postedAt?: string;
-}
+import { integrationService, SocialPlatform, SocialPost } from "@/services/integrationService";
 
 const SocialMediaIntegration = () => {
   const [platforms, setPlatforms] = useState<SocialPlatform[]>([
@@ -104,76 +74,59 @@ const SocialMediaIntegration = () => {
   const [blogPosts, setBlogPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    loadSocialPosts();
-    loadBlogPosts();
-    // Load platform connections from localStorage
-    const savedPlatforms = localStorage.getItem('socialPlatforms');
-    if (savedPlatforms) {
-      setPlatforms(JSON.parse(savedPlatforms));
-    }
+    const loadData = async () => {
+        const [socialPosts, blogPosts, platforms] = await Promise.all([
+            integrationService.getSocialPosts(),
+            integrationService.getPublishedBlogPosts(),
+            integrationService.getSocialPlatforms(),
+        ]);
+        setSocialPosts(socialPosts);
+        setBlogPosts(blogPosts);
+        setPlatforms(platforms.map(p => ({...p, icon: getPlatformIcon(p.id)})));
+    };
+    loadData();
   }, []);
 
-  const loadBlogPosts = async () => {
-    try {
-      const posts = await integrationService.getPublishedBlogPosts();
-      setBlogPosts(posts);
-    } catch (error) {
-      console.error('Failed to load blog posts:', error);
-      // Keep empty array as fallback
+    const getPlatformIcon = (id: string) => {
+        switch (id) {
+            case 'twitter': return Twitter;
+            case 'facebook': return Facebook;
+            case 'linkedin': return Linkedin;
+            case 'instagram': return Instagram;
+            default: return Share2;
+        }
     }
+
+  const handleConnectPlatform = async (platformId: string) => {
+    const platform = platforms.find(p => p.id === platformId);
+    if (!platform) return;
+
+    const updatedPlatform = {
+        ...platform,
+        connected: !platform.connected,
+        username: platform.connected ? undefined : `@user_${platformId}`,
+        followers: platform.connected ? undefined : Math.floor(Math.random() * 10000) + 1000,
+        last_post: platform.connected ? undefined : new Date().toISOString()
+    };
+    await integrationService.updateSocialPlatform(updatedPlatform);
+    setPlatforms(platforms.map(p => p.id === platformId ? { ...updatedPlatform, icon: getPlatformIcon(p.id) } : p));
+    setMessage(`${platform.name} ${platform.connected ? 'disconnected' : 'connected'} successfully!`);
   };
 
-  const loadSocialPosts = () => {
-    const saved = localStorage.getItem('socialPosts');
-    if (saved) {
-      setSocialPosts(JSON.parse(saved));
-    }
+  const handleAutoPostToggle = async (platformId: string) => {
+    const platform = platforms.find(p => p.id === platformId);
+    if (!platform) return;
+    const updatedPlatform = { ...platform, auto_post: !platform.auto_post };
+    await integrationService.updateSocialPlatform(updatedPlatform);
+    setPlatforms(platforms.map(p => p.id === platformId ? { ...updatedPlatform, icon: getPlatformIcon(p.id) } : p));
   };
 
-  const saveSocialPosts = (posts: SocialPost[]) => {
-    localStorage.setItem('socialPosts', JSON.stringify(posts));
-    setSocialPosts(posts);
-  };
-
-  const savePlatforms = (newPlatforms: SocialPlatform[]) => {
-    localStorage.setItem('socialPlatforms', JSON.stringify(newPlatforms));
-    setPlatforms(newPlatforms);
-  };
-
-  const handleConnectPlatform = (platformId: string) => {
-    // In a real implementation, this would initiate OAuth flow
-    const updatedPlatforms = platforms.map(platform => {
-      if (platform.id === platformId) {
-        return {
-          ...platform,
-          connected: !platform.connected,
-          username: platform.connected ? undefined : `@user_${platformId}`,
-          followers: platform.connected ? undefined : Math.floor(Math.random() * 10000) + 1000,
-          lastPost: platform.connected ? undefined : new Date().toISOString()
-        };
-      }
-      return platform;
-    });
-    savePlatforms(updatedPlatforms);
-    setMessage(`${platforms.find(p => p.id === platformId)?.name} ${platforms.find(p => p.id === platformId)?.connected ? 'disconnected' : 'connected'} successfully!`);
-  };
-
-  const handleAutoPostToggle = (platformId: string) => {
-    const updatedPlatforms = platforms.map(platform => 
-      platform.id === platformId 
-        ? { ...platform, autoPost: !platform.autoPost }
-        : platform
-    );
-    savePlatforms(updatedPlatforms);
-  };
-
-  const handleTemplateUpdate = (platformId: string, template: string) => {
-    const updatedPlatforms = platforms.map(platform => 
-      platform.id === platformId 
-        ? { ...platform, postTemplate: template }
-        : platform
-    );
-    savePlatforms(updatedPlatforms);
+  const handleTemplateUpdate = async (platformId: string, template: string) => {
+    const platform = platforms.find(p => p.id === platformId);
+    if (!platform) return;
+    const updatedPlatform = { ...platform, post_template: template };
+    await integrationService.updateSocialPlatform(updatedPlatform);
+    setPlatforms(platforms.map(p => p.id === platformId ? { ...updatedPlatform, icon: getPlatformIcon(p.id) } : p));
   };
 
   const generatePostContent = (blogPost: any, template: string) => {
@@ -186,7 +139,7 @@ const SocialMediaIntegration = () => {
       .replace('{hashtags}', hashtags);
   };
 
-  const handleCreateSocialPost = () => {
+  const handleCreateSocialPost = async () => {
     if (!selectedPost || selectedPlatforms.length === 0) {
       setMessage('❌ Please select a blog post and at least one platform');
       return;
@@ -196,29 +149,23 @@ const SocialMediaIntegration = () => {
     if (!blogPost) return;
 
     const content = customContent || generatePostContent(
-      blogPost, 
-      platforms.find(p => p.id === selectedPlatforms[0])?.postTemplate || ''
+      blogPost,
+      platforms.find(p => p.id === selectedPlatforms[0])?.post_template || ''
     );
 
-    const newSocialPost: SocialPost = {
-      id: `social-${Date.now()}`,
-      blogPostId: selectedPost,
-      blogTitle: blogPost.title,
+    const newSocialPost: Omit<SocialPost, 'id' | 'created_at' | 'engagement'> = {
+      blog_post_id: selectedPost,
+      blog_title: blogPost.title,
       platforms: selectedPlatforms,
       content,
-      scheduledTime: scheduledTime || undefined,
+      scheduled_time: scheduledTime || undefined,
       status: scheduledTime ? 'scheduled' : 'draft',
-      engagement: {
-        likes: 0,
-        shares: 0,
-        comments: 0,
-        reach: 0
-      },
-      createdAt: new Date().toISOString()
+      posted_at: undefined,
     };
 
-    const updatedPosts = [...socialPosts, newSocialPost];
-    saveSocialPosts(updatedPosts);
+    await integrationService.createSocialPost(newSocialPost);
+    const updatedPosts = await integrationService.getSocialPosts();
+    setSocialPosts(updatedPosts);
 
     // Reset form
     setSelectedPost('');
@@ -229,24 +176,24 @@ const SocialMediaIntegration = () => {
     setMessage(`✅ Social post ${scheduledTime ? 'scheduled' : 'created'} successfully!`);
   };
 
-  const handlePostNow = (postId: string) => {
-    const updatedPosts = socialPosts.map(post => {
-      if (post.id === postId) {
-        return {
-          ...post,
-          status: 'posted' as const,
-          postedAt: new Date().toISOString(),
-          engagement: {
+  const handlePostNow = async (postId: string) => {
+    const post = socialPosts.find(p => p.id === postId);
+    if (!post) return;
+
+    const updatedPost = {
+        ...post,
+        status: 'posted' as const,
+        posted_at: new Date().toISOString(),
+        engagement: {
             likes: Math.floor(Math.random() * 50) + 10,
             shares: Math.floor(Math.random() * 20) + 5,
             comments: Math.floor(Math.random() * 15) + 2,
             reach: Math.floor(Math.random() * 1000) + 200
-          }
-        };
-      }
-      return post;
-    });
-    saveSocialPosts(updatedPosts);
+        }
+    };
+    await integrationService.updateSocialPost(updatedPost);
+    const updatedPosts = await integrationService.getSocialPosts();
+    setSocialPosts(updatedPosts);
     setMessage('✅ Post published successfully!');
   };
 

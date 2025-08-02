@@ -1,12 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Database, 
-  CheckCircle, 
-  AlertCircle, 
-  ExternalLink, 
-  Copy, 
+import {
+  Database,
+  CheckCircle,
+  AlertCircle,
+  ExternalLink,
+  Copy,
   Loader2,
   FileText,
   Settings,
@@ -213,7 +213,7 @@ const BlogSetup = () => {
   const handleGenerateContent = async () => {
     setIsGenerating(true);
     setMessage('🤖 Generating AI-powered blog content...');
-    
+
     try {
       await generateAndPopulateBlogContent();
       setMessage('🎉 Blog content generated successfully!');
@@ -229,7 +229,7 @@ const BlogSetup = () => {
   const handleInsertBasicData = async () => {
     setIsGenerating(true);
     setMessage('📋 Inserting basic categories and statistics...');
-    
+
     try {
       await blogService.insertBasicData();
       setMessage('✅ Basic data inserted successfully!');
@@ -362,9 +362,9 @@ const BlogSetup = () => {
                   Go to your Supabase project dashboard and open the SQL Editor
                 </p>
                 <Button variant="outline" size="sm" asChild>
-                  <a 
-                    href="https://supabase.com/dashboard/project/mrhdiilrbvrwwwhdocnr/sql" 
-                    target="_blank" 
+                  <a
+                    href="https://supabase.com/dashboard/project/mrhdiilrbvrwwwhdocnr/sql"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
@@ -441,9 +441,9 @@ const BlogSetup = () => {
                   <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
                     <p className="text-green-800 text-sm">✅ Database tables are ready!</p>
                   </div>
-                  
-                  <Button 
-                    onClick={handleInsertBasicData} 
+
+                  <Button
+                    onClick={handleInsertBasicData}
                     disabled={isGenerating}
                     className="w-full"
                     variant="secondary"
@@ -461,8 +461,8 @@ const BlogSetup = () => {
                     )}
                   </Button>
 
-                  <Button 
-                    onClick={handleGenerateContent} 
+                  <Button
+                    onClick={handleGenerateContent}
                     disabled={isGenerating}
                     className="w-full"
                   >
@@ -486,7 +486,7 @@ const BlogSetup = () => {
                       ⚠️ Database tables must be created first before generating content.
                     </p>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <h4 className="font-semibold">Why manual setup?</h4>
                     <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-4">
@@ -540,7 +540,7 @@ const BlogSetup = () => {
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold mb-4">🚀 Complete Blog Management System</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Once the database is set up, you'll have access to a full-featured AI-powered blog management system 
+              Once the database is set up, you'll have access to a full-featured AI-powered blog management system
               with real-time analytics, content generation, and professional-grade functionality.
             </p>
             <div className="grid md:grid-cols-3 gap-6 text-left">

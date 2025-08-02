@@ -7,18 +7,18 @@ import BlogSetup from "@/components/BlogSetup";
 import EndUserBlogActions from "@/components/EndUserBlogActions";
 
 const BlogReal = () => {
-  const { 
-    featuredPosts, 
-    recentPosts, 
-    categories, 
-    statistics, 
-    loading, 
-    error, 
+  const {
+    featuredPosts,
+    recentPosts,
+    categories,
+    statistics,
+    loading,
+    error,
     refreshData,
     incrementViews,
     incrementLikes
   } = useBlog();
-  
+
 
 
 
@@ -120,18 +120,18 @@ const BlogReal = () => {
               <Star className="w-6 h-6 text-primary" />
               <h3 className="text-2xl font-bold">Featured Articles</h3>
             </div>
-            
+
             <div className="grid lg:grid-cols-2 gap-8">
               {featuredPosts.map((post) => (
-                <Card 
-                  key={post.id} 
+                <Card
+                  key={post.id}
                   className="group hover:shadow-xl transition-all duration-300 border-primary/20 cursor-pointer"
                   onClick={() => handlePostClick(post.id)}
                 >
                   {post.image_url && (
                     <div className="overflow-hidden rounded-t-lg">
-                      <img 
-                        src={post.image_url} 
+                      <img
+                        src={post.image_url}
                         alt={post.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -157,7 +157,7 @@ const BlogReal = () => {
                         </Badge>
                       ))}
                     </div>
-                    
+
                     <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
@@ -170,14 +170,14 @@ const BlogReal = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Eye className="w-4 h-4" />
                           {post.views.toLocaleString()}
                         </div>
-                        <button 
+                        <button
                           className="flex items-center gap-1 hover:text-primary transition-colors"
                           onClick={(e) => handleLikeClick(post.id, e)}
                         >
@@ -206,8 +206,8 @@ const BlogReal = () => {
             <h3 className="text-2xl font-bold mb-8">Recent Articles</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recentPosts.map((post) => (
-                <Card 
-                  key={post.id} 
+                <Card
+                  key={post.id}
                   className="group hover:shadow-lg transition-shadow cursor-pointer"
                   onClick={() => handlePostClick(post.id)}
                 >
@@ -235,7 +235,7 @@ const BlogReal = () => {
                         </Badge>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-3 h-3" />
@@ -246,7 +246,7 @@ const BlogReal = () => {
                         {post.read_time_minutes} min read
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Eye className="w-3 h-3" />
@@ -269,8 +269,8 @@ const BlogReal = () => {
             <h3 className="text-2xl font-bold mb-8">Content Categories</h3>
             <div className="flex flex-wrap gap-3">
               {categories.map((category) => (
-                <div 
-                  key={category.id} 
+                <div
+                  key={category.id}
                   className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:shadow-md transition-shadow ${category.color_class}`}
                 >
                   {category.name} ({category.post_count})
@@ -298,11 +298,11 @@ const BlogReal = () => {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4">Professional Development Services</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Leverage my enterprise development experience through personalized consulting, 
+              Leverage my enterprise development experience through personalized consulting,
               code reviews, and training sessions tailored to your specific needs.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
