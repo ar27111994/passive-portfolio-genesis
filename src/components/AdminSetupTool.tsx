@@ -189,7 +189,7 @@ const AdminSetupTool = () => {
     try {
       const result = await createAdminUser();
       setSetupResult(result);
-      
+
       // Re-run diagnostics to see if issues are fixed
       setTimeout(() => {
         runDiagnostics();
@@ -203,6 +203,27 @@ const AdminSetupTool = () => {
     }
 
     setIsRunning(false);
+  };
+
+  const runQuickSetup = async () => {
+    setIsSetupRunning(true);
+    setSetupSteps([]);
+    setSetupResult(null);
+
+    const setup = new DatabaseSetup();
+    const result = await setup.runSetup((steps) => {
+      setSetupSteps([...steps]);
+    });
+
+    setSetupResult(result);
+    setIsSetupRunning(false);
+
+    // Re-run diagnostics after setup
+    if (result.success) {
+      setTimeout(() => {
+        runDiagnostics();
+      }, 1000);
+    }
   };
 
   const showManualSetup = async () => {
