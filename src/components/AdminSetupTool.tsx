@@ -48,14 +48,29 @@ const AdminSetupTool = () => {
 
     // Test 1: Supabase Connection
     try {
-      const { data, error } = await supabase.from('information_schema.tables').select('table_name').limit(1);
+      // Try a simple query that should always work
+      const { data, error } = await supabase.rpc('version');
       if (error) {
-        results.push({
-          name: 'Supabase Connection',
-          status: 'error',
-          message: 'Failed to connect to Supabase',
-          details: error
-        });
+        // Try alternative connection test
+        const { data: altData, error: altError } = await supabase
+          .from('pg_catalog.pg_tables')
+          .select('tablename')
+          .limit(1);
+
+        if (altError) {
+          results.push({
+            name: 'Supabase Connection',
+            status: 'error',
+            message: 'Failed to connect to Supabase: ' + (altError.message || 'Unknown error'),
+            details: { originalError: error, alternativeError: altError }
+          });
+        } else {
+          results.push({
+            name: 'Supabase Connection',
+            status: 'success',
+            message: 'Connected to Supabase (via alternative method)'
+          });
+        }
       } else {
         results.push({
           name: 'Supabase Connection',
@@ -64,12 +79,37 @@ const AdminSetupTool = () => {
         });
       }
     } catch (err) {
-      results.push({
-        name: 'Supabase Connection',
-        status: 'error',
-        message: 'Connection failed with exception',
-        details: err
-      });
+      // Try the most basic connection test
+      try {
+        const response = await fetch(`${supabase.supabaseUrl}/rest/v1/`, {
+          headers: {
+            'apikey': supabase.supabaseKey,
+            'Authorization': `Bearer ${supabase.supabaseKey}`
+          }
+        });
+
+        if (response.ok) {
+          results.push({
+            name: 'Supabase Connection',
+            status: 'success',
+            message: 'Connected to Supabase (basic connection test)'
+          });
+        } else {
+          results.push({
+            name: 'Supabase Connection',
+            status: 'error',
+            message: `HTTP ${response.status}: ${response.statusText}`,
+            details: { status: response.status, statusText: response.statusText }
+          });
+        }
+      } catch (fetchErr) {
+        results.push({
+          name: 'Supabase Connection',
+          status: 'error',
+          message: 'Connection failed with exception',
+          details: { originalError: err, fetchError: fetchErr }
+        });
+      }
     }
 
     // Test 2: Check if user_roles table exists
