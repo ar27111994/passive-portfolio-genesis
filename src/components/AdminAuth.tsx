@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lock, Shield, Eye, EyeOff } from "lucide-react";
+import { Lock, Shield, Eye, EyeOff, Settings } from "lucide-react";
 import { useAuth } from '@/hooks/useAuth';
+import AdminSetupTool from './AdminSetupTool';
 
 const AdminAuth = () => {
   const [credentials, setCredentials] = useState({
