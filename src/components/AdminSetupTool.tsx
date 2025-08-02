@@ -48,29 +48,19 @@ const AdminSetupTool = () => {
 
     // Test 1: Supabase Connection
     try {
-      // Try a simple query that should always work
-      const { data, error } = await supabase.rpc('version');
-      if (error) {
-        // Try alternative connection test
-        const { data: altData, error: altError } = await supabase
-          .from('pg_catalog.pg_tables')
-          .select('tablename')
-          .limit(1);
+      // Test connection by querying user_roles table (which we know exists from the second test)
+      const { data, error } = await supabase
+        .from('user_roles')
+        .select('user_id')
+        .limit(0); // Just test connection, don't return data
 
-        if (altError) {
-          results.push({
-            name: 'Supabase Connection',
-            status: 'error',
-            message: 'Failed to connect to Supabase: ' + (altError.message || 'Unknown error'),
-            details: { originalError: error, alternativeError: altError }
-          });
-        } else {
-          results.push({
-            name: 'Supabase Connection',
-            status: 'success',
-            message: 'Connected to Supabase (via alternative method)'
-          });
-        }
+      if (error) {
+        results.push({
+          name: 'Supabase Connection',
+          status: 'error',
+          message: 'Failed to connect to Supabase: ' + error.message,
+          details: error
+        });
       } else {
         results.push({
           name: 'Supabase Connection',
@@ -79,37 +69,12 @@ const AdminSetupTool = () => {
         });
       }
     } catch (err) {
-      // Try the most basic connection test
-      try {
-        const response = await fetch(`${supabase.supabaseUrl}/rest/v1/`, {
-          headers: {
-            'apikey': supabase.supabaseKey,
-            'Authorization': `Bearer ${supabase.supabaseKey}`
-          }
-        });
-
-        if (response.ok) {
-          results.push({
-            name: 'Supabase Connection',
-            status: 'success',
-            message: 'Connected to Supabase (basic connection test)'
-          });
-        } else {
-          results.push({
-            name: 'Supabase Connection',
-            status: 'error',
-            message: `HTTP ${response.status}: ${response.statusText}`,
-            details: { status: response.status, statusText: response.statusText }
-          });
-        }
-      } catch (fetchErr) {
-        results.push({
-          name: 'Supabase Connection',
-          status: 'error',
-          message: 'Connection failed with exception',
-          details: { originalError: err, fetchError: fetchErr }
-        });
-      }
+      results.push({
+        name: 'Supabase Connection',
+        status: 'error',
+        message: 'Connection failed with exception',
+        details: err
+      });
     }
 
     // Test 2: Check if user_roles table exists
