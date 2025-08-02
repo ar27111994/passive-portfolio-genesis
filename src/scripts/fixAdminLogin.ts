@@ -6,11 +6,7 @@ export async function directFixAdminLogin(): Promise<{ success: boolean; message
   try {
     // Step 1: Test basic connection
     console.log('Testing Supabase connection...');
-    const { data: testData, error: testError } = await supabase
-      .from('information_schema.columns')
-      .select('table_name')
-      .eq('table_name', 'user_roles')
-      .limit(1);
+    const { data: testData, error: testError } = await supabase.rpc('version');
 
     if (testError) {
       return {
