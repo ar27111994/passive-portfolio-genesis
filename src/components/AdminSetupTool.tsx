@@ -323,23 +323,28 @@ const AdminSetupTool = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex gap-2 flex-wrap">
-            <Button onClick={runDiagnostics} disabled={isRunning || isSetupRunning || isDirectFixRunning}>
+          <div className="grid grid-cols-2 lg:grid-cols-6 gap-2">
+            <Button onClick={runDiagnostics} disabled={isRunning || isSetupRunning || isDirectFixRunning || isFunctionFixRunning}>
               <Database className="w-4 h-4 mr-2" />
               {isRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Run Diagnostics
             </Button>
-            <Button onClick={runDirectFix} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="default">
+            <Button onClick={runDirectFix} disabled={isRunning || isSetupRunning || isDirectFixRunning || isFunctionFixRunning} variant="default">
               <Shield className="w-4 h-4 mr-2" />
               {isDirectFixRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Fix Now
             </Button>
-            <Button onClick={runQuickSetup} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="outline">
+            <Button onClick={runFunctionFix} disabled={isRunning || isSetupRunning || isDirectFixRunning || isFunctionFixRunning} variant="destructive">
+              <Settings className="w-4 h-4 mr-2" />
+              {isFunctionFixRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Fix Function
+            </Button>
+            <Button onClick={runQuickSetup} disabled={isRunning || isSetupRunning || isDirectFixRunning || isFunctionFixRunning} variant="outline">
               <Play className="w-4 h-4 mr-2" />
               {isSetupRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Quick Setup
             </Button>
-            <Button onClick={setupAdmin} disabled={isRunning || isSetupRunning || isDirectFixRunning} variant="outline">
+            <Button onClick={setupAdmin} disabled={isRunning || isSetupRunning || isDirectFixRunning || isFunctionFixRunning} variant="outline">
               <User className="w-4 h-4 mr-2" />
               Alt Setup Method
             </Button>
