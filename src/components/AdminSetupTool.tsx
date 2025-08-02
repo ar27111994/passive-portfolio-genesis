@@ -230,9 +230,32 @@ const AdminSetupTool = () => {
   };
 
   const showManualSetup = async () => {
-    const instructions = getManualSetupSQL();
+    const instructions = getQuickSetupSQL();
     setManualInstructions(instructions);
     setShowManualInstructions(true);
+  };
+
+  const runDirectFix = async () => {
+    setIsDirectFixRunning(true);
+    setDirectFixResult(null);
+
+    try {
+      const result = await directFixAdminLogin();
+      setDirectFixResult(result);
+
+      // Re-run diagnostics after fix attempt
+      setTimeout(() => {
+        runDiagnostics();
+      }, 1000);
+    } catch (error) {
+      setDirectFixResult({
+        success: false,
+        message: 'Direct fix failed with exception',
+        details: error
+      });
+    }
+
+    setIsDirectFixRunning(false);
   };
 
   const copyToClipboard = (text: string) => {
