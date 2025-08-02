@@ -214,21 +214,27 @@ DROP POLICY IF EXISTS "Users can read their own role" ON public.user_roles;
 CREATE POLICY "Users can read their own role" ON public.user_roles 
 FOR SELECT USING (auth.uid() = user_id);
 
--- 5. After running this SQL:
---    a) Go to Authentication → Users
---    b) Click "Add User"
---    c) Email: admin@example.com
---    d) Password: password123
---    e) Click "Create User"
---    f) Copy the user ID from the users list
---    g) Go to Table Editor → user_roles
---    h) Click "Insert" → "Insert row"
---    i) user_id: [paste the copied user ID]
---    j) role: admin
---    k) Click "Save"
+-- 5. After running this SQL, create the admin user:
+--    Step 1: Go to Authentication → Users in Supabase Dashboard
+--    Step 2: Click "Add User" button
+--    Step 3: Fill in the form:
+--            Email: admin@example.com
+--            Password: password123
+--            Email Confirm: YES (check this box)
+--    Step 4: Click "Create User"
+--    Step 5: Copy the user ID from the users list (it looks like: a1b2c3d4-...)
+--    Step 6: Go to Table Editor → user_roles
+--    Step 7: Click "Insert" → "Insert row"
+--    Step 8: Fill in:
+--            user_id: [paste the copied user ID here]
+--            role: admin
+--    Step 9: Click "Save"
 
--- Alternative: If you know the admin user ID, replace YOUR_ADMIN_USER_ID below:
--- INSERT INTO public.user_roles (user_id, role) 
+-- Alternative: If you already know the admin user ID, replace YOUR_ADMIN_USER_ID below:
+-- INSERT INTO public.user_roles (user_id, role)
 -- VALUES ('YOUR_ADMIN_USER_ID', 'admin')
 -- ON CONFLICT (user_id) DO UPDATE SET role = 'admin';
+
+-- To find existing user IDs, run:
+-- SELECT id, email, created_at FROM auth.users WHERE email = 'admin@example.com';
 `;
