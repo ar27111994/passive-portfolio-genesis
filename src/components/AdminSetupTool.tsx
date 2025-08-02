@@ -227,7 +227,7 @@ const AdminSetupTool = () => {
   };
 
   const showManualSetup = async () => {
-    const instructions = await manualAdminSetupInstructions();
+    const instructions = getManualSetupSQL();
     setManualInstructions(instructions);
     setShowManualInstructions(true);
   };
