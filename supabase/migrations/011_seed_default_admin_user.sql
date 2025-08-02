@@ -5,7 +5,7 @@ BEGIN
   IF NOT EXISTS (SELECT 1 FROM auth.users WHERE email = 'admin@example.com') THEN
     -- Create the user
     INSERT INTO auth.users (id, aud, role, email, encrypted_password, email_confirmed_at, created_at, updated_at)
-    VALUES (gen_random_uuid(), 'authenticated', 'authenticated', 'admin@example.com', crypt('password', extensions.gen_salt('bf')), NOW(), NOW(), NOW());
+    VALUES (gen_random_uuid(), 'authenticated', 'authenticated', 'admin@example.com', extensions.crypt('password', extensions.gen_salt('bf')), NOW(), NOW(), NOW());
   END IF;
 END;
 $$ LANGUAGE plpgsql;
