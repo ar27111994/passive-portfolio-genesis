@@ -16,6 +16,7 @@ const AdminAuth = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showDiagnostics, setShowDiagnostics] = useState(false);
   const { signInWithEmail } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
