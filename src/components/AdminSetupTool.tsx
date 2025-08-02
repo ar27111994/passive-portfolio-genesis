@@ -272,18 +272,23 @@ const AdminSetupTool = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex gap-2 flex-wrap">
-            <Button onClick={runDiagnostics} disabled={isRunning}>
+            <Button onClick={runDiagnostics} disabled={isRunning || isSetupRunning}>
               <Database className="w-4 h-4 mr-2" />
               {isRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Run Diagnostics
             </Button>
-            <Button onClick={setupAdmin} disabled={isRunning} variant="outline">
+            <Button onClick={runQuickSetup} disabled={isRunning || isSetupRunning} variant="default">
+              <Play className="w-4 h-4 mr-2" />
+              {isSetupRunning ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Quick Setup
+            </Button>
+            <Button onClick={setupAdmin} disabled={isRunning || isSetupRunning} variant="outline">
               <User className="w-4 h-4 mr-2" />
-              Auto Setup Admin
+              Alt Setup Method
             </Button>
             <Button onClick={showManualSetup} variant="outline">
               <Shield className="w-4 h-4 mr-2" />
-              Manual Setup Guide
+              Manual Setup SQL
             </Button>
           </div>
 
